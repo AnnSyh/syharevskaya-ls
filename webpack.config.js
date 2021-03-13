@@ -108,7 +108,7 @@ module.exports = (env, argv) => {
       extensions: ["*", ".js", ".vue", ".json"],
     },
     devServer: {
-      historyApiFallback: true,
+      historyApiFallback: true,// все ненайденые маршруты будут вести на index.html
       noInfo: false,
       overlay: true,
     },
