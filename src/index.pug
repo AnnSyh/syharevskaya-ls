@@ -16,7 +16,7 @@ html(lang="en")
     .container.hero__container
       header.header
         .header__logo
-          a.logo(href="") ВА
+          a.logo(href="") АC
         .header__menu
           nav.menu
             ul.menu__list
@@ -29,13 +29,13 @@ html(lang="en")
             - var socials = ['insta', 'vk', 'github', 'envelope'];
             each item in socials
               li.socials__item
-                a(href=`${item === 'envelope' ? 'mailto:sabantsev@yandex.ru' : '#'}`).socials__link
+                a(href=`${item === 'envelope' ? 'mailto:sabantsev@yandex.ru' : '#'}` target="_blank").socials__link
                   +icon(item, 'socials__icon')
 
       .hero__content
         .userinfo
           .userinfo__title Личный сайт #[span.userinfo__occ веб разработчика]
-          .userinfo__name Владимир Астаханов
+          .userinfo__name Анны Сухаревской
       .hero__downbutton
         .scroll-down
           a(href="").scroll-down__btn Скролл
@@ -63,7 +63,7 @@ html(lang="en")
         .about__user-text
           .about__main-text-content
             .about__desc Привет, меня зовут
-            .about__title Владимир Астаханов
+            .about__title Анна Сухаревская
             .about__text-info
               p Я занимаюсь разработкой современных сайтов и приложений. Мне нравится делать интересные и современные проекты.
           .about__ps
@@ -83,6 +83,7 @@ html(lang="en")
             .values__title-text Чем я могу быть полезен вам
             .values__content
               p Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!
+
         .values__widget
           .values__widget-container
             -
@@ -116,8 +117,8 @@ html(lang="en")
             .works-slider__pics-content
               +image('content/slider-1.jpg', 'works-slider__fullpic')
               .works-slider__buttons
-                a(href="#").works-slider__btn.works-slider__btn_next
-                a(href="#").works-slider__btn.works-slider__btn_prev
+                button.works-slider__btn.works-slider__btn_next
+                button.works-slider__btn.works-slider__btn_prev
               ul.works-slider__thumbs
                 - for (var i = 3; i > 0; i--)
                   li.works-slider__thumb-item(class=`${i === 1 ? 'active' : ''}`)
@@ -134,7 +135,6 @@ html(lang="en")
               p Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!
             .works-slider__link
               a(href="#").iconed-link Посмотреть сайт
-
 .triangles.triangles_bottom
   svg(viewBox="0 0 1000 100" preserveAspectRatio="none").triangles__shape.triangles__shape_left
     polygon(points="0,0 1000,0 1000,100")
@@ -183,7 +183,7 @@ footer.footer
       .footer__copyright-col
         .footer__copyright-year &copy; 2020
       .footer__copyright-userinfo
-        .footer__copyright-name Владимир Астаханов
+        .footer__copyright-name Анна Сухаревская
         .footer__data-text Личный сайт веб - разработчика
     .footer__data
       nav.menu.menu--color-white.footer__data-menu
@@ -196,10 +196,10 @@ footer.footer
           .footer__data-text
             p Этот сайт я сделал в рамках обучения в Школе онлайн образования Loftschool
           .footer__data-socials
-            ul.socials.socials--round-borders
+            ul.socials
               each item in socials
                 li.socials__item
-                  a(href="#").socials__link
+                  a(href="#" target="_blank").socials__link.socials__link--round-borders
                     +icon(item, 'socials__icon')
         .footer__data-col
           .text-quote

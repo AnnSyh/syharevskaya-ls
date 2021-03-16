@@ -1,21 +1,23 @@
 .userinfo {
   text-align: center;
+
+  &__title {
+    font-size: 18px;
+    color: rgba($text-color, .4);
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  &__occ {
+    display: block;
+    white-space: nowrap;
+  }
+
+  &__name {
+    font-weight: 800;
+    font-size: 72px;
+    line-height: 1;
+    max-width: fit-content;
+  }
 }
 
-.userinfo__title {
-  font-size: 18px;
-  color: rgba($text-color, .4);
-  font-weight: 600;
-  margin-bottom: 20px;
-}
-
-.userinfo__occ {
-  display: block;
-  white-space: nowrap;
-}
-
-.userinfo__name {
-  font-weight: 800;
-  font-size: 72px;
-  line-height: 1;
-}

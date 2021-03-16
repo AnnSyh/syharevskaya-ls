@@ -6,5 +6,6 @@
   "bp-desktop": "1200px",
   "bp-tablets": "768px",
   "bp-phones": "480px",
-  "red-color": "#DB0200"
+  "red-color": "#DB0200",
+  "menu-link-hover": "#5500f2"
 }
