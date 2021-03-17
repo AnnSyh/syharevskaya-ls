@@ -135,7 +135,7 @@ html(lang="en")
               ul.works-slider__thumbs
                 - for (var i = 3; i > 0; i--)
                   li.works-slider__thumb-item(class=`${i === 1 ? 'active' : ''}`)
-                    a(href="").works-slider__thumb-link
+                    button.works-slider__thumb-link
                       +image(`content/slider-${i}.jpg`, 'works-slider__thumb')
           .works-slider__data
             ul.works-slider__tags
