@@ -1,10 +1,16 @@
 .values {
     margin-bottom: 114px;
 
+    @include phones {
+        margin-bottom: 75px;
+    }
+}
 
-    &__container {
+.values__container {
         position: relative;
-
+        @include tablets {
+        padding-bottom: 350px;
+    }
         &:before {
             content: "";
             position: absolute;
@@ -14,44 +20,71 @@
             height: 79%;
             width: 69%;
             left: -10%;
+            @include tablets {
+                bottom: 0;
+                left: 50%;
+                height: 300px;
+                transform: translateX(-50%);
+                background-position: center center;
+            }
         }
     }
-
-    &__wrapper {
+.values__wrapper {
         position: relative;
     }
 
-    &__title {
+.values__title {
         margin-bottom: 82px;
         display: flex;
         justify-content: center;
     }
 
-    &__title-container {
-        width: 41%;
-        margin-left: 16%;
+.values__title-container {
+    width: 38%;
+    margin-left: 6%;
+    @include desktop {
+        width: 42%;
+        margin-left: 0;
     }
+    @include tablets {
+        width: 68%;
+        text-align: center;
+    }
+    @include phones {
+        width: 100%;
+        margin-left: 0;
+        text-align: left;
+    }
+}
 
-    &__title-text {
+.values__title-text {
         font-size: 30px;
         font-weight: 700;
         margin-bottom: 55px;
     }
 
-    &__content {
+.values__content {
         color: rgba($text-color, .5);
         font-weight: 600;
         line-height: 1.8;
     }
 
-    &__widget {
+.values__widget {
         display: flex;
         justify-content: flex-end;
-
+        @include tablets {
+            justify-content: center;
+        }
     }
 
-    &__widget-container {
+.values__widget-container {
         width: 66%;
-        padding-left: 180px;
+
+        @include desktop {
+            width: 62%;
+        }
+        @include tablets {
+            width: 95%;
+        }
     }
-}
+

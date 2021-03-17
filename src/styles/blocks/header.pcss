@@ -1,4 +1,5 @@
-.header {
+.header,
+.header__inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -6,4 +7,19 @@
 
 .header__menu {
   width: 55%;
+  @include tablets {
+    display: none;
+  }
 }
+
+.header__inner{
+  width: 100%;
+}
+
+.header__buttons {
+  @include phones {
+    display: none;
+  }
+}
+
+

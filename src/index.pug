@@ -15,22 +15,35 @@ html(lang="en")
   section.fullscreen-section.hero
     .container.hero__container
       header.header
-        .header__logo
-          a.logo(href="") АC
-        .header__menu
-          nav.menu
-            ul.menu__list
-              - var menuLinks = ["Обо мне", "Навыки", "Работы", "Отзывы"];
-              each item in menuLinks
-                li.menu__item
-                  a(href="#").menu__link #{item}
-        .header__buttons
-          ul.socials
-            - var socials = ['insta', 'vk', 'github', 'envelope'];
-            each item in socials
-              li.socials__item
-                a(href=`${item === 'envelope' ? 'mailto:sabantsev@yandex.ru' : '#'}` target="_blank").socials__link
-                  +icon(item, 'socials__icon')
+        div.header__inner
+          .header__logo
+            a.logo(href="") АC
+          .header__menu
+            nav.menu
+              ul.menu__list
+                - var menuLinks = ["Обо мне", "Навыки", "Работы", "Отзывы"];
+                each item in menuLinks
+                  li.menu__item
+                    a(href="#").menu__link #{item}
+          .header__buttons
+            ul.socials
+              - var socials = ['insta', 'vk', 'github', 'envelope'];
+              each item in socials
+                li.socials__item
+                  a(href=`${item === 'envelope' ? 'mailto:syharevskaya@yandex.ru' : '#'}` target="_blank").socials__link
+                    +icon(item, 'socials__icon')
+
+          div.header__hamburger
+            a(href='#mobile-menu')
+              +icon('humburger', 'socials__icon')
+
+      div.mobile-menu
+        nav.menu
+          ul.menu__list
+            - var menuLinks = ["Обо мне", "Навыки", "Работы", "Отзывы"];
+            each item in menuLinks
+              li.menu__item
+                a(href="#").menu__link #{item}
 
       .hero__content
         .userinfo

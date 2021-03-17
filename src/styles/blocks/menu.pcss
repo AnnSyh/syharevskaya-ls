@@ -27,3 +27,21 @@
     border-bottom: 3px solid $menu-link-hover;;
   }
 }
+
+.header__hamburger,
+.mobile-menu {
+  display: none;
+  @include tablets {
+    display: flex;
+  }
+}
+
+.mobile-menu {
+  display: none;
+}
+
+//.mobile-menu {
+//  @include tablets {
+//    display: flex;
+//  }
+//}
