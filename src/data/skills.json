@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "title": "HTML",
+    "percent": 32
+  },
+  {
+    "id": 2,
+    "title": "css",
+    "percent": 52
+  },
+  {
+    "id": 3,
+    "title": "javascript",
+    "percent": 52
+  },
+  {
+    "id": 4,
+    "title": "Vue",
+    "percent": 52
+  }
+
+
+]
