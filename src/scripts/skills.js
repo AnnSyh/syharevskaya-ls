@@ -1,5 +1,4 @@
 import Vue from "vue"
-
 const skill= {
     template: "#skill",
     props: ["skill"],
@@ -18,7 +17,7 @@ const skillsList= {
     },
 
 }
-var app = new Vue({
+new Vue({
     el: '#skills-component',
     components:{
         skillsList
@@ -32,7 +31,41 @@ var app = new Vue({
                         {
                             title: "HTML",
                             percent: 25
+                        },
+                        {
+                            title: "css",
+                            percent: 89
+                        },
+                        {
+                            title: "javascript",
+                            percent: 35
+                        },
+                        {
+                            title: "Vue",
+                            percent: 75
+                        },
+                    ],
+                },
+                {
+                    category: "Workflow",
+                    skills: [
+                        {
+                            title: "Git",
+                            percent: 99
+                        },
+                        {
+                            title: "Terminal",
+                            percent: 34
+                        },
+                        {
+                            title: "Gulp",
+                            percent: 87
+                        },
+                        {
+                            title: "Webpack",
+                            percent: 45
                         }
+
                     ],
                 },
             ],
@@ -41,24 +74,3 @@ var app = new Vue({
 
 })
 
-// Vue.component('skills-list', {
-//     template: '#skills-list',
-//
-//     components:{
-//         // skills,
-//     },
-//
-//     data(){
-//         return{
-//             skills:[],
-//         };
-//     },
-//     // проверитьчтокомпонент былвмонтирован
-//     mounted() {
-//         console.log('компонент #skills-list вмонтирован')
-//     },
-//
-//     created(){
-//         this.skills = require("../data/skills.json");
-//     }
-// })
