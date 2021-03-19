@@ -1,7 +1,8 @@
 import Vue from "vue"
-const skill= {
-    template: "#skill",
-    props: ["skill"],
+
+const skillsItem = {
+    props:["skill"],
+    template:"#skills-item",
     computed:{
         getPercent(){
             const r=3.14*2*40
@@ -9,68 +10,28 @@ const skill= {
         }
     }
 }
-const skillsList= {
-    template: "#skills-list",
-    props: ["categories"],
-    components:{
-        skill
-    },
 
+const skillsRow = {
+    props:["category"],
+    template:"#skills-row",
+    components:{
+        skillsItem:skillsItem
+    }
 }
+
 new Vue({
     el: '#skills-component',
+    template:"#skills-list",
     components:{
-        skillsList
+        skillsRow:skillsRow
     },
-    data() {
-        return {
-            categories: [
-                {
-                    category: "Frontend",
-                    skills: [
-                        {
-                            title: "HTML",
-                            percent: 25
-                        },
-                        {
-                            title: "css",
-                            percent: 89
-                        },
-                        {
-                            title: "javascript",
-                            percent: 35
-                        },
-                        {
-                            title: "Vue",
-                            percent: 75
-                        },
-                    ],
-                },
-                {
-                    category: "Workflow",
-                    skills: [
-                        {
-                            title: "Git",
-                            percent: 99
-                        },
-                        {
-                            title: "Terminal",
-                            percent: 34
-                        },
-                        {
-                            title: "Gulp",
-                            percent: 87
-                        },
-                        {
-                            title: "Webpack",
-                            percent: 45
-                        }
-
-                    ],
-                },
-            ],
+    data(){
+        return{
+            skills: []
         }
+    },
+    created() {
+        this.skills = require("../data/skills.json");
     }
-
 })
 
