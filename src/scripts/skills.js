@@ -3,12 +3,27 @@ import Vue from "vue"
 const skillsItem = {
     props:["skill"],
     template:"#skills-item",
-    computed:{
-        getPercent(){
-            const r=3.14*2*40
-            return r-r/100*this.skill.percent
+    methods:{
+        drawPercentegeCircle(){
+            const  circle=this.$refs["colored-circle"];
+            const dashArray= parseInt(
+                getComputedStyle(circle).getPropertyValue("stroke-dasharray")
+            );
+            const percent = (dashArray/100)*(100-this.skill.percent);
+            circle.style.strokeDashoffset = percent;
         }
+    },
+    mounted() {
+        this.drawPercentegeCircle();
     }
+    // :stroke-dashoffset="getPercent" //skills.pug
+    // computed:{
+    //     getPercent(){
+    //         const r=3.14*2*40
+    //         return r-r/100*this.skill.percent
+    //     }
+    // }
+
 }
 
 const skillsRow = {
