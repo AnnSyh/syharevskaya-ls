@@ -1,0 +1,30 @@
+.iconed-link {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  color: $links-color;
+  font-size: 18px;
+  font-weight: bold;
+  position: relative;
+  z-index: 10;
+
+  transition: .4s;
+
+  &:before {
+    content: "";
+    display: block;
+    width: 15px;
+    height: 15px;
+    background: svg-load('link.svg', fill=$links-color) center center no-repeat;
+    margin-right: 20px;
+  }
+
+  &:hover {
+    color: $menu-link-hover;
+    border-bottom: 3px solid $menu-link-hover;
+
+    &:before {
+      background: svg-load('link.svg', fill=$menu-link-hover) center center no-repeat;
+    }
+  }
+}

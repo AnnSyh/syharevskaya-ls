@@ -1,11 +1,4 @@
-html {
-  @include desktop {
-    font-size: 15px;
-  }
-  @include tablets {
-    font-size: 14px;
-  }
-}
+
 body,
 html {
   height: 100%;
@@ -28,13 +21,10 @@ body {
 
 .container {
   margin: 0 auto;
-  max-width: 1480px;
   width: 95%;
-  // width: 1490px;
 
-  @include phones {
-    width: 85%;
-  }
+  max-width: 1499px;
+
 }
 
 .fullscreen-section {
@@ -71,11 +61,11 @@ p {
   margin: 0;
   padding: 0;
 }
-
-button[type="button"] {
-  cursor: pointer;
-  background-color: transparent;
-}
+//button,
+//button[type="button"] { border: 1px solid red;
+//  cursor: pointer;
+//  background-color: transparent;
+//}
 
 a {
   color: inherit;
@@ -86,4 +76,12 @@ img {
   display: block;
   max-width: 100%;
   max-height: 100%;
+}
+
+button:active,
+button:focus {
+  outline: none;
+}
+button::-moz-focus-inner {
+  border: 0;
 }
