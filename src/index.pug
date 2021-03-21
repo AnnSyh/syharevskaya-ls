@@ -114,38 +114,8 @@ html(lang="en")
     section.contacts
       .container.contacts__container
         .contacts__about
-          .reviews
-            .reviews__header
-              .reviews__title.section-title Что обо мне говорят
-              .reviews__buttons
-                button.reviews__btn.reviews__btn_prev
-                button.reviews__btn.reviews__btn_next
-            ul.reviews__content
-                li.reviews__content-item
-                  .quote
-                    .quote__text
-                      p Этот парень проходил обучение веб-разработке не где-то, а в Loftschool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
-                    .quote__user
-                      .user-min
-                        .user-min__avatar
-                          .user-min__pic-wrapper
-                            +image('content/user-0.jpg', 'user-min__avatar-pic')
-                        .user-min__info
-                          .user-min__name Владимир Сабанцев
-                          .user-min__occ Преподователь
-                li.reviews__content-item
-                  .quote
-                    .quote__text
-                      p Этот парень проходил обучение веб-разработке не где-то, а в Loftschool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
-                    .quote__user
-                      .user-min
-                        .user-min__avatar
-                          .user-min__pic-wrapper
-                            +image('content/user-1.jpg', 'user-min__avatar-pic')
-                        .user-min__info
-                          .user-min__name Владимир Сабанцев
-                          .user-min__occ Преподователь
-
+          #reviews-component
+            reviews-container
 
     footer.footer
       .container.footer__container
