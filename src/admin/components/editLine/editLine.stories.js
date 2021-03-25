@@ -33,7 +33,7 @@ defaultView.story = {
 };
 
 export const blockedView = () => ({
-  components: { editLine },
+  components: {editLine},
   template: `
     <editLine value="Название" blocked />
   `,
