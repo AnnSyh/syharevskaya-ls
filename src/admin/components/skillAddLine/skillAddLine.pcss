@@ -1,13 +1,38 @@
 .inputs {
   display: flex;
-  width: 40%;
+  width: 90%;
   align-items: center;
   justify-content: space-between;
+
+  & .title {
+    width: 85%;
+  }
+
+  & .percent {
+    display: flex;
+  }
 }
 
 .skillAddLine-component {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
+
+  &.blocked{
+    filter:grayscale(50%);
+    pointer-events: none;
+    &:after{
+      content: "";
+      position: absolute;
+      top:0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+
+    }
+  }
 }
+
+
 

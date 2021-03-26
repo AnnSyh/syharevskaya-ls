@@ -14,23 +14,32 @@
       <div class="container">
         <div class="header">
           <span class="header__title">Блок "Обо мне"</span>
-          <iconed-btn type="iconed" title="Добавить группу"/>
+
+          <iconed-btn
+              type="iconed"
+              v-if="emptyCardIsShown == false"
+              @click="emptyCardIsShown = true"
+              title="Добавить группу"/>
         </div>
       </div>
 
-<!--      <div class="cards">-->
-<!--        <category title="Frontend"></category>-->
-<!--      </div>-->
-
       <ul class="skills">
-        <li class="item">
-          <category/>
+        <li class="item" v-if="emptyCardIsShown">
+          <category
+            @remove="emptyCardIsShown = false"
+            empty
+          />
         </li>
-        <li class="item">
-          <category/>
-        </li>
-        <li class="item">
-          <category/>
+        <li
+            class="item"
+            v-for="category in categories"
+            :key="category.id"
+        >
+<!--          11<pre>{{category.id}}}</pre>22-->
+          <category
+          :title="category.category"
+          :skills="category.skills"
+          />
         </li>
       </ul>
 
@@ -50,6 +59,7 @@ import headline from "./components/headline/headline";
 import user from "./components/user/user";
 import category from "./components/category/category";
 
+
 export default {
   components: {
     test,
@@ -60,8 +70,18 @@ export default {
     navigation,
     icon,
     category
-  }
+  },
+  data() {
+    return {
+      emptyCardIsShown:false,
+      categories:[]
+    }
+  },
+ created() {
+      this.categories = require('../data/categories.json');
+ }
 }
+
 
 </script>
 

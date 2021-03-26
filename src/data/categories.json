@@ -1,0 +1,30 @@
+[
+  {
+    "id": 0,
+    "category": "Frontend",
+    "skills" : [
+      {"id": 0, "title": "HTML", "percent": 80},
+      {"id": 1, "title": "Css", "percent": 80},
+      {"id": 2, "title": "JavaScript", "percent": 80}
+    ]
+  },
+  {
+    "id": 1,
+    "category": "Backend",
+    "skills" : [
+      {"id": 0, "title": "HTML", "percent": 80},
+      {"id": 1, "title": "Css", "percent": 80},
+      {"id": 2, "title": "JavaScript", "percent": 80}
+    ]
+  },
+  {
+    "id": 2,
+    "category": "Workflow",
+    "skills" : [
+      {"id": 0, "title": "HTML", "percent": 80},
+      {"id": 1, "title": "Css", "percent": 80},
+      {"id": 2, "title": "JavaScript", "percent": 80}
+    ]
+  }
+
+]
