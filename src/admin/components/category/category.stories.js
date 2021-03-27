@@ -32,4 +32,4 @@ export const defaultView = () => ({
     @remove-skill="onRemoveSkill"
     @edit-skill="onEditSkill"
   />`,
-});
+})

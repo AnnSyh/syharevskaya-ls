@@ -16,7 +16,15 @@
           @keydown.native.enter="onApprove"
           autofocus="autofocus"
           no-side-paddings="no-side-paddings"
+          required
+          type="text"
+          maxlength="3"
+
         ></app-input>
+
+        <app-input v-if="1"
+            errorMessage="Произошла ошибка"
+        />
       </div>
       <div class="buttons">
         <div class="button-icon">
