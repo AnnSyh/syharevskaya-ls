@@ -32,7 +32,7 @@ import card           from "../card/card";
 import skill          from "../skill/skill";
 import skillAddLine   from "../skillAddLine/skillAddLine";
 import editLine       from "../editLine/editLine";
-import tagsAdder       from "../tagsAdder/tagsAdder";
+import tagsAdder      from "../tagsAdder/tagsAdder";
 import tag            from "../tag/tag";
 
 
@@ -60,13 +60,19 @@ export default {
     }
   },
   model:{
-    prop:"tags"
+    prop:"tags",
+    event:"change"
   },
-  data(){
-    return{
-      currentTags: this.tags
-    }
-  },
+  // data(){
+  //   return{
+  //     tags: this.tags
+  //   }
+  // },
+  // computed:{
+  //   tagsArray(){
+  //     return this.tags.trim().split(", ");
+  //   },
+  // },
 }
 </script>
 

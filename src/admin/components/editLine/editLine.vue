@@ -42,9 +42,9 @@ import Vue from 'vue';
 import appInput from "../input/input";
 import SimpleVueValidation from 'simple-vue-validator';
 
-const Validator = SimpleVueValidation.Validator;
-
-// Vue.use(SimpleVueValidation);
+const Validator = SimpleVueValidation.Validator.create({templates: {
+    url: 'That doesn\'t look like a valid url.'
+  }});
 
 
 export default {
@@ -59,7 +59,7 @@ export default {
     },
     errorText: {
       type: String,
-      default: ""
+      default: "fhghthtr fdherye"
     },
     editModeByDefault: Boolean,
     blocked: Boolean
@@ -69,13 +69,13 @@ export default {
       editmode: this.editModeByDefault,
       title: this.value,
       email: '',
-      name: ''
+      name: '',
     };
   },
   validators: {
-    email: function (value) {
-      return Validator.value(value).required().email();
-    },
+    // email: function (value) {
+    //   return Validator.value(value).required().email();
+    // },
     name: function (value) {
       return Validator.value(value).required();
     }
