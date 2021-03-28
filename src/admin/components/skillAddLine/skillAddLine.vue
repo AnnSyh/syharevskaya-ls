@@ -10,7 +10,13 @@
         <app-input no-side-paddings/>
       </div>
       <div class="percent">
-        <app-input type="number" min="0" max="100" maxlength="3"/>
+        <app-input
+            type="number"
+            min="0"
+            max="100"
+            maxlength="30"
+            placeholder="skillddLine"
+        />
         <span>%</span>
       </div>
     </div>

@@ -10,20 +10,21 @@
     <div v-else class="title">
       <div
           class="test-error"
-          :class="{error: validation.hasError('name')}">
+          >
         <div style="display: flex">
-          <div class="input">
+          <div class="input" :class="{error: validation.hasError('name')}">
             <app-input
                 v-model="name"
                 placeholder="Название новой группы"
                 :value="value"
                 :errorText="errorText"
+                :errorMessage="validation.firstError('name')"
                 @input="$emit('input', $event)"
                 @keydown.native.enter="onApprove"
                 autofocus="autofocus"
                 no-side-paddings="no-side-paddings"
             ></app-input>
-            <div class="message">{{ validation.firstError('name') }}</div>
+<!--            <div class="message">{{ validation.firstError('name') }}</div>-->
           </div>
           <div class="buttons">
             <div class="button-icon">

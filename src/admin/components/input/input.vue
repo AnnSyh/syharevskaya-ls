@@ -12,7 +12,7 @@
       @input="$emit('input', $event.target.value)"
     />
     <div class="input__error-tooltip">
-      <tooltip :text="errorMessage"></tooltip>
+      <tooltip :text="errorMessage" v-on="$listeners"></tooltip>
     </div>
   </label>
   <label
@@ -66,6 +66,9 @@ export default {
   },
   components: {
     tooltip: () => import("components/tooltip")
+  },
+  mounted() {
+    console.log(this.$attrs)
   }
 };
 </script>
