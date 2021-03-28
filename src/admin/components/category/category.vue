@@ -18,7 +18,7 @@
         </li>
       </ul>
       <div class="bottom-line">
-<!--        <tagsAdder v-model="tags"/>-->
+        <tagsAdder v-model="tags"/>
         <skillAddLine :blocked="empty"/>
       </div>
     </template>

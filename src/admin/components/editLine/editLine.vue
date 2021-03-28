@@ -22,9 +22,9 @@
 
         ></app-input>
 
-        <app-input v-if="1"
-            errorMessage="Произошла ошибка"
-        />
+<!--        <app-input v-if="1"-->
+<!--            errorMessage="Произошла ошибка"-->
+<!--        />-->
       </div>
       <div class="buttons">
         <div class="button-icon">
