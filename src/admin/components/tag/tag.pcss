@@ -2,9 +2,24 @@
   white-space: nowrap;
   padding: 6px 20px;
   border-radius: 50px;
-  background: #fff;
+  background: #ccc;
   color: rgba(40, 51, 64, 0.5);
   margin-right: 8px;
   margin-bottom: 8px;
   font-size: 13px;
 }
+
+.remove {
+  position: relative;
+  padding: 0px;
+
+  &:after {
+    content: "x";
+    display: block;
+    font-size: 1rem;
+    height: 1rem;
+  }
+
+}
+
+

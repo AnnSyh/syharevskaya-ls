@@ -1,0 +1,26 @@
+.nav-component__list {
+    display: flex;
+}
+
+.nav-component__link {
+    padding: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    display: block;
+    text-decoration: none;
+
+    &:hover {
+        color: #383bcf;
+        position: relative;
+
+        &:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #383bcf;
+        }
+    }
+}
