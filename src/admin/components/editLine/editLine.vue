@@ -24,7 +24,6 @@
                 autofocus="autofocus"
                 no-side-paddings="no-side-paddings"
             ></app-input>
-<!--            <div class="message">{{ validation.firstError('name') }}</div>-->
           </div>
           <div class="buttons">
             <div class="button-icon">
@@ -70,17 +69,12 @@ export default {
     return {
       editmode: this.editModeByDefault,
       title: this.value,
-      email: '',
       name: '',
     };
   },
   validators: {
-    // email: function (value) {
-    //   return Validator.value(value).required().email();
-    // },
     name: function (value) {
       return Validator.value(value).required();
-      // return Validator.value(value).name;
     }
   },
   methods: {
