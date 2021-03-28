@@ -33,6 +33,7 @@ import skill          from "../skill/skill";
 import skillAddLine   from "../skillAddLine/skillAddLine";
 import editLine       from "../editLine/editLine";
 import tagsAdder       from "../tagsAdder/tagsAdder";
+import tag            from "../tag/tag";
 
 
 export default {
@@ -41,9 +42,14 @@ export default {
     editLine,
     skill,
     skillAddLine,
-    tagsAdder
+    tagsAdder,
+    tag
   },
   props: {
+    tags:{
+      type: String,
+      default: ""
+    },
     empty: Boolean,
     title:{
       type: String,
@@ -51,6 +57,14 @@ export default {
     skills:{
       type: Array,
       default: () => []
+    }
+  },
+  model:{
+    prop:"tags"
+  },
+  data(){
+    return{
+      currentTags: this.tags
     }
   },
 }

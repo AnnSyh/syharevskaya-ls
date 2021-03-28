@@ -1,55 +1,37 @@
 <template>
   <div class="edit-line-component" :class="{'blocked' : blocked}">
 
-
-    <div class="layout-form">
-      <div class="form-group" :class="{error: validation.hasError('email')}">
-        <div class="label">* Email</div>
-        <div class="content"><input type="text" class="form-control" v-model="email"/></div>
-        <div class="message">{{ validation.firstError('email') }}</div>
-      </div>
-      <div class="form-group">
-        <div class="actions">
-          <button type="button" class="btn btn-primary" @click="submit">Submit</button>
-        </div>
-      </div>
-    </div>
-
-
-
     <div class="title" v-if="editmode === false">
-      <div class="text">{{value}}</div>
+      <div class="text">{{ value }}</div>
       <div class="icon">
         <icon symbol="pencil" grayscale @click="editmode = true"></icon>
       </div>
     </div>
     <div v-else class="title">
-      <div class="input">
-        <app-input
-          placeholder="Название новой группы"
-          :value="value"
-          :errorText="errorText"
-          @input="$emit('input', $event)"
-          @keydown.native.enter="onApprove"
-          autofocus="autofocus"
-          no-side-paddings="no-side-paddings"
-          required
-          type="text"
-          maxlength="3"
-
-        ></app-input>
-
-<!--        <app-input v-if="1"-->
-<!--            errorMessage="Произошла ошибка"-->
-<!--        />-->
-      </div>
-      <div class="buttons">
-        <div class="button-icon">
-          <icon symbol="tick" @click="onApprove"></icon>
+      <div :class="{error: validation.hasError('name')}">
+        <div style="display: flex">
+          <div class="input">
+            <app-input
+                v-model="name"
+                placeholder="Название новой группы"
+                :value="value"
+                :errorText="errorText"
+                @input="$emit('input', $event)"
+                @keydown.native.enter="onApprove"
+                autofocus="autofocus"
+                no-side-paddings="no-side-paddings"
+            ></app-input>
+          </div>
+          <div class="buttons">
+            <div class="button-icon">
+              <icon symbol="tick"  @click="submit"></icon>
+            </div>
+            <div class="button-icon">
+              <icon symbol="cross" @click="$emit('remove')"></icon>
+            </div>
+          </div>
         </div>
-        <div class="button-icon">
-          <icon symbol="cross" @click="$emit('remove')"></icon>
-        </div>
+        <div class="message">{{ validation.firstError('name') }}</div>
       </div>
     </div>
   </div>
@@ -57,13 +39,19 @@
 
 <script>
 import Vue from 'vue';
+import appInput from "../input/input";
 import SimpleVueValidation from 'simple-vue-validator';
+
 const Validator = SimpleVueValidation.Validator;
 
-Vue.use(SimpleVueValidation);
+// Vue.use(SimpleVueValidation);
 
 
 export default {
+  components: {
+    appInput,
+    SimpleVueValidation
+  },
   props: {
     value: {
       type: String,
@@ -80,12 +68,16 @@ export default {
     return {
       editmode: this.editModeByDefault,
       title: this.value,
-      email: ''
+      email: '',
+      name: ''
     };
   },
   validators: {
     email: function (value) {
       return Validator.value(value).required().email();
+    },
+    name: function (value) {
+      return Validator.value(value).required();
     }
   },
   methods: {
