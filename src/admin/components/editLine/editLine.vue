@@ -8,7 +8,9 @@
       </div>
     </div>
     <div v-else class="title">
-      <div :class="{error: validation.hasError('name')}">
+      <div
+          class="test-error"
+          :class="{error: validation.hasError('name')}">
         <div style="display: flex">
           <div class="input">
             <app-input
@@ -21,6 +23,7 @@
                 autofocus="autofocus"
                 no-side-paddings="no-side-paddings"
             ></app-input>
+            <div class="message">{{ validation.firstError('name') }}</div>
           </div>
           <div class="buttons">
             <div class="button-icon">
@@ -31,19 +34,17 @@
             </div>
           </div>
         </div>
-        <div class="message">{{ validation.firstError('name') }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Vue from 'vue';
 import appInput from "../input/input";
 import SimpleVueValidation from 'simple-vue-validator';
 
 const Validator = SimpleVueValidation.Validator.create({templates: {
-    url: 'That doesn\'t look like a valid url.'
+    name: 'That doesn\'t look like a valid url.'
   }});
 
 
@@ -78,6 +79,7 @@ export default {
     // },
     name: function (value) {
       return Validator.value(value).required();
+      // return Validator.value(value).name;
     }
   },
   methods: {
