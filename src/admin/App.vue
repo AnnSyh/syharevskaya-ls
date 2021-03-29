@@ -1,63 +1,27 @@
 <template>
-  <div class="app-container">
+  <div class="app-container" :class="{'wrapper--dark':this.$route.path === '/login'}">
 
-    <headline title="Панель администрирования">
-      <user
-          title="Анна Сухаревская"
-          src="https://cdn1.ozone.ru/s3/multimedia-4/wc1200/6017928400.jpg"
-      ></user>
-    </headline>
+    <siteHeader v-if="this.$route.path !== '/login'" />
 
-    <navigation/>
+    <navigation v-if="this.$route.path !== '/login'"/>
 
-    <div class="page-content">
-      <div class="container">
-        <div class="header">
-          <span class="header__title">Блок "Обо мне"</span>
-
-          <iconed-btn
-              type="iconed"
-              v-if="emptyCardIsShown == false"
-              @click="emptyCardIsShown = true"
-              title="Добавить группу"/>
-        </div>
-      </div>
-
-      <ul class="skills">
-        <li class="item" v-if="emptyCardIsShown">
-          <category
-            @remove="emptyCardIsShown = false"
-            empty
-          />
-        </li>
-        <li
-            class="item"
-            v-for="category in categories"
-            :key="category.id"
-        >
-<!--          11<pre>{{category.id}}}</pre>22-->
-          <category
-          :title="category.category"
-          :skills="category.skills"
-          />
-        </li>
-      </ul>
-
-    </div>
-
+<!--    <router-view name="headline"/>-->
+    <router-view/>
 
   </div>
 </template>
 
 <script>
-import icon from "./components/icon/icon";
-import navigation from "./components/navigation/navigation.vue";
-import card from "./components/card/card";
-import iconedBtn from "./components/button/button";
-import test from "./components/test/test";
-import headline from "./components/headline/headline";
-import user from "./components/user/user";
-import category from "./components/category/category";
+import icon       from "./components/icon/icon";
+import navigation from "./components/navigation/navigation";
+import card       from "./components/card/card";
+import iconedBtn  from "./components/button/button";
+import test       from "./components/test/test";
+import headline   from "./components/headline/headline";
+import siteHeader   from "./components/siteHeader/siteHeader";
+import def        from "./components/deff/deff";
+import user       from "./components/user/user";
+import category   from "./components/category/category";
 
 
 export default {
@@ -65,21 +29,18 @@ export default {
     test,
     user,
     headline,
+    siteHeader,
+    def,
     iconedBtn,
     card,
     navigation,
     icon,
     category
   },
-  data() {
-    return {
-      emptyCardIsShown:false,
-      categories:[]
-    }
-  },
- created() {
-      this.categories = require('../data/categories.json');
- }
+  created() {
+    console.log(this.$route); //получить информацию о пути/стргденаходимся
+  }
+
 }
 
 

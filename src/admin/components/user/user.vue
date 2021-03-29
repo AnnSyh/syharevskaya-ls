@@ -1,6 +1,6 @@
 <template>
   <div class="user-component">
-    <avatar  size="3.7" v-bind="$attrs"></avatar>
+    <avatar  size="3" v-bind="$attrs"></avatar>
     <div class="username">{{title}}</div>
   </div>
 </template>
