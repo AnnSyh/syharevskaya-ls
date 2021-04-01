@@ -8,19 +8,20 @@
     font-weight: 600;
     display: block;
     text-decoration: none;
+}
+.active,
+//.router-link-active,
+.nav-component__link:hover {
+    color: #383bcf;
+    position: relative;
 
-    &:hover {
-        color: #383bcf;
-        position: relative;
-
-        &:after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: #383bcf;
-        }
+    &:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: #383bcf;
     }
 }

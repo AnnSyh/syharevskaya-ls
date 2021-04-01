@@ -5,23 +5,31 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  min-height: 400px;
 
   &.card_plain {
     padding: 0;
   }
+
+  .header {
+    padding: 30px 2%;
+    border-bottom: 1px solid rgba(#1f232d, 0.15);
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 30px;
+  }
+
+  .content {
+    padding: 0 2%;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
 }
 
-.header {
-  padding: 30px 2%;
-  border-bottom: 1px solid rgba(#1f232d, 0.15);
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 30px;
-}
 
-.content {
-  padding: 0 2%;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
+
+.skills>.item {
+  width: 100%;
+  margin-bottom: 0;
 }

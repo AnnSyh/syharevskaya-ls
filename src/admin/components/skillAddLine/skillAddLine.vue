@@ -7,7 +7,7 @@
   >
     <div class="inputs">
       <div class="title">
-        <app-input no-side-paddings/>
+        <app-input placeholder="Название новой группы" no-side-paddings/>
       </div>
       <div class="percent">
         <app-input
@@ -15,7 +15,7 @@
             min="0"
             max="100"
             maxlength="30"
-            placeholder="skillddLine"
+
         />
         <span>%</span>
       </div>
