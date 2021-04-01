@@ -20,4 +20,5 @@
   }
 </script>
 
+<style lang="postcss" scoped src="../../app.pcss"></style>
 <style lang="postcss" scoped src="./headline.pcss"></style>
