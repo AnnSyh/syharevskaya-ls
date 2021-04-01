@@ -1,5 +1,4 @@
 <template>
-  <div>
     <headline v-if="this.$route.path !== '/login'"
               title="Панель администрирования">
       <user
@@ -7,8 +6,6 @@
           src="https://cdn1.ozone.ru/s3/multimedia-4/wc1200/6017928400.jpg"
       ></user>
     </headline>
-    <navigation v-if="this.$route.path !== '/login'"/>
-  </div>
 </template>
 
 <script>

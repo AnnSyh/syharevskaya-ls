@@ -1,12 +1,12 @@
 <template>
   <div class="app-container" :class="{'wrapper--dark':this.$route.path === '/login'}">
+    <router-view name="header"/>
+    <router-view name="navigation"/>
 
-    <siteHeader v-if="this.$route.path !== '/login'" />
+    <div class="page-content">
+      <router-view/>
+    </div>
 
-    <navigation v-if="this.$route.path !== '/login'"/>
-
-<!--    <router-view name="headline"/>-->
-    <router-view/>
 
   </div>
 </template>
@@ -49,7 +49,7 @@ export default {
 <style lang="postcss">
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
 @import "normalize.css";
-@import "../styles/mixins.pcss";
+@import "../styles/main.pcss";
 @import "../styles/layout/base.pcss";
 </style>
 

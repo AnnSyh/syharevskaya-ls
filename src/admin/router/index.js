@@ -3,6 +3,9 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
+import siteHeader from "../components/siteHeader";
+import navigation from "../components/navigation/navigation";
+
 import About    from '../pages/about'
 import Login    from '../pages/login'
 import Navies  from '../pages/navies'
@@ -13,21 +16,43 @@ import headline from "../components/headline/headline";
 
 const routes = [
     { path: '/',
-        components: { About
-            // default: About,
-            // header: headline
+        components: {
+            default: About,
+            header: siteHeader,
+            navigation: navigation
         },
         meta:{name:"Обо мне!"}
      },
     { path: '/login',
-        components: { Login
-            // default: Login,
-            // header: headline
+        components: {
+            default: Login
         },
     },
-    { path: '/navies',  component: Navies,  meta:{name:"Навыки!"}  },
-    { path: '/reviews', component: Reviews, meta:{name:"Отзывы!"}  },
-    { path: '/works',   component: Works,   meta:{name:"Работы!"}  },
+    {  path: '/navies',
+        components: {
+            default: Navies,
+            header: siteHeader,
+            navigation: navigation
+        },
+        meta:{name:"Навыки!"}
+
+    },
+    { path: '/reviews',
+        components: {
+            default: Reviews,
+            header: siteHeader,
+            navigation: navigation
+        },
+        meta:{name:"Отзывы!"}
+    },
+    { path: '/works',
+        components: {
+            default: Works,
+            header: siteHeader,
+            navigation: navigation
+        },
+        meta:{name:"Работы!"}
+    },
 
 ]
 

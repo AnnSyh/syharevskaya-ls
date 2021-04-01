@@ -1,8 +1,15 @@
 <template>
-  <section class="login">
-    <div class="container">
-      <h1>Reviews</h1>
-      <h1 class="about__title">Блок "{{this.$route.meta.name}}"</h1>
+  <section class="reviews container">
+    <div class="header">
+      <h1 class="header__title">Блок "{{this.$route.meta.name}}"</h1>
+    </div>
+    <div class="card-component">
+      <div class="header">
+        <div class="text">Заголовок контента</div>
+      </div>
+      <div class="content">
+        content
+      </div>
     </div>
   </section>
 </template>
@@ -12,4 +19,6 @@ export default {
 
 }
 </script>
+<style lang="postcss" src="../components/card/card.pcss" scoped>
+</style>
 
