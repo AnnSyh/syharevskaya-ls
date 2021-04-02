@@ -23,7 +23,7 @@
               />
             </div>
             <div class="btn">
-              <app-button title="Отправить"/>
+              <app-button :disabled="isSubmitDisabled" title="Отправить"/>
             </div>
           </form>
         </div>
@@ -33,39 +33,54 @@
 </template>
 
 <script>
-import appInput from  "../../components/input"
-import appButton from  "../../components/button"
-import {Validator, mixin as  ValidatorMixin} from 'simple-vue-validator';
+import appInput from "../../components/input"
+import appButton from "../../components/button"
+import {Validator, mixin as ValidatorMixin} from 'simple-vue-validator';
+import $axios from "../../request";
 
 
 export default {
-  mixins:[ValidatorMixin],
+  mixins: [ValidatorMixin],
   validators: {
-    "user.name" : value => {
+    "user.name": value => {
       return Validator.value(value).required("Введите имя пользователя");
     },
-    "user.password" : value => {
+    "user.password": value => {
       return Validator.value(value).required("Введите имя пользователя");
     }
   },
-  data:() => ({
+  data: () => ({
     user: {
-      password:"",
-      name:""
-      }
+      name: "",
+      password: ""
+    },
+    isSubmitDisabled: false
   }),
-  components:{
+  components: {
     appInput,
     appButton,
     Validator
   },
-  methods:{
-    handleSubmit(){
-      this.$validate().then((isValid)=> {
-        if(isValid === false) return;
+  methods: {
+    handleSubmit() {
+      this.$validate().then((isValid) => {
+        if (isValid === false) return;
 
-        //request
-        console.log('request')
+        this.isSubmitDisabled = true;
+
+        $axios.post("/login", this.user).then(response => {
+          const token = response.data.token;
+          localStorage.setItem("token", token);
+          axios.defaults.headers["Authorizations"] = `Bearer ${token}`;
+          this.$router.replace('/');
+          console.log("response", response)
+        })
+        .catch((error) => console.log(error.response.data.error))
+        // .catch((error) => console.dir(error))
+        .finally(() => {
+          this.isSubmitDisabled = false;
+        })
+
       })
     }
   }
