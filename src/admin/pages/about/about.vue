@@ -33,10 +33,10 @@
 </template>
 
 <script>
-import icon from "../components/icon/icon";
-import card from "../components/card/card";
-import iconedBtn from "../components/button/button";
-import category from "../components/category/category";
+import icon from "../../components/icon/icon";
+import card from "../../components/card/card";
+import iconedBtn from "../../components/button/button";
+import category from "../../components/category/category";
 
 export default {
   components: {
@@ -52,7 +52,7 @@ export default {
     }
   },
   created() {
-    this.categories = require('../../data/categories.json');
+    this.categories = require('../../../data/categories.json');
     console.log(this.$route.meta.name); //получить информацию о пути/стргденаходимся
   }
 }
