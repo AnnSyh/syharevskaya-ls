@@ -23,7 +23,6 @@
             v-for="category in categories"
             :key="category.id"
         >
-          <!--          11<pre>{{category.id}}}</pre>22-->
           <category
               :title="category.category"
               :skills="category.skills"
@@ -55,17 +54,15 @@ export default {
   },
   methods:{
     ...mapActions({
-      createCategoryActions:"categories/create"
-
+      createCategoryAction:"categories/create"
     }),
-    createCategory(categotyTitle){
-      this.createCategoryActions(categotyTitle);
-      // console.log('categotyTitle = ',categotyTitle)
+    createCategory(categoryTitle){
+      this.createCategoryAction(categoryTitle);
+      // console.log('categoryTitle = ',categoryTitle)
     }
   },
   created() {
     this.categories = require('../../../data/categories.json');
-    console.log(this.$route.meta.name); //получить информацию о пути/стргденаходимся
   }
 }
 </script>

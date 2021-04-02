@@ -86,26 +86,6 @@ export default {
          this.isSubmitDisabled = false;
        }
 
-
-
-      //
-      // if ((this.$validate()) === false) return;
-      //
-      // this.isSubmitDisabled = true;
-      // try {
-      //   const response = await $axios.post("/login", this.user);
-      //   const token = response.data.token;
-      //   localStorage.setItem("token", token);
-      //   $axios.defaults.headers["Authorization"] = `Bearer ${token}`;
-      //   this.$router.replace("/");
-      // } catch (error) {
-      //   this.showTooltip({
-      //     text: error.response.data.error,
-      //     type: "error"
-      //   })
-      // } finally {
-      //   this.isSubmitDisabled = false;
-      // }
     },
   }
 

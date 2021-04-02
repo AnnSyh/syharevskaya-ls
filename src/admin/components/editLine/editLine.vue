@@ -12,13 +12,12 @@
           class="test-error"
           >
         <div style="display: flex">
-          <div class="input" :class="{error: validation.hasError('name')}">
+          <div class="input">
             <app-input
                 v-model="name"
                 placeholder="Название новой группы"
                 :value="value"
-                :errorText="errorText"
-                :errorMessage="validation.firstError('name')"
+                :error-message="validation.firstError('name')"
                 @input="$emit('input', $event)"
                 @keydown.native.enter="onApprove"
                 autofocus="autofocus"
@@ -41,17 +40,19 @@
 
 <script>
 import appInput from "../input/input";
-import SimpleVueValidation from 'simple-vue-validator';
-
-const Validator = SimpleVueValidation.Validator.create({templates: {
-    name: 'That doesn\'t look like a valid url.'
-  }});
+import {Validator, mixin as ValidatorMixin} from 'simple-vue-validator';
 
 
 export default {
+  mixins: [ValidatorMixin],
+  validators: {
+    "name": value => {
+      return Validator.value(value).required("Введите наз новой группы");
+    }
+  },
   components: {
     appInput,
-    SimpleVueValidation
+    Validator
   },
   props: {
     value: {
@@ -72,13 +73,14 @@ export default {
       name: '',
     };
   },
-  validators: {
-    name: function (value) {
-      return Validator.value(value).required();
-    }
-  },
+  // validators: {
+  //   name: function (value) {
+  //     return Validator.value(value).required();
+  //   }
+  // },
   methods: {
     onApprove() {
+      if (this.value.trim() === "") return false;
       if (this.title.trim() === this.value.trim()) {
         this.editmode = false;
       } else {
