@@ -36,8 +36,8 @@
 import appInput from "../../components/input"
 import appButton from "../../components/button"
 import {Validator, mixin as ValidatorMixin} from 'simple-vue-validator';
-import $axios from "../../request";
-
+import $axios from "../../requests";
+// import { mapActions } from "vuex";
 
 export default {
   mixins: [ValidatorMixin],
@@ -62,27 +62,51 @@ export default {
     Validator
   },
   methods: {
-    handleSubmit() {
-      this.$validate().then((isValid) => {
-        if (isValid === false) return;
+    async handleSubmit() {
+      console.log('!!!submit', this.user.name, this.user.password)
 
-        this.isSubmitDisabled = true;
+      if ((await this.$validate()) === false) return;
 
-        $axios.post("/login", this.user).then(response => {
-          const token = response.data.token;
-          localStorage.setItem("token", token);
-          axios.defaults.headers["Authorizations"] = `Bearer ${token}`;
-          this.$router.replace('/');
-          console.log("response", response)
-        })
-        .catch((error) => console.log(error.response.data.error))
-        // .catch((error) => console.dir(error))
-        .finally(() => {
-          this.isSubmitDisabled = false;
-        })
+      this.isSubmitDisabled = true;
 
-      })
-    }
+       try {
+         const response = await $axios.post("/login", this.user);
+
+         const token = response.data.token;
+
+         localStorage.setItem("token", token);
+         $axios.defaults.headers["Authorization"] = `Bearer ${token}`;
+         console.log('responce = ',responce);
+         this.$router.replace("/");
+
+       }  catch(error) {
+
+         console.dir(error.response.data.error)
+       } finally {
+         this.isSubmitDisabled = false;
+       }
+
+
+
+      //
+      // if ((this.$validate()) === false) return;
+      //
+      // this.isSubmitDisabled = true;
+      // try {
+      //   const response = await $axios.post("/login", this.user);
+      //   const token = response.data.token;
+      //   localStorage.setItem("token", token);
+      //   $axios.defaults.headers["Authorization"] = `Bearer ${token}`;
+      //   this.$router.replace("/");
+      // } catch (error) {
+      //   this.showTooltip({
+      //     text: error.response.data.error,
+      //     type: "error"
+      //   })
+      // } finally {
+      //   this.isSubmitDisabled = false;
+      // }
+    },
   }
 
 }

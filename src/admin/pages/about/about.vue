@@ -14,6 +14,7 @@
         <li class="item" v-if="emptyCardIsShown">
           <category
               @remove="emptyCardIsShown = false"
+              @approve="createCategory"
               empty
           />
         </li>
@@ -37,6 +38,7 @@ import icon from "../../components/icon/icon";
 import card from "../../components/card/card";
 import iconedBtn from "../../components/button/button";
 import category from "../../components/category/category";
+import {mapActions} from "vuex"
 
 export default {
   components: {
@@ -49,6 +51,16 @@ export default {
     return {
       emptyCardIsShown:false,
       categories:[]
+    }
+  },
+  methods:{
+    ...mapActions({
+      createCategoryActions:"categories/create"
+
+    }),
+    createCategory(categotyTitle){
+      this.createCategoryActions(categotyTitle);
+      // console.log('categotyTitle = ',categotyTitle)
     }
   },
   created() {

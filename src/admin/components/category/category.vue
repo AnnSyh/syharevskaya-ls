@@ -5,6 +5,7 @@
         v-model="title"
         :editModeByDefault="empty"
         @remove="$emit('remove',$event)"
+        @approve="$emit('approve', $event)"
     />
     <template slot="content">
       <ul class="skills" v-if="empty === false">
@@ -18,8 +19,9 @@
         </li>
       </ul>
       <div class="bottom-line">
-<!--        <tagsAdder v-model="tags"/>-->
-        <skillAddLine :blocked="empty"/>
+        <skillAddLine
+            @approve="$emit('create-skill', $event)"
+            :blocked="empty"/>
       </div>
     </template>
   </card>
@@ -46,32 +48,28 @@ export default {
     tag
   },
   props: {
-    tags:{
-      type: String,
-      default: ""
-    },
     empty: Boolean,
     title:{
       type: String,
+      default: "",
     },
     skills:{
       type: Array,
       default: () => []
+    },
+    tags:{
+      type: String,
+      default: ""
     }
   },
-  model:{
-    prop:"tags",
-    event:"change"
+  data() {
+    return {
+      categoryTitle: this.title,
+    };
   },
-  // data(){
-  //   return{
-  //     tags: this.tags
-  //   }
-  // },
-  // computed:{
-  //   tagsArray(){
-  //     return this.tags.trim().split(", ");
-  //   },
+  // model:{
+  //   prop:"tags",
+  //   event:"change"
   // },
 }
 </script>

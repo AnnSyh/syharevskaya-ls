@@ -23,6 +23,8 @@ import def        from "./components/deff/deff";
 import user       from "./components/user/user";
 import category   from "./components/category/category";
 
+import { mapState, mapActions } from "vuex";
+
 
 export default {
   components: {
@@ -37,6 +39,7 @@ export default {
     icon,
     category
   },
+
   created() {
     console.log(this.$route); //получить информацию о пути/стргденаходимся
   }

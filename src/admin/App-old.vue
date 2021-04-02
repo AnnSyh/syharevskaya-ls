@@ -93,3 +93,43 @@ export default {
 </style>
 
 <style lang="postcss" scoped src="./app.pcss"></style>
+---------------------------------------------------------------
+
+this.$validate().then(async (isValid)=>{
+if(isValid === false) return ;
+
+this.isSubmitDisabled = true;
+try {
+const response = await axios.post("/login", this.user)
+const token = response.data.token;
+localStorage.setItem('token', token);
+$axios.defaults.headers["Authorization"] = `Bearer ${token}`;
+console.log('responce = ',responce);
+this.$router.replace("/");
+
+}  catch(error) {
+console.dir(error.response.data.error)
+} finally {
+this.isSubmitDisabled = false;
+}
+
+})
+-------------------------------------------
+
+this.$validate().then((isValid)=>{
+if(isValid === false) return ;
+
+this.isSubmitDisabled = true;
+
+axios.post("https://webdev-api.loftschool.com/login", this.user).then(responce =>{
+const token = response.data.token;
+localStorage.setItem('token', token);
+$axios.defaults.headers["Authorization"] = `Bearer ${token}`;
+console.log('responce = ',responce);
+this.$router.replace("/");
+})
+.catch((error) => console.dir(error.response.data.error))
+.then(()=>{
+this.isSubmitDisabled = false;
+})
+})
