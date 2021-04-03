@@ -8,10 +8,10 @@
             type="iconed"
             v-if="emptyCardIsShown == false"
             @click="emptyCardIsShown = true"
-            title="Добавить группу"/>
+            title="about Добавить группу"/>
 
       </div>
-      <pre>{{categories}}}</pre>
+<!--      <pre>{{categories}}}</pre>-->
       <ul class="skills">
         <li class="item" v-if="emptyCardIsShown">
           <category
@@ -91,6 +91,7 @@ export default {
       skill.editmode = false;
     },
    async createCategory(categoryTitle){
+      // console.log('createCategory')
       try {
         await this.createCategoryAction(categoryTitle)
         this.emptyCardIsShown = false;

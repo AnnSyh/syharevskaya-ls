@@ -1,13 +1,13 @@
 <template>
     <div
       class="skillAddLine-component"
+      :class="['skill-add-line-component', {blocked: blocked}]"
   >
     <div class="inputs">
       <div class="title">
         <app-input
             v-model="skill.title"
             placeholder="новой навык"
-            no-side-paddings
             :error-message="validation.firstError('skill.title')"
         />
       </div>

@@ -28,7 +28,7 @@
             <div class="button-icon">
               <icon symbol="tick"  @click="onApprove"></icon>
             </div>
-            <div class="button-icon">
+            <div class="button-icon">+
               <icon symbol="cross" @click="$emit('remove')"></icon>
             </div>
           </div>

@@ -1,17 +1,23 @@
 <template>
-  <div class="app-container" :class="{'wrapper--dark':this.$route.path === '/login'}">
+  <div class="app-container page-content" :class="{'wrapper--dark':this.$route.path === '/login'}">
     <router-view name="header"/>
     <router-view name="navigation"/>
 
-    <div class="page-content">
+    <div class="" >
       <router-view/>
     </div>
+
+<!--    <div class="notify-container">-->
+<!--      <notification/>-->
+<!--    </div>-->
 
 
   </div>
 </template>
 
 <script>
+import notification from "./components/notification";
+
 import icon       from "./components/icon/icon";
 import navigation from "./components/navigation/navigation";
 import card       from "./components/card/card";
@@ -37,7 +43,8 @@ export default {
     card,
     navigation,
     icon,
-    category
+    category,
+    notification
   },
 
   created() {
