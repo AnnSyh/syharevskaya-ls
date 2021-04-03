@@ -6,6 +6,16 @@ export default {
     mutations:{
         SET_CATEGORIES: (state, categories) => (state.data = categories),
         ADD_CATEGORY: (state, category) => state.data.unshift(category),
+
+        REMOVE_CATEGORIES: (state, categoryToRemove) => {
+            state.data = state.data.map(category => {
+                if (category.id === categoryToRemove.category) {
+                    category.category = category.category.filter(category => category.id !== categoryToRemove.id)
+                }
+                return category;
+            })
+        },
+
         ADD_SKILL: (state, newSkill) => {
             state.data = state.data.map(category => {
                 if (category.id === newSkill.category) {
@@ -51,12 +61,22 @@ export default {
         },
         async fetch({ commit }) {
             try {
-                const { data } = await this.$axios.get('/categories/444')
+                const { data } = await this.$axios.get('/categories/446')
                 commit("SET_CATEGORIES", data)
             } catch (error) {
                 console.log(error);
             }
-        }
+        },
+        async remove({ commit }, categoryToRemove){
+            try {
+                const { data } = await this.$axios.delete(`/skills/${categoryToRemove.id}`);
+                commit("categories/REMOVE_CATEGORIES", categoryToRemove, { root: true })
+
+            } catch (error){
+                console.log("Ошибка remove Categories", error);
+                throw new Error("Ошибка remove Categories")
+            }
+        },
     }
 
 }

@@ -2,7 +2,7 @@
   <card>
     <editLine
         slot="title"
-        v-model="title"
+        v-model="categoryTitle"
         :editModeByDefault="empty"
         @remove="$emit('remove',$event)"
         @approve="$emit('approve', $event)"
@@ -67,10 +67,10 @@ export default {
       categoryTitle: this.title,
     };
   },
-  // model:{
-  //   prop:"tags",
-  //   event:"change"
-  // },
+  model:{
+    prop:"tags",
+    event:"change"
+  },
 }
 </script>
 
