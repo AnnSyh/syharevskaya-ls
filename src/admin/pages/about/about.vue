@@ -1,5 +1,6 @@
 <template>
-  <section class="about container">
+  <section class="about">
+    <div class="container" v-if="categories.length">
       <div class="header">
         <span class="header__title">Блок "{{this.$route.meta.name}}"</span>
 
@@ -10,6 +11,7 @@
             title="Добавить группу"/>
 
       </div>
+      <pre>{{categories}}}</pre>
       <ul class="skills">
         <li class="item" v-if="emptyCardIsShown">
           <category
@@ -26,9 +28,16 @@
           <category
               :title="category.category"
               :skills="category.skills"
+              @create-skill="createSkill($event,category.id)"
+              @edit-skill="editSkill"
+              @remove-skill="removeSkill"
           />
         </li>
       </ul>
+    </div>
+    <div class="container" v-else>
+      loading....
+    </div>
   </section>
 </template>
 
@@ -37,7 +46,7 @@ import icon from "../../components/icon/icon";
 import card from "../../components/card/card";
 import iconedBtn from "../../components/button/button";
 import category from "../../components/category/category";
-import {mapActions} from "vuex"
+import {mapActions, mapState} from "vuex"
 
 export default {
   components: {
@@ -49,20 +58,50 @@ export default {
   data() {
     return {
       emptyCardIsShown:false,
-      categories:[]
     }
+  },
+  computed:{
+    ...mapState('categories',{
+      categories: state => state.data
+    })
   },
   methods:{
     ...mapActions({
-      createCategoryAction:"categories/create"
+      createCategoryAction:"categories/create",
+      fetchCategoriesAction: "categories/fetch",
+      addSkillAction:"skills/add",
+      removeSkillAction:"skills/remove",
+      editSkillAction:"skills/edit"
     }),
-    createCategory(categoryTitle){
+   async createSkill(skill,categoryId){
+      const newSkill = {
+        ...skill,
+        category:categoryId
+      }
+      await this.addSkillAction(newSkill);
+
+      skill.title="",
+      skill.percent=""
+    },
+    removeSkill(skill){
+      this.removeSkillAction(skill);
+    },
+    async editSkill(skill){
+      await this.editSkillAction(skill);
+      skill.editmode = false;
+    },
+   async createCategory(categoryTitle){
+      try {
+        await this.createCategoryAction(categoryTitle)
+        this.emptyCardIsShown = false;
+      } catch (error){
+        console.log(error.message)
+      }
       this.createCategoryAction(categoryTitle);
-      // console.log('categoryTitle = ',categoryTitle)
     }
   },
   created() {
-    this.categories = require('../../../data/categories.json');
+    this.fetchCategoriesAction();
   }
 }
 </script>

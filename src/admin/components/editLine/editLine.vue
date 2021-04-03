@@ -14,10 +14,10 @@
         <div style="display: flex">
           <div class="input">
             <app-input
-                v-model="name"
                 placeholder="Название новой группы"
                 :value="value"
-                :error-message="validation.firstError('name')"
+                :error-text="errorText"
+                v-model="name"
                 @input="$emit('input', $event)"
                 @keydown.native.enter="onApprove"
                 autofocus="autofocus"
@@ -26,7 +26,7 @@
           </div>
           <div class="buttons">
             <div class="button-icon">
-              <icon symbol="tick"  @click="submit"></icon>
+              <icon symbol="tick"  @click="onApprove"></icon>
             </div>
             <div class="button-icon">
               <icon symbol="cross" @click="$emit('remove')"></icon>
@@ -61,7 +61,7 @@ export default {
     },
     errorText: {
       type: String,
-      default: "fhghthtr fdherye"
+      default: "errorText"
     },
     editModeByDefault: Boolean,
     blocked: Boolean
@@ -73,11 +73,6 @@ export default {
       name: '',
     };
   },
-  // validators: {
-  //   name: function (value) {
-  //     return Validator.value(value).required();
-  //   }
-  // },
   methods: {
     onApprove() {
       if (this.value.trim() === "") return false;
@@ -87,14 +82,6 @@ export default {
         this.$emit("approve", this.value);
       }
     },
-    submit: function () {
-      this.$validate()
-          .then(function (success) {
-            if (success) {
-              alert('Validation succeeded!');
-            }
-          });
-    }
   },
   components: {
     icon: () => import("components/icon"),

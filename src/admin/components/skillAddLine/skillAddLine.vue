@@ -1,29 +1,26 @@
 <template>
-<!--  <div-->
-<!--      class="['skillAddLine-component',{blocked: blocked}]"-->
-<!--  >  -->
     <div
       class="skillAddLine-component"
   >
     <div class="inputs">
       <div class="title">
-        <app-input placeholder="Название новой группы" no-side-paddings/>
+        <app-input
+            v-model="skill.title"
+            placeholder="новой навык"
+            no-side-paddings
+            :error-message="validation.firstError('skill.title')"
+        />
       </div>
       <div class="percent">
         <app-input
-            type="number"
-            min="0"
-            max="100"
-            maxlength="30"
-
+            v-model="skill.percent"
+            :error-message="validation.firstError('skill.percent')"
         />
         <span>%</span>
       </div>
     </div>
     <div class="add-btn">
-<!--      <round-btn type="iconed"  title=""  />  - ошибки в панели-->
-      <iconed-btn type="iconed" title=""/>
-
+      <iconed-btn type="iconed" @click="handleClick"/>
     </div>
   </div>
 </template>
@@ -33,8 +30,21 @@ import input from "../input/input"
 import icon from "../icon/icon"
 import iconedBtn from "../button/button";
 import roundBtn from "../button/button";
+import {Validator, mixin as ValidatorMixin} from 'simple-vue-validator';
 
 export default {
+  mixins: [ValidatorMixin],
+  validators: {
+    "skill.title": value => {
+      return Validator.value(value).required("Не может быть пустым");
+    },
+    "skill.percent": value => {
+      return Validator.value(value)
+          .integer("Должнобытьчисло")
+          .between(0,100,"Не коректное значение")
+          .required("Не может быть пустым");
+    },
+  },
   props: {
     blocked: Boolean
   },
@@ -43,6 +53,20 @@ export default {
     iconedBtn,
     appInput: input,
     roundBtn
+  },
+  data(){
+    return{
+      skill: {
+        title:"",
+        percent:"",
+      },
+    }
+  },
+  methods:{
+    async handleClick(){
+      if(await  this.$validate() === false) return;
+      this.$emit('approve', this.skill)
+    }
   }
 }
 

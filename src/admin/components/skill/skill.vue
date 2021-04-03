@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="skill-component" v-if="currentSkill.editmode===false">
+    <div class="skill-component" v-if="currentSkill.editmode === false">
       <div class="inputs">
         <div class="title">{{ skill.title }}</div>
         <div class="percent">{{ skill.percent }}</div>
@@ -39,8 +39,7 @@ export default {
   props: {
     skill: {
       type: Object,
-      default: () => {
-      },
+      default: () => {},
       required: true
     },
 
