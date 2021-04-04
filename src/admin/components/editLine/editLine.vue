@@ -4,21 +4,20 @@
     <div class="title" v-if="editmode === false">
       <div class="text">{{ value }}</div>
       <div class="icon">
-        <icon symbol="pencil" grayscale @click="editmode = true"></icon>
+        <icon symbol="pencil" grayscale
+              @click="editmode = true"
+        ></icon>
       </div>
     </div>
     <div v-else class="title">
-      <div
-          class="test-error"
-          >
+      <div class="test-error">
         <div style="display: flex">
-          <div class="input" :class="{error: validation.hasError('name')}">
+          <div class="input">
             <app-input
-                v-model="name"
                 placeholder="Название новой группы"
+                v-model="name"
                 :value="value"
-                :errorText="errorText"
-                :errorMessage="validation.firstError('name')"
+                :error-message="validation.firstError('name')"
                 @input="$emit('input', $event)"
                 @keydown.native.enter="onApprove"
                 autofocus="autofocus"
@@ -27,10 +26,12 @@
           </div>
           <div class="buttons">
             <div class="button-icon">
-              <icon symbol="tick"  @click="submit"></icon>
+              <icon symbol="tick"  @click="onApprove"></icon>
             </div>
             <div class="button-icon">
-              <icon symbol="cross" @click="$emit('remove')"></icon>
+              <icon symbol="cross"
+                    @click="$emit('remove',$event)"
+              ></icon>
             </div>
           </div>
         </div>
@@ -40,18 +41,22 @@
 </template>
 
 <script>
+import icon from "../../components/icon/icon";
 import appInput from "../input/input";
-import SimpleVueValidation from 'simple-vue-validator';
-
-const Validator = SimpleVueValidation.Validator.create({templates: {
-    name: 'That doesn\'t look like a valid url.'
-  }});
+import {Validator, mixin as ValidatorMixin} from 'simple-vue-validator';
 
 
 export default {
+  mixins: [ValidatorMixin],
+  validators: {
+    "name": value => {
+      return Validator.value(value).required("Введите наз новой группы");
+    }
+  },
   components: {
     appInput,
-    SimpleVueValidation
+    Validator,
+    icon,
   },
   props: {
     value: {
@@ -60,7 +65,7 @@ export default {
     },
     errorText: {
       type: String,
-      default: "fhghthtr fdherye"
+      default: "errorText"
     },
     editModeByDefault: Boolean,
     blocked: Boolean
@@ -72,32 +77,16 @@ export default {
       name: '',
     };
   },
-  validators: {
-    name: function (value) {
-      return Validator.value(value).required();
-    }
-  },
   methods: {
     onApprove() {
+      if (this.value.trim() === "") return false;
       if (this.title.trim() === this.value.trim()) {
         this.editmode = false;
       } else {
         this.$emit("approve", this.value);
       }
     },
-    submit: function () {
-      this.$validate()
-          .then(function (success) {
-            if (success) {
-              alert('Validation succeeded!');
-            }
-          });
-    }
   },
-  components: {
-    icon: () => import("components/icon"),
-    appInput: () => import("components/input")
-  }
 };
 </script>
 

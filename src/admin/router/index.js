@@ -6,13 +6,11 @@ Vue.use(VueRouter)
 import siteHeader from "../components/siteHeader";
 import navigation from "../components/navigation/navigation";
 
-import About    from '../pages/about'
-import Login    from '../pages/login'
+import About    from '../pages/about/about'
+import Login    from '../pages/login/login'
 import Navies  from '../pages/navies'
 import Works    from '../pages/works'
 import Reviews    from '../pages/reviews'
-
-import headline from "../components/headline/headline";
 
 const routes = [
     { path: '/',

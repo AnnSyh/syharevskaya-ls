@@ -1,12 +1,18 @@
 <template>
   <card>
+    <p>this.title = {{this.title}}</p>
     <editLine
         slot="title"
-        v-model="title"
+        v-model="categoryTitle"
         :editModeByDefault="empty"
-        @remove="$emit('remove',$event)"
+        @remove="removeCategory"
+        @approve="$emit('approve', $event)"
     />
     <template slot="content">
+<!--      <p>this.title = {{this.title}}</p>-->
+<!--      <p>this.category.id = {{this.category.id}}</p>-->
+<!--      <p>this.category = {{this.category}}</p>-->
+<!--      <p>skills = {{skills}}</p>-->
       <ul class="skills" v-if="empty === false">
         <li class="item"  v-for="skill in skills" :key="skill.id">
           <skill
@@ -14,12 +20,12 @@
               @remove="$emit('remove-skill', $event)"
               @approve="$emit('edit-skill', $event)"
           />
-
         </li>
       </ul>
       <div class="bottom-line">
-<!--        <tagsAdder v-model="tags"/>-->
-        <skillAddLine :blocked="empty"/>
+        <skillAddLine
+            @approve="$emit('create-skill', $event)"
+            :blocked="empty"/>
       </div>
     </template>
   </card>
@@ -34,6 +40,7 @@ import skillAddLine   from "../skillAddLine/skillAddLine";
 import editLine       from "../editLine/editLine";
 import tagsAdder      from "../tagsAdder/tagsAdder";
 import tag            from "../tag/tag";
+import {mapActions, mapState} from "vuex"
 
 
 export default {
@@ -46,33 +53,47 @@ export default {
     tag
   },
   props: {
-    tags:{
-      type: String,
-      default: ""
-    },
     empty: Boolean,
     title:{
       type: String,
+      default: "",
+    },
+    category:{
+      type: Object,
+      default: () => ({})
     },
     skills:{
       type: Array,
       default: () => []
+    },
+    tags:{
+      type: String,
+      default: ""
     }
+  },
+  data() {
+    return {
+      categoryTitle: this.title,
+    };
+  },
+  computed:{
+    ...mapState('categories',{
+      categories: state => state.data
+    })
+  },
+  methods:{
+    ...mapActions({
+      removeCategoryAction: "categories/remove",
+    }),
+
+    removeCategory(){ console.log('category.vue removeCategory')
+      this.removeCategoryAction(this.category.id);
+    },
   },
   model:{
     prop:"tags",
     event:"change"
   },
-  // data(){
-  //   return{
-  //     tags: this.tags
-  //   }
-  // },
-  // computed:{
-  //   tagsArray(){
-  //     return this.tags.trim().split(", ");
-  //   },
-  // },
 }
 </script>
 

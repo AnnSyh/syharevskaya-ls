@@ -1,5 +1,5 @@
 <template>
-  <button 
+  <button
     v-on="$listeners"
     class="button-component"
   >{{title}}</button>
@@ -10,7 +10,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Добавить группу"
+      default: ""
     }
   }
 };

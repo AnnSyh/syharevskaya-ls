@@ -35,4 +35,5 @@
   }
 </script>
 
+<style lang="postcss" scoped src="../../app.pcss"></style>
 <style lang="postcss" scoped src="./navigation.pcss"></style>

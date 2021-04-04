@@ -1,10 +1,20 @@
 <template>
-  <div class="app-container" :class="{'wrapper--dark':this.$route.path === '/login'}">
+  <div class="app-container page-content" :class="{'wrapper--dark':this.$route.path === '/login'}">
     <router-view name="header"/>
     <router-view name="navigation"/>
 
-    <div class="page-content">
+    <div >
       <router-view/>
+    </div>
+
+    <div :class="['notify-container', {active: isTooltipShown}]">
+      <div class="notification">
+        <notification
+            :text="tooltipText"
+            :type="tooltipType"
+            @click="hideTooltip"
+        />
+      </div>
     </div>
 
 
@@ -12,6 +22,8 @@
 </template>
 
 <script>
+import notification from "./components/notification";
+
 import icon       from "./components/icon/icon";
 import navigation from "./components/navigation/navigation";
 import card       from "./components/card/card";
@@ -22,6 +34,7 @@ import siteHeader   from "./components/siteHeader/siteHeader";
 import def        from "./components/deff/deff";
 import user       from "./components/user/user";
 import category   from "./components/category/category";
+import { mapState, mapActions } from "vuex";
 
 
 export default {
@@ -35,8 +48,22 @@ export default {
     card,
     navigation,
     icon,
-    category
+    category,
+    notification
   },
+  methods: {
+    ...mapActions({
+      hideTooltip: "tooltips/hide"
+    })
+  },
+  computed: {
+    ...mapState("tooltips", {
+      isTooltipShown: (state) => state.isShown,
+      tooltipText: (state) => state.text,
+      tooltipType: (state) => state.type,
+    }),
+  },
+
   created() {
     console.log(this.$route); //получить информацию о пути/стргденаходимся
   }

@@ -4,7 +4,15 @@
   //justify-content: space-between;
   align-items: center;
   height: 6.25rem;
+
+  @include tablets{
+    width: 100%;
+    justify-content: space-between;
+  }
 }
+
+
+
 .header__title {
   font-size: 1.3125rem;
   font-weight: 700;
@@ -13,7 +21,7 @@
 }
 
 .header__menu {
-  width: 55%;
+  width: 100%;
   @include tablets {
     display: none;
   }
