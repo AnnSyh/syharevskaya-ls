@@ -8,7 +8,7 @@
             type="iconed"
             v-if="emptyCardIsShown == false"
             @click="emptyCardIsShown = true"
-            title="about Добавить группу"/>
+            title="Добавить группу"/>
 
       </div>
 <!--      <pre>{{categories}}}</pre>-->
@@ -25,9 +25,12 @@
             v-for="category in categories"
             :key="category.id"
         >
+
+          {{category.id}}
           <category
               :title="category.category"
               :skills="category.skills"
+              :category="category"
               @create-skill="createSkill($event,category.id)"
               @edit-skill="editSkill"
               @remove-skill="removeSkill"
@@ -99,7 +102,10 @@ export default {
         console.log(error.message)
       }
       this.createCategoryAction(categoryTitle);
-    }
+    },
+    removeCategory(){
+      this.removeCategoriesAction(this.category);
+    },
   },
   created() {
     this.fetchCategoriesAction();

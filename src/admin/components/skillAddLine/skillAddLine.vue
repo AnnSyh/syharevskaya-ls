@@ -14,6 +14,7 @@
       <div class="percent">
         <app-input
             v-model="skill.percent"
+            placeholder="100"
             :error-message="validation.firstError('skill.percent')"
         />
         <span>%</span>

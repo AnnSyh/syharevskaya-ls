@@ -67,10 +67,10 @@ export default {
                 console.log(error);
             }
         },
-        async remove({ commit }, categoryToRemove){
+        async remove({ commit }, categoryIdToRemove){
             try {
-                const { data } = await this.$axios.delete(`/skills/${categoryToRemove.id}`);
-                commit("categories/REMOVE_CATEGORIES", categoryToRemove, { root: true })
+                const { data } = await this.$axios.delete(`/categories/${categoryIdToRemove}`);
+                commit("categories/REMOVE_CATEGORIES", categoryIdToRemove, { root: true })
 
             } catch (error){
                 console.log("Ошибка remove Categories", error);

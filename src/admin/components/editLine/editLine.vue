@@ -4,20 +4,20 @@
     <div class="title" v-if="editmode === false">
       <div class="text">{{ value }}</div>
       <div class="icon">
-        <icon symbol="pencil" grayscale @click="editmode = true"></icon>
+        <icon symbol="pencil" grayscale
+              @click="editmode = true"
+        ></icon>
       </div>
     </div>
     <div v-else class="title">
-      <div
-          class="test-error"
-          >
+      <div class="test-error">
         <div style="display: flex">
           <div class="input">
             <app-input
                 placeholder="Название новой группы"
-                :value="value"
-                :error-text="errorText"
                 v-model="name"
+                :value="value"
+                :error-message="validation.firstError('name')"
                 @input="$emit('input', $event)"
                 @keydown.native.enter="onApprove"
                 autofocus="autofocus"
@@ -28,8 +28,11 @@
             <div class="button-icon">
               <icon symbol="tick"  @click="onApprove"></icon>
             </div>
-            <div class="button-icon">+
-              <icon symbol="cross" @click="$emit('remove')"></icon>
+            <p>111</p>
+            <div class="button-icon">
+              <icon symbol="cross"
+                    @click="$emit('remove',$event)"
+              ></icon>
             </div>
           </div>
         </div>
@@ -39,6 +42,7 @@
 </template>
 
 <script>
+import icon from "../../components/icon/icon";
 import appInput from "../input/input";
 import {Validator, mixin as ValidatorMixin} from 'simple-vue-validator';
 
@@ -52,7 +56,8 @@ export default {
   },
   components: {
     appInput,
-    Validator
+    Validator,
+    icon,
   },
   props: {
     value: {
@@ -83,10 +88,6 @@ export default {
       }
     },
   },
-  components: {
-    icon: () => import("components/icon"),
-    appInput: () => import("components/input")
-  }
 };
 </script>
 
