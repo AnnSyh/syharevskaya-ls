@@ -3,13 +3,19 @@
     <router-view name="header"/>
     <router-view name="navigation"/>
 
-    <div class="" >
+    <div >
       <router-view/>
     </div>
 
-<!--    <div class="notify-container">-->
-<!--      <notification/>-->
-<!--    </div>-->
+    <div :class="['notify-container', {active: isTooltipShown}]">
+      <div class="notification">
+        <notification
+            :text="tooltipText"
+            :type="tooltipType"
+            @click="hideTooltip"
+        />
+      </div>
+    </div>
 
 
   </div>
@@ -28,7 +34,6 @@ import siteHeader   from "./components/siteHeader/siteHeader";
 import def        from "./components/deff/deff";
 import user       from "./components/user/user";
 import category   from "./components/category/category";
-
 import { mapState, mapActions } from "vuex";
 
 
@@ -45,6 +50,18 @@ export default {
     icon,
     category,
     notification
+  },
+  methods: {
+    ...mapActions({
+      hideTooltip: "tooltips/hide"
+    })
+  },
+  computed: {
+    ...mapState("tooltips", {
+      isTooltipShown: (state) => state.isShown,
+      tooltipText: (state) => state.text,
+      tooltipType: (state) => state.type,
+    }),
   },
 
   created() {

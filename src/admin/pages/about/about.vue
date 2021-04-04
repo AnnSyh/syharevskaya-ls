@@ -1,6 +1,7 @@
 <template>
   <section class="about">
-    <div class="container" v-if="categories.length">
+<!--    <div class="container" v-if="categories.length">-->
+    <div class="container">
       <div class="header">
         <span class="header__title">Блок "{{this.$route.meta.name}}"</span>
 
@@ -11,7 +12,7 @@
             title="Добавить группу"/>
 
       </div>
-<!--      <pre>{{categories}}}</pre>-->
+<!--      <pre>{{categories}}</pre>-->
       <ul class="skills">
         <li class="item" v-if="emptyCardIsShown">
           <category
@@ -25,8 +26,7 @@
             v-for="category in categories"
             :key="category.id"
         >
-
-          {{category.id}}
+<!--          {{category.id}}-->
           <category
               :title="category.category"
               :skills="category.skills"
@@ -38,9 +38,9 @@
         </li>
       </ul>
     </div>
-    <div class="container" v-else>
-      loading....
-    </div>
+<!--    <div class="container" v-else>-->
+<!--      loading....-->
+<!--    </div>-->
   </section>
 </template>
 
@@ -94,7 +94,7 @@ export default {
       skill.editmode = false;
     },
    async createCategory(categoryTitle){
-      // console.log('createCategory')
+      console.log('about.vue createCategory')
       try {
         await this.createCategoryAction(categoryTitle)
         this.emptyCardIsShown = false;

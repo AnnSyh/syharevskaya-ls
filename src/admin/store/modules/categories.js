@@ -53,15 +53,17 @@ export default {
         async create({ commit }, title) {
             try {
                 const { data } = await this.$axios.post('/categories', { title })
+                console.log('category.js create')
                 commit("ADD_CATEGORY", data);
 
             } catch (error) {
-                throw new Error("произошла ошибка");
+                console.log('title',title);
+                throw new Error("create произошла ошибка");
             }
         },
         async fetch({ commit }) {
             try {
-                const { data } = await this.$axios.get('/categories/446')
+                const { data } = await this.$axios.get('/categories/447')
                 commit("SET_CATEGORIES", data)
             } catch (error) {
                 console.log(error);

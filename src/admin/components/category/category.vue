@@ -10,10 +10,9 @@
     />
     <template slot="content">
 <!--      <p>this.title = {{this.title}}</p>-->
-      <p>this.category.id = {{this.category.id}}</p>
-      <p>this.category = {{this.category}}</p>
-
-      <p>skills = {{skills}}</p>
+<!--      <p>this.category.id = {{this.category.id}}</p>-->
+<!--      <p>this.category = {{this.category}}</p>-->
+<!--      <p>skills = {{skills}}</p>-->
       <ul class="skills" v-if="empty === false">
         <li class="item"  v-for="skill in skills" :key="skill.id">
           <skill

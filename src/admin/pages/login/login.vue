@@ -37,7 +37,7 @@ import appInput from "../../components/input"
 import appButton from "../../components/button"
 import {Validator, mixin as ValidatorMixin} from 'simple-vue-validator';
 import $axios from "../../requests";
-// import { mapActions } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   mixins: [ValidatorMixin],
@@ -61,7 +61,11 @@ export default {
     appButton,
     Validator
   },
+
   methods: {
+    ...mapActions({
+      showTooltip: "tooltips/show"
+    }),
     async handleSubmit() {
       console.log('!!!submit', this.user.name, this.user.password)
 
@@ -80,8 +84,12 @@ export default {
          this.$router.replace("/");
 
        }  catch(error) {
-
-         console.dir(error.response.data.error)
+          this.showTooltip({
+            text: error.response.data.error,
+            type: "error"
+          })
+         // console.log("response.data.error",error.response.data.error)
+         // console.dir(error.response.data.error)
        } finally {
          this.isSubmitDisabled = false;
        }
