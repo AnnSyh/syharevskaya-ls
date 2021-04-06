@@ -101,7 +101,6 @@ export default {
       } catch (error){
         console.log(error.message)
       }
-      this.createCategoryAction(categoryTitle);
     },
     removeCategory(){
       this.removeCategoriesAction(this.category);
