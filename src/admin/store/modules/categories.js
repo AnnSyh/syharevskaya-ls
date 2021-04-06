@@ -63,7 +63,7 @@ export default {
         },
         async fetch({ commit }) {
             try {
-                const { data } = await this.$axios.get('/categories/447')
+                const { data } = await this.$axios.get('/categories/451')
                 commit("SET_CATEGORIES", data)
             } catch (error) {
                 console.log(error);
