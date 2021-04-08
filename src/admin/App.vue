@@ -1,5 +1,8 @@
 <template>
-  <div class="app-container page-content" :class="{'wrapper--dark':this.$route.path === '/login'}">
+  <div class="app-container page-content" >
+
+    <div :class="{'wrapper--dark':this.$route.path === '/login'}">
+
     <router-view name="header"/>
     <router-view name="navigation"/>
 
@@ -17,6 +20,7 @@
       </div>
     </div>
 
+    </div>
 
   </div>
 </template>
