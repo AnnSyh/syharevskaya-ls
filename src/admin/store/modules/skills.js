@@ -1,5 +1,7 @@
 export default {
     namespaced: true,
+    state:{},
+    mutations :{},
     actions: {
         async add({ commit }, skill){
             try {
@@ -29,5 +31,6 @@ export default {
             }
         }
 
-    }
+    },
+    getters: {}
 }

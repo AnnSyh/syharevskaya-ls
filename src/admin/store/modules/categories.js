@@ -7,12 +7,11 @@ export default {
         SET_CATEGORIES: (state, categories) => (state.data = categories),
         ADD_CATEGORY: (state, category) => state.data.unshift(category),
 
-        REMOVE_CATEGORIES: (state, categoryToRemove) => {
-            state.data = state.data.map(category => {
-                if (category.id === categoryToRemove.category) {
-                    category.category = category.category.filter(category => category.id !== categoryToRemove.id)
-                }
-                return category;
+        REMOVE_CATEGORIES: (state, categoryID) => {
+            return console.log("here");
+            state.data = state.data.filter(category => {
+                console.log(category.id, categoryID);
+                category.id !== categoryID
             })
         },
 
@@ -61,7 +60,10 @@ export default {
                 throw new Error("create произошла ошибка");
             }
         },
-        async fetch({ commit }) {
+        async fetch({ commit },payload) {
+            console.log('fetch({commit},... = ',{commit});
+            console.log('fetch(.....,payload = ',payload);
+
             try {
                 //надо получить id_user
                 //отправить  на /user токен и он возвращает id_user
@@ -83,14 +85,19 @@ export default {
         },
         async remove({ commit }, categoryIdToRemove){
             try {
-                const { data } = await this.$axios.delete(`/categories/${categoryIdToRemove}`);
-                commit("categories/REMOVE_CATEGORIES", categoryIdToRemove, { root: true })
+                await this.$axios.delete(`/categories/${categoryIdToRemove}`);
+                commit("REMOVE_CATEGORIES", categoryIdToRemove)
 
             } catch (error){
                 console.log("Ошибка remove Categories", error);
                 throw new Error("Ошибка remove Categories")
             }
         },
+    },
+    getters:{
+        get_categories(state){
+            return state.categories
+        }
     }
 
 }
