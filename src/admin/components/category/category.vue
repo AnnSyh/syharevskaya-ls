@@ -59,8 +59,8 @@ export default {
       default: "",
     },
     category:{
-      type: Object,
-      default: () => ({})
+      type: Object | null,
+      default: null
     },
     skills:{
       type: Array,
@@ -88,7 +88,7 @@ export default {
       updateCategoryAction: "categories/update",
     }),
 
-    approveHandler(value){
+  async  approveHandler(value){
       console.log(this.category);
       if(this.category &&  this.category.id){
         // console.log('update');
@@ -97,13 +97,17 @@ export default {
           title: value
         });
       } else {
-        // console.log('create');
-        this.createCategoryAction(value);
+      await this.createCategoryAction(value);
       }
+    this.$emit('remove');
     },
 
-    removeCategory(){ console.log('category.vue removeCategory')
-      this.removeCategoryAction(this.category.id);
+    removeCategory(){
+        if (this.category){
+          this.removeCategoryAction(this.category.id);
+        } else {
+          this.$emit('remove');
+        }
     },
   },
   model:{

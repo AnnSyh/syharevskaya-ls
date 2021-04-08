@@ -16,14 +16,21 @@
     <div class="skill-component" v-else>
       <div class="inputs">
         <div class="title">
-          <app-input no-side-paddings v-model="currentSkill.title"/>
+          <app-input
+              no-side-paddings
+              v-model="currentSkill.title"
+              :error-message="validation.firstError('currentSkill.title')"
+          />
         </div>
         <div class="percent">
-          <app-input v-model="currentSkill.percent"/>
+          <app-input
+              v-model="currentSkill.percent"
+              :error-message="validation.firstError('currentSkill.percent')"
+          />
         </div>
       </div>
       <div class="btns">
-        <icon symbol="tick" class="btn" @click="$emit('approve', currentSkill)"/>
+        <icon symbol="tick" class="btn" @click="approveHandler"/>
         <icon symbol="cross" class="btn"@click="currentSkill.editmode = false"/>
       </div>
 
@@ -35,9 +42,18 @@
 <script>
 import input from "../input/input"
 import icon from "../icon/icon"
-
+import {Validator, mixin as ValidatorMixin} from 'simple-vue-validator';
 
 export default {
+  mixins: [ValidatorMixin],
+  validators: {
+    "currentSkill.title": value => {
+      return Validator.value(value).required("Введите имя пользователя");
+    },
+    "currentSkill.percent": value => {
+      return Validator.value(value).required("Введите имя пользователя");
+    }
+  },
   props: {
     skill: {
       type: Object,
@@ -60,6 +76,12 @@ export default {
   components: {
     icon,
     appInput: input
+  },
+  methods:{
+    async approveHandler(){
+      console.log("here");
+      if ((await this.$validate()) === false) return;
+    }
   }
 }
 </script>

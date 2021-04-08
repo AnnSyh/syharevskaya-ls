@@ -50,8 +50,8 @@ export default {
   },
   data: () => ({
     user: {
-      name: "",
-      password: ""
+      name: "annsyh030420218",
+      password: "1111"
     },
     isSubmitDisabled: false
   }),
@@ -63,7 +63,8 @@ export default {
 
   methods: {
     ...mapActions({
-      showTooltip: "tooltips/show"
+      showTooltip: "tooltips/show",
+      getUser: "auth/login"
     }),
     async handleSubmit() {
       console.log('!!!submit', this.user.name, this.user.password)
@@ -78,6 +79,8 @@ export default {
          const token = response.data.token;
          this.$axios.defaults.headers["Authorization"] = `Bearer ${token}`;
          localStorage.setItem("token", token);//сохрнаили token в localStorage
+          this.getUser();
+
 
          console.log('response = ',response);
          this.$router.replace("/");

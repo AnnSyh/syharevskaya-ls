@@ -10,10 +10,12 @@ export default {
             console.log(' UPDATE_CATEGORY: category = ',category)
         },
         REMOVE_CATEGORIES: (state, categoryID) => {
-            return console.log("here");
+
+
             state.data = state.data.filter(category => {
                 console.log(category.id, categoryID);
-                category.id !== categoryID
+               return  category.id !== categoryID
+
             })
         },
 
@@ -51,23 +53,10 @@ export default {
         }
     },
     actions: {
-        async fetch({ commit },payload) {
-            console.log('fetch({commit},... = ',{commit});
-            console.log('fetch(.....,payload = ',payload);
-
+        async fetch({ commit,rootState },payload) {
             try {
-                //надо получить id_user
-                //отправить  на /user токен и он возвращает id_user
-
-                const token = localStorage.getItem("token", token);//запросили token в localStorage
-
-                const user = await this.$axios.get('/user');//получаю user
-                const id_user = user.data.user.id;      console.log('id_user = ', id_user);
-
-                // const { data } = await this.$axios.get("/categories/453");
-                const { data } = await this.$axios.get(`/categories/${id_user}`);
-
-                console.log('data после получения id_user',data);
+                const { data } = await this.$axios.get("/categories/453");
+                // const { data } = await this.$axios.get(`/categories/${user_id}`);
 
                 commit("SET_CATEGORIES", data)
             } catch (error) {
@@ -84,6 +73,7 @@ export default {
                 console.log('title',title);
                 throw new Error("create произошла ошибка");
             }
+            return true;
         },
         async update({ commit }, {id, title}) {
             try {
