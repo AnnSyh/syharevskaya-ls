@@ -6,7 +6,7 @@
         v-model="categoryTitle"
         :editModeByDefault="empty"
         @remove="removeCategory"
-        @approve="$emit('approve', $event)"
+        @approve="approveHandler"
     />
     <template slot="content">
 <!--      <p>this.title = {{this.title}}</p>-->
@@ -84,7 +84,23 @@ export default {
   methods:{
     ...mapActions({
       removeCategoryAction: "categories/remove",
+      createCategoryAction: "categories/create",
+      updateCategoryAction: "categories/update",
     }),
+
+    approveHandler(value){
+      console.log(this.category);
+      if(this.category &&  this.category.id){
+        // console.log('update');
+        this.updateCategoryAction({
+          id: this.category.id,
+          title: value
+        });
+      } else {
+        // console.log('create');
+        this.createCategoryAction(value);
+      }
+    },
 
     removeCategory(){ console.log('category.vue removeCategory')
       this.removeCategoryAction(this.category.id);

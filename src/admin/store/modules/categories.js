@@ -6,7 +6,9 @@ export default {
     mutations:{
         SET_CATEGORIES: (state, categories) => (state.data = categories),
         ADD_CATEGORY: (state, category) => state.data.unshift(category),
-
+        UPDATE_CATEGORY: (state, category) =>{
+            console.log(' UPDATE_CATEGORY: category = ',category)
+        },
         REMOVE_CATEGORIES: (state, categoryID) => {
             return console.log("here");
             state.data = state.data.filter(category => {
@@ -49,17 +51,6 @@ export default {
         }
     },
     actions: {
-        async create({ commit }, title) {
-            try {
-                const { data } = await this.$axios.post(`/categories`, { title })
-                console.log('category.js create', data)
-                commit("ADD_CATEGORY", data);
-
-            } catch (error) {
-                console.log('title',title);
-                throw new Error("create произошла ошибка");
-            }
-        },
         async fetch({ commit },payload) {
             console.log('fetch({commit},... = ',{commit});
             console.log('fetch(.....,payload = ',payload);
@@ -83,6 +74,29 @@ export default {
                 console.log(error);
             }
         },
+        async create({ commit }, title) {
+            try {
+                const { data } = await this.$axios.post(`/categories`, { title })
+                console.log('category.js create', data)
+                commit("ADD_CATEGORY", data);
+
+            } catch (error) {
+                console.log('title',title);
+                throw new Error("create произошла ошибка");
+            }
+        },
+        async update({ commit }, {id, title}) {
+            try {
+                const { data } = await this.$axios.post(`/categories/${id}`, { title })
+                commit("UPDATE_CATEGORY", data);
+
+            } catch (error) {
+                console.log('title',title);
+                throw new Error("create произошла ошибка");
+            }
+        },
+
+
         async remove({ commit }, categoryIdToRemove){
             try {
                 await this.$axios.delete(`/categories/${categoryIdToRemove}`);
