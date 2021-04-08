@@ -74,7 +74,7 @@ export default {
     return {
       editmode: this.editModeByDefault,
       title: this.value,
-      name: '',
+      name: this.value,
     };
   },
   methods: {
