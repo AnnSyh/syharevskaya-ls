@@ -76,8 +76,8 @@ export default {
          const response = await this.$axios.post("/login", this.user);
 
          const token = response.data.token;
+         localStorage.setItem("token", token);//сохрнаили token в localStorage
 
-         localStorage.setItem("token", token);
          this.$axios.defaults.headers["Authorization"] = `Bearer ${token}`;
          console.log('response = ',response);
          this.$router.replace("/");

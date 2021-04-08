@@ -52,8 +52,15 @@ export default {
     actions: {
         async create({ commit }, title) {
             try {
-                const { data } = await this.$axios.post('/categories', { title })
-                console.log('category.js create')
+                //надо получить token из localStorage  - но это уже есть в requests.js
+                // const token = localStorage.getItem("token", token);//запросили token в localStorage
+
+
+                console.log('token = ', token);  //не передается token
+
+
+                const { data } = await this.$axios.post('/categories?token' + token, { title })
+                console.log('category.js create', data)
                 commit("ADD_CATEGORY", data);
 
             } catch (error) {
@@ -63,7 +70,23 @@ export default {
         },
         async fetch({ commit }) {
             try {
-                const { data } = await this.$axios.get('/categories/451')
+                //надо получить id_user
+                //отправить  на /user токен и он возвращает id_user
+
+                const token = localStorage.getItem("token", token);//запросили token в localStorage
+                console.log('token = ', token);
+
+                const user = await this.$axios.get('/user');//получаю user
+                console.log('  id_user(из categories.js) = ', user.data.user.id);
+
+                const id_user = user.data.user.id;
+
+                const { data } = await this.$axios.get(`/categories/id_user`);
+                console.log('data после получения id_user',data);
+
+                // const { dataA } = await this.$axios.get('/categories/{id_user}');
+                // console.log('data после получения id_user со {} ',dataA);
+
                 commit("SET_CATEGORIES", data)
             } catch (error) {
                 console.log(error);
