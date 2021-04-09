@@ -7,5 +7,6 @@
   "bp-tablets": "768px",
   "bp-phones": "480px",
   "red-color": "#DB0200",
-  "menu-link-hover": "#5500f2"
+  "menu-link-hover": "#5500f2",
+  "work-card-link-color": "#383BCF"
 }

@@ -27,16 +27,33 @@
             </div>
             <div class="form-col">
               <div class="form-row">
-                <app-input v-model="newWork.title" title="Название" />
+                <app-input
+                    v-model="newWork.title"
+                    title="Название"
+                    :error-message="validation.firstError('newWork.title')"
+                />
               </div>
               <div class="form-row">
-                <app-input v-model="newWork.link" title="Ссылка" />
+                <app-input
+                    v-model="newWork.link"
+                    title="Ссылка"
+                    :error-message="validation.firstError('newWork.link')"
+                />
               </div>
               <div class="form-row">
-                <app-input v-model="newWork.description" field-type="textarea" title="Описание" />
+                <app-input
+                    v-model="newWork.description"
+                    field-type="textarea"
+                    title="Описание"
+                    :error-message="validation.firstError('newWork.description')"
+                />
               </div>
               <div class="form-row">
-                <tags-adder v-model="newWork.techs" />
+                <p>newWork.techs = {{newWork.techs}}</p>
+                <tags-adder
+                    v-model="newWork.techs"
+                    :error-message="validation.firstError('newWork.techs')"
+                />
               </div>
             </div>
           </div>
@@ -63,7 +80,7 @@ import appButton from "../button";
 import appInput from "../input";
 import tagsAdder from "../tagsAdder";
 import {mapActions, mapState} from "vuex";
-
+import {Validator, mixin as ValidatorMixin} from 'simple-vue-validator';
 
 
 export default {
@@ -71,7 +88,25 @@ export default {
     card,
     appButton,
     appInput,
-    tagsAdder
+    tagsAdder,
+    Validator
+  },
+  mixins: [ValidatorMixin],
+  validators: {
+    "newWork.title": value => {
+      return Validator.value(value).required("Введите название");
+    },
+    "newWork.link": value => {
+      return Validator.value(value)
+          .url("Введите корректный url")
+          .required("Введите ссылку");
+    },
+    "newWork.description": value => {
+      return Validator.value(value).required("Введите описание");
+    },
+    "newWork.techs": value => {
+      return Validator.value(value).required("Введите tag");
+    }
   },
   data() {
     return {
@@ -102,7 +137,8 @@ export default {
       this.hovered = true;
     },
     async handleSubmit() {
-      // console.log('this.newWork = ',this.newWork);
+      console.log('!!! submit form this.newWork = ',this.newWork);
+      if ((await this.$validate()) === false) return;
       await this.addNewWork(this.newWork);
     },
     handleChange(event) {

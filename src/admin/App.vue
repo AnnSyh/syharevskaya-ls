@@ -39,6 +39,7 @@ import def        from "./components/deff/deff";
 import user       from "./components/user/user";
 import category   from "./components/category/category";
 import { mapState, mapActions } from "vuex";
+import works      from "./pages/works/works";
 
 
 export default {
@@ -53,7 +54,8 @@ export default {
     navigation,
     icon,
     category,
-    notification
+    notification,
+    works
   },
   methods: {
     ...mapActions({

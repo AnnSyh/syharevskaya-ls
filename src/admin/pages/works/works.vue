@@ -9,15 +9,13 @@
           <div class="form">
             <app-form />
           </div>
-<!--          <ul class="cards">-->
-<!--            <li class="item" v-for="work in works" :key="work.id">-->
-<!--              <work-card-->
-<!--                  :work="work"-->
-<!--              />-->
-<!--            </li>-->
-<!--          </ul>-->
-
-<!--              <tagsAdder v-model="tags"/>-->
+          <ul class="works-cards">
+            <li class="item" v-for="work in works" :key="work.id">
+              <work-card
+                  :work="work"
+              />
+            </li>
+          </ul>
 
         </div>
       </div>
@@ -30,12 +28,15 @@
 import tagsAdder      from "../../components/tagsAdder/tagsAdder";
 import tag            from "../../components/tag/tag";
 import appForm        from "../../components/form";
+import workCard       from "../../components/workCard";
+import { mapState, mapActions } from "vuex";
 
 export default {
   components: {
     tagsAdder,
     tag,
-    appForm
+    appForm,
+    workCard
   },
   props: {
     tags:{
@@ -48,6 +49,19 @@ export default {
       emptyCardIsShown:false,
       categories:[]
     }
+  },
+  computed: {
+    ...mapState("works", {
+      works: (state) => state.data,
+    }),
+  },
+  methods: {
+    ...mapActions({
+      fetchWorks: "works/fetch"
+    }),
+  },
+  mounted() {
+    this.fetchWorks();
   },
   created() {
     this.categories = require('../../../data/categories.json');
