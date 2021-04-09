@@ -1,6 +1,6 @@
 <template>
   <card>
-    <p>this.title = {{this.title}}</p>
+<!--    <p>this.title = {{this.title}}</p>-->
     <editLine
         slot="title"
         v-model="categoryTitle"

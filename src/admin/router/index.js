@@ -8,8 +8,7 @@ import navigation from "../components/navigation/navigation";
 
 import About    from '../pages/about/about'
 import Login    from '../pages/login/login'
-import Navies  from '../pages/navies'
-import Works    from '../pages/works'
+import Works    from '../pages/works/works'
 import Reviews    from '../pages/reviews'
 
 const routes = [
@@ -25,15 +24,6 @@ const routes = [
         components: {
             default: Login
         },
-    },
-    {  path: '/navies',
-        components: {
-            default: Navies,
-            header: siteHeader,
-            navigation: navigation
-        },
-        meta:{name:"Навыки!"}
-
     },
     { path: '/reviews',
         components: {
