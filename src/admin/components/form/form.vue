@@ -7,23 +7,29 @@
         <div class="form-container" slot="content">
           <div class="form-cols">
             <div class="form-col">
-              <label
-                  :style="{backgroundImage: `url(${newWork.preview})`}"
-                  :class="[ 'uploader', {active: newWork.preview}, {
-                  hovered: hovered
-                }]"
-                  @dragover="handleDragOver"
-                  @dragleave="hovered = false"
-                  @drop="handleChange"
-              >
-                <div class="uploader-title">Перетащите или загрузите картинку</div>
-                <div class="uploader-btn">
-                  <app-button
-                      typeAttr="file"
-                      @change="handleChange"
-                  ></app-button>
-                </div>
-              </label>
+              <div class="label-block">
+                <app-input
+                    :error-message="validation.firstError('newWork.preview')"
+                ></app-input>
+                <label
+                    :error-message="validation.firstError('newWork.preview')"
+                    :style="{backgroundImage: `url(${newWork.preview})`}"
+                    :class="[ 'uploader', {active: newWork.preview}, {
+                            hovered: hovered
+                          }]"
+                    @dragover="handleDragOver"
+                    @dragleave="hovered = false"
+                    @drop="handleChange"
+                >
+                  <div class="uploader-title">Перетащите или загрузите картинку</div>
+                  <div class="uploader-btn">
+                    <app-button
+                        typeAttr="file"
+                        @change="handleChange"
+                    ></app-button>
+                  </div>
+                </label>
+              </div>
             </div>
             <div class="form-col">
               <div class="form-row">
@@ -49,7 +55,7 @@
                 />
               </div>
               <div class="form-row">
-                <p>newWork.techs = {{newWork.techs}}</p>
+<!--                <p>newWork.techs = {{newWork.techs}}</p>-->
                 <tags-adder
                     v-model="newWork.techs"
                     :error-message="validation.firstError('newWork.techs')"
@@ -81,10 +87,12 @@ import appInput from "../input";
 import tagsAdder from "../tagsAdder";
 import {mapActions, mapState} from "vuex";
 import {Validator, mixin as ValidatorMixin} from 'simple-vue-validator';
+import Input from "../input/input";
 
 
 export default {
   components: {
+    Input,
     card,
     appButton,
     appInput,
@@ -106,6 +114,9 @@ export default {
     },
     "newWork.techs": value => {
       return Validator.value(value).required("Введите tag");
+    } ,
+    "newWork.preview": value => {
+      return Validator.value(value).required("Загрузите картинку");
     }
   },
   data() {

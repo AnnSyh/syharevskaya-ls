@@ -64,7 +64,8 @@ export default {
   methods: {
     ...mapActions({
       showTooltip: "tooltips/show",
-      getUser: "auth/login"
+      getUser: "auth/login",
+      login:"user/login"
     }),
     async handleSubmit() {
       console.log('!!!submit', this.user.name, this.user.password)
@@ -81,6 +82,8 @@ export default {
          localStorage.setItem("token", token);//сохрнаили token в localStorage
           this.getUser();
 
+          const userResponse = await this.$axios.get("/user");
+          this.login(userResponse.data.user);
 
          console.log('response = ',response);
          this.$router.replace("/");

@@ -24,7 +24,7 @@
 <script>
 import appInput from "../input"
 import tag from "../tag"
-import {mixin as ValidatorMixin, Validator} from "simple-vue-validator";
+
 
 export default {
   components: {
@@ -41,12 +41,7 @@ export default {
     prop:"tags",
     event:"change"
   },
-  // mixins: [ValidatorMixin],
-  // validators: {
-  //   "newWork.techs": value => {
-  //     return Validator.value(value).required("Введите tag");
-  //   }
-  // },
+
   data(){
     return{
       currentTags: this.tags
