@@ -1,6 +1,7 @@
 import axios from "axios";
+import config from "../../env.paths.json"
 
-axios.defaults.baseURL = "https://webdev-api.loftschool.com/";
+axios.defaults.baseURL = config.BASE_URL;
 
 const  token = localStorage.getItem('token') || "";
 
