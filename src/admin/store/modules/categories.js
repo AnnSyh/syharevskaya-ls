@@ -56,9 +56,7 @@ export default {
         async fetch({ commit,rootState },payload) {
             try {
                 const user = await this.$axios.get('/user');//получаю user
-                // console.log('user = ', user);
                 const user_id = user.data.user.id;//получаю user id
-                // console.log('user_id = ', user_id);
 
                 // const { data } = await this.$axios.get("/categories/453");
                 const { data } = await this.$axios.get(`/categories/${user_id}`);

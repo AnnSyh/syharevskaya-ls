@@ -10,9 +10,10 @@ import About    from '../pages/about/about'
 import Login    from '../pages/login/login'
 import Works    from '../pages/works/works'
 import Reviews  from '../pages/reviews'
+
 import store    from "../store";
 import axios    from "axios";
-import config from "../../../env.paths.json"
+import config from "../../../env.paths.json" // для  baseURL: config.BASE_URL
 
 const routes = [
     { path: '/',
@@ -50,9 +51,7 @@ const routes = [
 
 ]
 
- export const router = new VueRouter({
-    routes // сокращённая запись для `routes: routes`
-})
+export const router = new VueRouter({ routes })
 
 const guard = axios.create({
     baseURL: config.BASE_URL
@@ -63,11 +62,9 @@ router.beforeEach(async (to,from,next) => {
     const isUserLoggedIn = store.getters["user/userIsLoggedIn"];
 
     next();
-    // return;  //получается бесконечный цикл почему?
 
     if (isPublicRoute === false && isUserLoggedIn === false) {
         const token = localStorage.getItem("token");
-
         guard.defaults.headers["Authorization"] = `Bearer ${token}`;
 
         try {

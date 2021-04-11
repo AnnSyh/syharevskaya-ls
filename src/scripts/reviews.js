@@ -1,6 +1,8 @@
 import Vue from "vue"
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import "swiper/swiper-bundle.css"
+import axios from "axios";
+import reviews from "../admin/pages/reviews";
 
 
 new Vue({
@@ -27,6 +29,13 @@ new Vue({
             }
         }
     },
+    created() {
+        this.fetch();
+        //статическая подгрузка данных
+        // const data = require("../data/reviews.json");
+        // this.reviews = this.requireImagesToArray(data);
+
+    },
     computed: {
         slider() {
             return this.$refs["slider"].$swiper;
@@ -49,12 +58,17 @@ new Vue({
                     slider.slidePrev()
                     break
             }
+        },
+        async fetch(){
+            const {data} = await axios.get('https://webdev-api.loftschool.com/reviews/174');
+
+            this.reviews = data.map(review =>{
+                review.photo = `https://webdev-api.loftschool.com/${review.photo}`;
+                return review;
+            });
         }
     },
-    created() {
-        const data = require("../data/reviews.json");
-        this.reviews = this.requireImagesToArray(data);
-    },
+
 });
 
 
