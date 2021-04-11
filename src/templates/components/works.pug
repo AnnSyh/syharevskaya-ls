@@ -50,11 +50,11 @@ script(type="text/x-template")#preview-info
             )
         .works-slider__title {{currentWork.title}}
         .works-slider__desc
-            p {{currentWork.desc}}
+            p {{currentWork.description}}
         .works-slider__link
             a(:href="currentWork.link").iconed-link Посмотреть сайт
 
 script(type="text/x-template")#preview-tag
-    ul.works-slider__tags
+    ul.works-slider__tags 1111
         li.works-slider__tag-item(v-for="tag in tags")
             .tag {{tag}}

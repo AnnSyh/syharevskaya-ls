@@ -1,4 +1,6 @@
 import Vue from "vue"
+import axios from "axios";
+import works from "../admin/pages/works";
 
 const tags = {
     props: ["tags"],
@@ -12,7 +14,10 @@ const info = {
     },
     computed:{
         tagsArray(){
-            return this.currentWork.skills.split(",");
+            console.log('22222 tagsArray this.currentWork = ', this.currentWork);
+            // console.log('this.works.techs = ',this.works.skills)
+
+            // return this.currentWork.skills.split(",");
         }
     }
 }
@@ -50,8 +55,22 @@ new Vue({
     data(){
         return {
             works: [],
-            currentIndex: 0,
+            // currentIndex: 0,
+            currentIndex: {
+                "id": 1,
+                "title": "Пока у вас еще нет загруженных работ",
+                "techs": "",
+                "photo": "",
+                "link": "",
+                "description": ""
+            }
         }
+    },
+    created() {
+        this.fetch();
+        // статическая подгрузка данных
+        // const data = require("../data/works.json");
+            // this.works = this.requireImagesToArray(data);
     },
     computed: {
         currentWork(){
@@ -93,12 +112,18 @@ new Vue({
             }
         },
 
+        async fetch(){
+            const { data } = await axios.get('https://webdev-api.loftschool.com/works/174');
+
+            this.works = data.map(work =>{
+                work.photo = `https://webdev-api.loftschool.com/${work.photo}`;
+                return work;
+            });
+        }
+
     },
 
-    created() {
-        const data = require("../data/works.json");
-        this.works = this.requireImagesToArray(data);
-    }
+
 });
 
 

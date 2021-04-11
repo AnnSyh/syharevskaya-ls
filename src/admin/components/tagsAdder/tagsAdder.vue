@@ -25,6 +25,7 @@
 import appInput from "../input"
 import tag from "../tag"
 
+
 export default {
   components: {
     appInput,
@@ -40,6 +41,7 @@ export default {
     prop:"tags",
     event:"change"
   },
+
   data(){
     return{
       currentTags: this.tags
@@ -61,7 +63,8 @@ export default {
 
       if (tagNdx < 0) return;
 
-      tags.splice(tagNdx,1);      console.log('tags.slice = ',tags);
+      tags.splice(tagNdx,1);
+      console.log('tags.slice = ',tags);
       this.currentTags = tags.join(", ");
 
       this.$emit("change", this.currentTags)

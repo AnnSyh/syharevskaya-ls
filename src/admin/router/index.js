@@ -8,9 +8,12 @@ import navigation from "../components/navigation/navigation";
 
 import About    from '../pages/about/about'
 import Login    from '../pages/login/login'
-import Navies  from '../pages/navies'
-import Works    from '../pages/works'
-import Reviews    from '../pages/reviews'
+import Works    from '../pages/works/works'
+import Reviews  from '../pages/reviews'
+
+import store    from "../store";
+import axios    from "axios";
+import config from "../../../env.paths.json" // для  baseURL: config.BASE_URL
 
 const routes = [
     { path: '/',
@@ -23,17 +26,11 @@ const routes = [
      },
     { path: '/login',
         components: {
-            default: Login
+            default: Login,
+            meta:{
+                public:true
+            }
         },
-    },
-    {  path: '/navies',
-        components: {
-            default: Navies,
-            header: siteHeader,
-            navigation: navigation
-        },
-        meta:{name:"Навыки!"}
-
     },
     { path: '/reviews',
         components: {
@@ -54,6 +51,31 @@ const routes = [
 
 ]
 
- export const router = new VueRouter({
-    routes // сокращённая запись для `routes: routes`
-})
+export const router = new VueRouter({ routes })
+
+const guard = axios.create({
+    baseURL: config.BASE_URL
+});
+
+router.beforeEach(async (to,from,next) => {
+    const isPublicRoute = to.matched.some(route => route.meta.public);
+    const isUserLoggedIn = store.getters["user/userIsLoggedIn"];
+
+    next();
+
+    if (isPublicRoute === false && isUserLoggedIn === false) {
+        const token = localStorage.getItem("token");
+        guard.defaults.headers["Authorization"] = `Bearer ${token}`;
+
+        try {
+            const response = await guard.get("/user");
+            store.dispatch("user/login", await response.data.user)
+            next();
+        } catch (error) {
+            router.replace("/login");
+            localStorage.removeItem("token");
+        }
+    } else {
+        next();
+    }
+});

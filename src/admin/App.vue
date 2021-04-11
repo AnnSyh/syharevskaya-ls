@@ -1,5 +1,8 @@
 <template>
-  <div class="app-container page-content" :class="{'wrapper--dark':this.$route.path === '/login'}">
+  <div class="app-container page-content" >
+
+    <div :class="{'wrapper--dark':this.$route.path === '/login'}">
+
     <router-view name="header"/>
     <router-view name="navigation"/>
 
@@ -17,6 +20,7 @@
       </div>
     </div>
 
+    </div>
 
   </div>
 </template>
@@ -35,6 +39,7 @@ import def        from "./components/deff/deff";
 import user       from "./components/user/user";
 import category   from "./components/category/category";
 import { mapState, mapActions } from "vuex";
+import works      from "./pages/works/works";
 
 
 export default {
@@ -49,7 +54,8 @@ export default {
     navigation,
     icon,
     category,
-    notification
+    notification,
+    works
   },
   methods: {
     ...mapActions({
@@ -65,7 +71,7 @@ export default {
   },
 
   created() {
-    console.log(this.$route); //получить информацию о пути/стргденаходимся
+    // console.log('стргде находимся',this.$route); //получить информацию о пути/стргденаходимся
   }
 
 }

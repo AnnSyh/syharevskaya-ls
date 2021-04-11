@@ -68,7 +68,7 @@ export default {
     tooltip: () => import("components/tooltip")
   },
   mounted() {
-    console.log(this.$attrs)
+    // console.log('input.vue mounted() ',this.$attrs)
   }
 };
 </script>

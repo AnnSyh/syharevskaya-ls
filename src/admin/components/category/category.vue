@@ -1,12 +1,12 @@
 <template>
   <card>
-    <p>this.title = {{this.title}}</p>
+<!--    <p>this.title = {{this.title}}</p>-->
     <editLine
         slot="title"
         v-model="categoryTitle"
         :editModeByDefault="empty"
         @remove="removeCategory"
-        @approve="$emit('approve', $event)"
+        @approve="approveHandler"
     />
     <template slot="content">
 <!--      <p>this.title = {{this.title}}</p>-->
@@ -59,8 +59,8 @@ export default {
       default: "",
     },
     category:{
-      type: Object,
-      default: () => ({})
+      type: Object | null,
+      default: null
     },
     skills:{
       type: Array,
@@ -84,10 +84,30 @@ export default {
   methods:{
     ...mapActions({
       removeCategoryAction: "categories/remove",
+      createCategoryAction: "categories/create",
+      updateCategoryAction: "categories/update",
     }),
 
-    removeCategory(){ console.log('category.vue removeCategory')
-      this.removeCategoryAction(this.category.id);
+  async  approveHandler(value){
+      console.log(this.category);
+      if(this.category &&  this.category.id){
+        // console.log('update');
+        this.updateCategoryAction({
+          id: this.category.id,
+          title: value
+        });
+      } else {
+      await this.createCategoryAction(value);
+      }
+    this.$emit('remove');
+    },
+
+    removeCategory(){
+        if (this.category){
+          this.removeCategoryAction(this.category.id);
+        } else {
+          this.$emit('remove');
+        }
     },
   },
   model:{

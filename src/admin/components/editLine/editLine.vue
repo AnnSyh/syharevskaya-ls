@@ -73,18 +73,17 @@ export default {
   data() {
     return {
       editmode: this.editModeByDefault,
-      title: this.value,
-      name: '',
+      name: this.value,
     };
   },
   methods: {
     onApprove() {
-      if (this.value.trim() === "") return false;
-      if (this.title.trim() === this.value.trim()) {
-        this.editmode = false;
-      } else {
-        this.$emit("approve", this.value);
+      if (this.name.trim() === "") {  //нужна валидация  если поле пустое то ошибка
+        // console.log("Пустое поле ")
+        return this.$validate() === false;
       }
+      this.editmode = false;
+        this.$emit("approve", this.name.trim());
     },
   },
 };

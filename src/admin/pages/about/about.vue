@@ -49,7 +49,7 @@ import icon from "../../components/icon/icon";
 import card from "../../components/card/card";
 import iconedBtn from "../../components/button/button";
 import category from "../../components/category/category";
-import {mapActions, mapState} from "vuex"
+import {mapActions, mapState, mapGetters} from "vuex"
 
 export default {
   components: {
@@ -66,6 +66,9 @@ export default {
   computed:{
     ...mapState('categories',{
       categories: state => state.data
+    }),
+    ...mapGetters({
+      get_categories: 'categories/get_categories'
     })
   },
   methods:{

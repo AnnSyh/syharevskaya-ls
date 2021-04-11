@@ -50,8 +50,8 @@ export default {
   },
   data: () => ({
     user: {
-      name: "",
-      password: ""
+      name: "annsyh030420218",
+      password: "1111"
     },
     isSubmitDisabled: false
   }),
@@ -63,10 +63,12 @@ export default {
 
   methods: {
     ...mapActions({
-      showTooltip: "tooltips/show"
+      showTooltip: "tooltips/show",
+      getUser: "auth/login",
+      login:"user/login"
     }),
     async handleSubmit() {
-      console.log('!!!submit', this.user.name, this.user.password)
+      // console.log('!!!submit', this.user.name, this.user.password)
 
       if ((await this.$validate()) === false) return;
 
@@ -76,9 +78,13 @@ export default {
          const response = await this.$axios.post("/login", this.user);
 
          const token = response.data.token;
-
-         localStorage.setItem("token", token);
          this.$axios.defaults.headers["Authorization"] = `Bearer ${token}`;
+         localStorage.setItem("token", token);//сохрнаили token в localStorage
+          this.getUser();
+
+          const userResponse = await this.$axios.get("/user");
+          this.login(userResponse.data.user);
+
          console.log('response = ',response);
          this.$router.replace("/");
 
