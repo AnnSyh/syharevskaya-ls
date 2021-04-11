@@ -13,7 +13,6 @@ export default {
 
 
             state.data = state.data.filter(category => {
-                console.log(category.id, categoryID);
                return  category.id !== categoryID
 
             })
@@ -54,9 +53,11 @@ export default {
     },
     actions: {
         async fetch({ commit,rootState },payload) {
+
+
             try {
-                const user = await this.$axios.get('/user');//получаю user
-                const user_id = user.data.user.id;//получаю user id
+                console.log('rootState.auth.user.id = ',rootState.auth.user.id);
+                const user_id = rootState.auth.user.id//получаю user id
 
                 // const { data } = await this.$axios.get("/categories/453");
                 const { data } = await this.$axios.get(`/categories/${user_id}`);
@@ -69,11 +70,9 @@ export default {
         async create({ commit }, title) {
             try {
                 const { data } = await this.$axios.post(`/categories`, { title })
-                console.log('category.js create', data)
                 commit("ADD_CATEGORY", data);
 
             } catch (error) {
-                console.log('title',title);
                 throw new Error("create произошла ошибка");
             }
             return true;
@@ -84,7 +83,6 @@ export default {
                 commit("UPDATE_CATEGORY", data);
 
             } catch (error) {
-                console.log('title',title);
                 throw new Error("create произошла ошибка");
             }
         },
@@ -96,7 +94,6 @@ export default {
                 commit("REMOVE_CATEGORIES", categoryIdToRemove)
 
             } catch (error){
-                console.log("Ошибка remove Categories", error);
                 throw new Error("Ошибка remove Categories")
             }
         },

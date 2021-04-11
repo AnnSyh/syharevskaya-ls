@@ -59,6 +59,7 @@ new Vue({
                     break
             }
         },
+
         async fetch(){
             const {data} = await axios.get('https://webdev-api.loftschool.com/reviews/174');
 
