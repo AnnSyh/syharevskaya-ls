@@ -15,6 +15,9 @@ export default {
                 return  work.id !== workId
             })
         },
+        UPDATE_WORKS: (state, works) =>{
+            console.log(' UPDATE_WORKS: works = ',works)
+        },
     },
     actions: {
         async add ({commit},newWork) {
@@ -54,6 +57,18 @@ export default {
             } catch (error){
                 console.log('Ошибка remove Works')
                 // throw new Error("Ошибка remove Works")
+            }
+        },
+
+        async update({ commit }, {id, title}) {
+            try {
+                console.log('actions: update id = ', id);
+                console.log('actions: update title = ', title);
+                const { data } = await this.$axios.post(`/works/${id}`,{ title })
+                commit("UPDATE_WORKS", data);
+
+            } catch (error) {
+                throw new Error("works.js update произошла ошибка");
             }
         },
     },

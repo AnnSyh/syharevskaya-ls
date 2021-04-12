@@ -5,18 +5,25 @@
     </div>
     <div class="card-component">
       <div class="header">
-        <div class="text">Заголовок контента</div>
+        <div class="text">Новый отзыв</div>
       </div>
       <div class="content">
-        content
+        <div class="form">
+          <formReview></formReview>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <script>
-export default {
 
+import formReview from "../components/formReview/formReview";
+
+export default {
+  components:{
+    formReview
+  }
 }
 </script>
 <style lang="postcss" src="../components/card/card.pcss" scoped>

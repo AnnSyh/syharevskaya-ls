@@ -14,10 +14,11 @@
         </div>
         <a :href="work.link" class="link">{{work.link}}</a>
         <div class="btns">
+<!--          <p>emptyCardIsShown = {{emptyCardIsShown}}</p>-->
           <icon symbol="pencil" title="Править"
                 @click="approveHandler"
           ></icon>
-          <icon symbol="cross" title="1Удалить"
+          <icon symbol="cross" title="Удалить"
                 @click="removeWork"
           ></icon>
         </div>
@@ -37,6 +38,9 @@ export default {
   components: { card, icon, tagsList },
   props: {
     work: Object,
+    emptyCardIsShown: {
+      type: Boolean
+    },
   },
   computed: {
     ...mapState('works',{
@@ -53,17 +57,25 @@ export default {
       createWorkAction: "works/create",
       updateWorkAction: "works/update",
     }),
-    async  approveHandler(value){
+    async  approveHandler(){
       console.log('approveHandler this.work = ',this.work);
-      // if(this.category &&  this.category.id){
-      //   // console.log('update');
-      //   this.updateCategoryAction({
-      //     id: this.category.id,
-      //     title: value
-      //   });
-      // } else {
-      //   await this.createCategoryAction(value);
-      // }
+
+      // emptyCardIsShown = true;
+
+      if(this.work &&  this.work.id){
+        console.log('update');
+        this.updateWorkAction({
+          id: this.work.id,
+          title: this.work.title,
+          techs: this.work.techs,
+          photo: this.work.photo,
+          link: this.work.link,
+          description: this.work.description,
+        });
+      } else {
+        console.log('else update');
+        // await this.createCategoryAction(value);
+      }
       this.$emit('remove');
     },
 

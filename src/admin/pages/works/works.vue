@@ -21,10 +21,12 @@
           <ul class="works-cards">
             <li class="item" v-for="work in works"
                 :key="work.id"
+                :emptyCardIsShown="emptyCardIsShown"
             >
 <!--          {{work.id}}-->
               <work-card
                   :work="work"
+
               />
             </li>
           </ul>
@@ -76,9 +78,11 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchWorks: "works/fetch"
+      fetchWorks: "works/fetch",
     }),
+
   },
+
   mounted() {
     this.fetchWorks();
   },
