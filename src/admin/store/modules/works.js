@@ -9,7 +9,12 @@ export default {
         },
         SET_WORKS(state, works) {
             state.data = works
-        }
+        },
+        REMOVE_WORKS: (state, workId) => {
+            state.data = state.data.filter(work => {
+                return  work.id !== workId
+            })
+        },
     },
     actions: {
         async add ({commit},newWork) {
@@ -33,12 +38,23 @@ export default {
 
         async fetch({commit}) {
             try {
-                const { data } = await this.$axios.get("/works/1");
+                const { data } = await this.$axios.get("/works/453");
                 // console.log('data = ',data);
                 commit("SET_WORKS", data);
             } catch (error) {
                 console.log("error");
             }
-        }
+        },
+
+        async remove({ commit }, workId){
+            try {
+                await this.$axios.delete(`/works/${workId}`);
+                commit("REMOVE_WORKS", workId)
+
+            } catch (error){
+                console.log('Ошибка remove Works')
+                // throw new Error("Ошибка remove Works")
+            }
+        },
     },
 };

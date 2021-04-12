@@ -17,9 +17,12 @@
                 title="Добавить работу"/>
           </card>
 
-
+<!--          <pre>{{works}}</pre>-->
           <ul class="works-cards">
-            <li class="item" v-for="work in works" :key="work.id">
+            <li class="item" v-for="work in works"
+                :key="work.id"
+            >
+<!--          {{work.id}}-->
               <work-card
                   :work="work"
               />
@@ -80,8 +83,8 @@ export default {
     this.fetchWorks();
   },
   created() {
-    this.categories = require('../../../data/categories.json');
-    console.log(this.$route.meta.name); //получить информацию о пути/стргденаходимся
+    console.log('this.fetchWorks() = ', this.fetchWorks())
+    this.fetchWorks();
   },
   model:{
     prop:"tags",

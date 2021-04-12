@@ -10,8 +10,6 @@ export default {
             console.log(' UPDATE_CATEGORY: category = ',category)
         },
         REMOVE_CATEGORIES: (state, categoryID) => {
-
-
             state.data = state.data.filter(category => {
                return  category.id !== categoryID
 
