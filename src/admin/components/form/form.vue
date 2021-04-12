@@ -1,6 +1,5 @@
 <template>
-  <div class="form-component">
-<!--    form-component-->
+
     <form class="form" @submit.prevent="handleSubmit">
       <card>
         <h1 slot="title">Добавление работы</h1>
@@ -77,7 +76,7 @@
         </div>
       </card>
     </form>
-  </div>
+
 </template>
 
 <script>
@@ -158,6 +157,7 @@ export default {
       const file = event.dataTransfer
           ? event.dataTransfer.files[0]
           : event.target.files[0];
+
       this.newWork.photo = file;
       this.renderPhoto(file);
       this.hovered = false;
@@ -169,7 +169,6 @@ export default {
         reader.onloadend = () => {
           this.newWork.preview = reader.result;
       };
-
         reader.onerror = () => { //произошла ошибка
           // надо уведомить пользователя при помощи tooltip
         };

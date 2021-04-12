@@ -1,14 +1,23 @@
 <template>
-  <section class="works-page-component page-component">
+  <section class="works-page-component container">
     <div class="page-content">
       <div class="container">
         <div class="header  page-header">
           <h1 class="header__title page-title">Блок "{{this.$route.meta.name}}"</h1>
         </div>
-        <div class="">
-          <div class="form">
+        <div class="form-component card-component">
+          <div class="form" v-if="emptyCardIsShown">
             <app-form />
           </div>
+          <card simple v-else class="empty-work">
+            <iconed-btn
+                type="iconed"
+                v-if="emptyCardIsShown == false"
+                @click="emptyCardIsShown = true"
+                title="Добавить работу"/>
+          </card>
+
+
           <ul class="works-cards">
             <li class="item" v-for="work in works" :key="work.id">
               <work-card
@@ -16,7 +25,6 @@
               />
             </li>
           </ul>
-
         </div>
       </div>
     </div>
@@ -31,12 +39,20 @@ import appForm        from "../../components/form";
 import workCard       from "../../components/workCard";
 import { mapState, mapActions } from "vuex";
 
+import card from "../../components/card";
+import icon from "../../components/icon";
+import iconedBtn from "../../components/button/button";
+
+
 export default {
   components: {
     tagsAdder,
     tag,
     appForm,
-    workCard
+    workCard,
+    card,
+    icon,
+    iconedBtn
   },
   props: {
     tags:{

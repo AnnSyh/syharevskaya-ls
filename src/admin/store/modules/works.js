@@ -13,11 +13,13 @@ export default {
     },
     actions: {
         async add ({commit},newWork) {
-            console.log('newWork', newWork);
+            console.log(newWork);
             const formData = new FormData();
+
             Object.keys(newWork).forEach(item => {
                 formData.append(item, newWork[item]);
             })
+
             // for(let entry of formData.entries()){ //выводданных в консоль
             //     console.log(entry);
             // }
@@ -32,7 +34,7 @@ export default {
         async fetch({commit}) {
             try {
                 const { data } = await this.$axios.get("/works/1");
-                console.log('data = ',data);
+                // console.log('data = ',data);
                 commit("SET_WORKS", data);
             } catch (error) {
                 console.log("error");
