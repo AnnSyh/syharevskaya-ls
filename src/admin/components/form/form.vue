@@ -64,7 +64,7 @@
           </div>
           <div class="form-btns">
             <div class="btn">
-              <button title="Отмена" type="button" @click="resetHandler" plain>Отмена</button>
+              <app-button title="Отмена" typeAttrs="button" @click="$emit('close', $event)" plain></app-button>
             </div>
             <div class="btn">
               <app-button title="Сохранить" :disabled="isSubmitDisabled"></app-button>
@@ -156,11 +156,6 @@ export default {
           preview: "",
         }
       }
-    },
-
-    resetHandler(){
-      console.log('!!!!');
-      this.$emit('close')
     },
 
     handleDragOver(e) {

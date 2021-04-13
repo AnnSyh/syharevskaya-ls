@@ -58,7 +58,13 @@ export default {
       createWorkAction: "works/create",
       updateWorkAction: "works/update",
     }),
-    removeWork (){}
+    removeWork(){
+      if (this.work){
+        this.removeWorkAction(this.work.id);
+      } else {
+        this.$emit('remove');
+      }
+    },
 
   },
 };
