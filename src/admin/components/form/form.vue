@@ -64,7 +64,7 @@
           </div>
           <div class="form-btns">
             <div class="btn">
-              <app-button title="Отмена" plain></app-button>
+              <button title="Отмена" type="button" @click="resetHandler" plain>Отмена</button>
             </div>
             <div class="btn">
               <app-button title="Сохранить" :disabled="isSubmitDisabled"></app-button>
@@ -121,16 +121,15 @@ export default {
   data() {
     return {
       hovered: false,
-      newWork: {
-        title: "",
-        link: "",
-        description: "",
-        techs: "",
-        photo: {},
-        preview: "",
-      },
+      newWork: {...this.currentWork },
       isSubmitDisabled: false,
     };
+  },
+  props:{
+    currentWork:{
+      type:Object,
+      default:() => ({})
+    }
   },
   computed:{
     ...mapState('works',{
@@ -142,6 +141,28 @@ export default {
       addNewWork: "works/add",
     }),
 
+    setWork(){
+      if (this.currentWork){
+        this.newWork = {...this.currentWork}
+        this.newWork.preview = 'https://webdev-api.loftschool.com/' + this.currentWork.photo
+      } else {
+        this.newWork = {
+          id: null,
+          title: "",
+          link: "",
+          description: "",
+          techs: "",
+          photo: {},
+          preview: "",
+        }
+      }
+    },
+
+    resetHandler(){
+      console.log('!!!!');
+      this.$emit('close')
+    },
+
     handleDragOver(e) {
       e.preventDefault();
       this.hovered = true;
@@ -149,7 +170,11 @@ export default {
     async handleSubmit() {
       console.log('!!! submit form this.newWork = ',this.newWork);
       if ((await this.$validate()) === false) return;
-      await this.addNewWork(this.newWork);
+      if(this.newWork.id){
+                          //обновить см skill
+      } else{
+        await this.addNewWork(this.newWork);
+      }
     },
     handleChange(event) {
       event.preventDefault();
@@ -177,6 +202,17 @@ export default {
         }
     },
   },
+  created() {
+      this.setWork()
+  },
+  beforeDestroy() {
+    console.log('beforeDestroy');
+  },
+  watch: {
+    currentWork(){
+      this.setWork()
+    }
+  }
 };
 </script>
 <style lang="postcss" src="./form.pcss" scoped>

@@ -6,9 +6,12 @@
           <h1 class="header__title page-title">Блок "{{this.$route.meta.name}}"</h1>
         </div>
         <div class="form-component card-component">
-          <div class="form" v-if="emptyCardIsShown">
-            <app-form />
-          </div>
+<!--          <div class="form" v-if="emptyCardIsShown">-->
+            <app-form class="form" v-if="emptyCardIsShown"
+            :currentWork="currentWork"
+            @close="closeHandler"
+            />
+<!--          </div>-->
           <card simple v-else class="empty-work">
             <iconed-btn
                 type="iconed"
@@ -26,8 +29,9 @@
 <!--          {{work.id}}-->
               <work-card
                   :work="work"
-
+                  @edit="editHandler"
               />
+<!--              @editWork="editwork"-->
             </li>
           </ul>
         </div>
@@ -68,8 +72,10 @@ export default {
   data() {
     return {
       emptyCardIsShown:false,
-      categories:[]
+      categories:[],
+      currentWork:null
     }
+
   },
   computed: {
     ...mapState("works", {
@@ -80,7 +86,22 @@ export default {
     ...mapActions({
       fetchWorks: "works/fetch",
     }),
+    editHandler(work){
+        this.currentWork = {...work}
+        this.emptyCardIsShown = true;
+    },
+    closeHandler(){
+      console.log('here');
+      this.emptyCardIsShown = false
+    }
 
+  },
+  watch: {
+    emptyCardIsShown(){
+      if(!this.emptyCardIsShown){
+        this.currentWork = null
+      }
+    }
   },
 
   mounted() {

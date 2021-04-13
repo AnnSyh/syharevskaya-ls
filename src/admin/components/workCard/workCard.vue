@@ -15,8 +15,9 @@
         <a :href="work.link" class="link">{{work.link}}</a>
         <div class="btns">
 <!--          <p>emptyCardIsShown = {{emptyCardIsShown}}</p>-->
+<!--          @keydown.enter="editWork"-->
           <icon symbol="pencil" title="Править"
-                @click="approveHandler"
+                @click="$emit('edit', work)"
           ></icon>
           <icon symbol="cross" title="Удалить"
                 @click="removeWork"
@@ -57,35 +58,7 @@ export default {
       createWorkAction: "works/create",
       updateWorkAction: "works/update",
     }),
-    async  approveHandler(){
-      console.log('approveHandler this.work = ',this.work);
-
-      // emptyCardIsShown = true;
-
-      if(this.work &&  this.work.id){
-        console.log('update');
-        this.updateWorkAction({
-          id: this.work.id,
-          title: this.work.title,
-          techs: this.work.techs,
-          photo: this.work.photo,
-          link: this.work.link,
-          description: this.work.description,
-        });
-      } else {
-        console.log('else update');
-        // await this.createCategoryAction(value);
-      }
-      this.$emit('remove');
-    },
-
-    removeWork(){
-      if (this.work){
-        this.removeWorkAction(this.work.id);
-      } else {
-        this.$emit('remove');
-      }
-    },
+    removeWork (){}
 
   },
 };

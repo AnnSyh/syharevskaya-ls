@@ -79,9 +79,7 @@ export default {
   },
   methods:{
     async approveHandler(){
-      console.log("here");
       if ((await this.$validate()) === false) return;
-
       // $emit('approve',currentSkill)  ????
     }
   }
