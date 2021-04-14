@@ -7,21 +7,28 @@ export default {
         ADD_REVIEW(state, newReview) {
             state.data.push(newReview);
         },
-        SET_REVIEW(state, reviews) {
-            state.data = reviews
+        SET_REVIEWS(state, review) {
+            state.data = review
         },
-        REMOVE_REVIEW: (state, reviewId) => {
-            state.data = state.data.filter(work => {
-                return  work.id !== reviewId
+
+        REMOVE_REVIEWS: (state, reviewId) => {
+            state.data = state.data.filter(review => {
+                return  review.id !== reviewId
             })
         },
-        UPDATE_REVIEW: (state, reviews) =>{
-            console.log(' UPDATE_REVIEW: reviews = ',reviews)
-        },
+/*
+        UPDATE_REVIEWS: (state, reviews) => {
+            console.log(' UPDATE_WORKS: worksToEdit = ',works)
+            state.data = works
+            // state.data = state.data.filter(work => {
+            //     return  work.id == works.id
+            // })
+        }
+        */
     },
     actions: {
         async add ({commit},newReview) {
-            console.log('newReview = ',newReview);
+            console.log(newReview);
             const formData = new FormData();
 
             Object.keys(newReview).forEach(item => {
@@ -40,36 +47,40 @@ export default {
         },
 
         async fetch({commit}) {
+            // console.log('review.js: fetch',)
             try {
                 const { data } = await this.$axios.get("/reviews/453");
                 // console.log('data = ',data);
-                commit("SET_REVIEW", data);
+                commit("SET_REVIEWS", data);
             } catch (error) {
                 console.log("error");
             }
         },
 
         async remove({ commit }, reviewId){
+            console.log('remove: reviewId = ',reviewId)
             try {
                 await this.$axios.delete(`/reviews/${reviewId}`);
-                commit("REMOVE_REVIEW", reviewId)
+                commit("REMOVE_REVIEWS", workId)
 
             } catch (error){
-                console.log('Ошибка remove reviews')
-                // throw new Error("Ошибка remove reviews")
+                console.log('Ошибка remove review')
+                // throw new Error("Ошибка remove review")
             }
         },
-
-        async update({ commit }, {id, title}) {
+/*
+        async update({ commit },  workToEdit) {
+            // console.log('works.js: update');
             try {
-                console.log('actions: update id = ', id);
-                console.log('actions: update title = ', title);
-                const { data } = await this.$axios.post(`/reviews/${id}`,{ title })
-                commit("UPDATE_REVIEW", data);
+                console.log('works.js: actions: update = ', workToEdit);
+                const { data } = await this.$axios.post(`/works/${workToEdit.id}`,workToEdit)
+                const workToEditId = workToEdit.id
+                commit("UPDATE_WORKS", data);
 
             } catch (error) {
-                throw new Error("reviews.js update произошла ошибка");
+                throw new Error("works.js update произошла ошибка");
             }
         },
+        */
     },
 };

@@ -9,7 +9,7 @@ import navigation from "../components/navigation/navigation";
 import About    from '../pages/about/about'
 import Login    from '../pages/login/login'
 import Works    from '../pages/works/works'
-import Reviews  from '../pages/reviews'
+import Reviews  from '../pages/review/reviews'
 
 import store    from "../store";
 import axios    from "axios";

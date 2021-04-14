@@ -68,7 +68,6 @@
                   title="Отмена"
                   typeAttrs="button"
                   @click="$emit('close', $event)" plain>
-
               </app-button>
             </div>
             <div class="btn">

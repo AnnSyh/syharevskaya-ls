@@ -30,20 +30,20 @@
 
             <div class="form-cols">
               <div class="form-col"> <app-input
-                  v-model="newReview.name"
-                  :error-message="validation.firstError('newReview.name')"
+                  v-model="newReview.author"
+                  :error-message="validation.firstError('newReview.author')"
                   title="Имя автора"
               ></app-input></div>
               <div class="form-col"><app-input
-                  v-model="newReview.titul"
-                  :error-message="validation.firstError('newReview.titul')"
+                  v-model="newReview.occ"
+                  :error-message="validation.firstError('newReview.occ')"
                   title="Титул автора"
               ></app-input></div>
             </div>
             <div class="form-row">
               <app-input
-                  v-model="newReview.description"
-                  :error-message="validation.firstError('newReview.description')"
+                  v-model="newReview.text"
+                  :error-message="validation.firstError('newReview.text')"
                   field-type="textarea"
                   title="Отзыв"
               ></app-input>
@@ -52,10 +52,17 @@
 
           <div class="form-btns">
             <div class="btn">
-              <app-button title="Отмена" plain></app-button>
+              <app-button
+                  title="Отмена"
+                  typeAttrs="button"
+                  @click="$emit('close', $event)" plain>
+              ></app-button>
             </div>
             <div class="btn">
-              <app-button title="Сохранить" :disabled="isSubmitDisabled"></app-button>
+              <app-button
+                  title="Сохранить"
+                  :disabled="isSubmitDisabled"
+              ></app-button>
             </div>
           </div>
         </div>
@@ -81,13 +88,13 @@ export default {
   },
   mixins: [ValidatorMixin],
   validators: {
-    "newReview.name": value => {
+    "newReview.author": value => {
       return Validator.value(value).required("Введите имя");
     },
-    "newReview.description": value => {
+    "newReview.text": value => {
       return Validator.value(value).required("Введите описание");
     },
-    "newReview.titul": value => {
+    "newReview.occ": value => {
       return Validator.value(value).required("Введите титул");
     } ,
     "newReview.preview": value => {
@@ -97,33 +104,76 @@ export default {
   data() {
     return {
       hovered: false,
-      newReview: {
-        name: "",
-        titul: "",
-        description: "",
-        photo: {},
-      },
+      newReview: {...this.currentReview },
+      // newReview: {
+      //   author: "",
+      //   occ: "",
+      //   text: "",
+      //   photo: {},
+      // },
       isSubmitDisabled: false,
     };
   },
+  props:{
+    currentReview:{
+      type:Object,
+      default:() => ({})
+    }
+  },
   computed:{
     ...mapState('reviews',{
-      works: state => state.data
+      reviews: state => state.data
     })
   },
   methods: {
     ...mapActions({
-      addNewReview: "reviews/add",
+      addNewReview: 'reviews/add',
+      // addNewReview: 'works/add',
+      // updateNewReview: 'rev/update',
     }),
+
+    setReview(){
+      if (this.currentReview){
+        this.newReview = {...this.currentReview}
+        this.newReview.photo = 'https://webdev-api.loftschool.com/' + this.currentReview.photo
+      } else {
+        this.newReview = {
+          id: null,
+          author: "",
+          occ: "",
+          text: "",
+          photo: "",
+          // preview: "", //???
+          // newReview: {
+          //   author: "",
+          //   occ: "",
+          //   text: "",
+          //   photo: {},
+          // },
+        }
+      }
+    },
 
     handleDragOver(e) {
       e.preventDefault();
       this.hovered = true;
     },
-    async handleSubmit() {
-      console.log('!!! submit form this.newReview = ',this.newReview);
+
+    async handleSubmit(value) {
+      console.log('value = ',value);
+      console.log('! submit form this.newReview = ',this.newReview);
       if ((await this.$validate()) === false) return;
+
       await this.addNewReview(this.newReview);
+      console.log('after')
+
+      // if(this.newReview.id){
+      //   console.log('this.newReview.id = ',this.newReview.id)
+      //   await this.updateNewReview(this.newReview);
+      // } else {
+      //   console.log('else this.newReview.id = ',this.newReview.id)
+      //   await this.addNewReview(this.newReview);
+      // }
     },
     handleChange(event) {
       event.preventDefault();
@@ -151,6 +201,17 @@ export default {
       }
     },
   },
+  created() {
+    this.setReview()
+  },
+  // beforeDestroy() {
+  //   console.log('beforeDestroy');
+  // },
+  watch: {
+    currentReview(){
+      this.setReview()
+    }
+  }
 }
 
 </script>
