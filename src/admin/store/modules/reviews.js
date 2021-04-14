@@ -68,7 +68,7 @@ export default {
                 // throw new Error("Ошибка remove review")
             }
         },
-/*
+
         async update({ commit },  workToEdit) {
             // console.log('works.js: update');
             try {
@@ -81,6 +81,6 @@ export default {
                 throw new Error("works.js update произошла ошибка");
             }
         },
-        */
+
     },
 };

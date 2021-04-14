@@ -50,6 +50,9 @@
     margin-bottom: 30px;
 }
 
+.w-30p {width:30%;}
+.w-70p {width:70%;}
+
 .form-btns {
     display: flex;
     justify-content: flex-end;
@@ -81,11 +84,24 @@
     height: 0;
     border: none;
 }
-
-.uploader-btn {border: 1px solid red;
-
+.uploader-link,
+.uploader-btn {
+    top: 72px;
+    position: relative;
 }
 
 .label-block .input {
     display: none;
+}
+
+
+.label-block {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.uploader {
+    height: 12.5rem;
+    width: 12.5rem;
 }

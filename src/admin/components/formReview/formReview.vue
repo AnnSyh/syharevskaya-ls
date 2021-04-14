@@ -1,33 +1,34 @@
 <template>
-  <form class="form" @submit.prevent="handleSubmit">
-    <h1>Добавить отзыв</h1>
-    <div class="form-container" slot="content">
 
-      <div class="form-cols">
-        <div class="form-col">
-          <div class="label-block">
-            <label
-                :error-message="validation.firstError('newReview.preview')"
-                :style="{backgroundImage: `url(${newReview.preview})`}"
-                :class="[ 'uploader', {active: newReview.preview}, {
+  <form class="form" @submit.prevent="handleSubmit">
+    <card>
+      <h1 slot="title">Добавить отзыв</h1>
+      <div class="form-container" slot="content">
+        <div class="form-cols">
+          <div class="w-30p">
+            <div class="label-block">
+              <label
+                  :error-message="validation.firstError('newReview.photo')"
+                  :style="{backgroundImage: `url(${newReview.photo})`}"
+                  :class="[ 'uploader', {active: newReview.photo}, {
                             hovered: hovered
                           }]"
-                @dragover="handleDragOver"
-                @dragleave="hovered = false"
-                @drop="handleChange"
-            >
-              <div class="uploader-title">Перетащите или загрузите картинку</div>
-              <div class="uploader-btn">
-                <app-button
-                    typeAttr="file"
-                    @change="handleChange"
-                ></app-button>
-              </div>
-            </label>
-        </div>
-      </div>
-        <div class="form-col">
+                  @dragover="handleDragOver"
+                  @dragleave="hovered = false"
+                  @drop="handleChange"
+              >
+                <div class="uploader-title">Перетащите или загрузите картинку</div>
+                <div class="uploader-link">
 
+                  <app-button
+                      typeAttr="file"
+                      @change="handleChange"
+                  ></app-button>
+                </div>
+              </label>
+            </div>
+          </div>
+          <div class="w-70p">
             <div class="form-cols">
               <div class="form-col"> <app-input
                   v-model="newReview.author"
@@ -49,30 +50,32 @@
               ></app-input>
             </div>
 
-
-          <div class="form-btns">
-            <div class="btn">
-              <app-button
-                  title="Отмена"
-                  typeAttrs="button"
-                  @click="$emit('close', $event)" plain>
-              ></app-button>
-            </div>
-            <div class="btn">
-              <app-button
-                  title="Сохранить"
-                  :disabled="isSubmitDisabled"
-              ></app-button>
+            <div class="form-btns">
+              <div class="btn">
+                <app-button
+                    title="Отмена"
+                    typeAttrs="button"
+                    @click="$emit('close', $event)" plain>
+                  ></app-button>
+              </div>
+              <div class="btn">
+                <app-button
+                    title="Сохранить"
+                    :disabled="isSubmitDisabled"
+                ></app-button>
+              </div>
             </div>
           </div>
         </div>
-    </div>
-    </div>
+      </div>
+    </card>
   </form>
+
 </template>
 
 <script>
 
+import card from "../card";
 import Input from "../input/input";
 import appButton from "../button/button";
 import appInput from "../input/input";
@@ -81,6 +84,7 @@ import {mapActions, mapState} from "vuex";
 
 export default {
   components: {
+    card,
     Input,
     appButton,
     appInput,
@@ -97,7 +101,7 @@ export default {
     "newReview.occ": value => {
       return Validator.value(value).required("Введите титул");
     } ,
-    "newReview.preview": value => {
+    "newReview.photo": value => {
       return Validator.value(value).required("Загрузите картинку");
     }
   },
@@ -105,12 +109,6 @@ export default {
     return {
       hovered: false,
       newReview: {...this.currentReview },
-      // newReview: {
-      //   author: "",
-      //   occ: "",
-      //   text: "",
-      //   photo: {},
-      // },
       isSubmitDisabled: false,
     };
   },
@@ -129,7 +127,7 @@ export default {
     ...mapActions({
       addNewReview: 'reviews/add',
       // addNewReview: 'works/add',
-      // updateNewReview: 'rev/update',
+      updateNewReview: 'reviews/update',
     }),
 
     setReview(){
@@ -143,13 +141,6 @@ export default {
           occ: "",
           text: "",
           photo: "",
-          // preview: "", //???
-          // newReview: {
-          //   author: "",
-          //   occ: "",
-          //   text: "",
-          //   photo: {},
-          // },
         }
       }
     },
@@ -164,16 +155,16 @@ export default {
       console.log('! submit form this.newReview = ',this.newReview);
       if ((await this.$validate()) === false) return;
 
-      await this.addNewReview(this.newReview);
-      console.log('after')
+      // await this.addNewReview(this.newReview);
+      // console.log('after')
 
-      // if(this.newReview.id){
-      //   console.log('this.newReview.id = ',this.newReview.id)
-      //   await this.updateNewReview(this.newReview);
-      // } else {
-      //   console.log('else this.newReview.id = ',this.newReview.id)
-      //   await this.addNewReview(this.newReview);
-      // }
+      if(this.newReview.id){
+        console.log('this.newReview.id = ',this.newReview.id)
+        await this.updateNewReview(this.newReview);
+      } else {
+        console.log('else this.newReview.id = ',this.newReview.id)
+        await this.addNewReview(this.newReview);
+      }
     },
     handleChange(event) {
       event.preventDefault();
@@ -191,7 +182,7 @@ export default {
 
       reader.readAsDataURL(file);
       reader.onloadend = () => {
-        this.newReview.preview = reader.result;
+        this.newReview.photo = reader.result;
       };
       reader.onerror = () => { //произошла ошибка
         // надо уведомить пользователя при помощи tooltip

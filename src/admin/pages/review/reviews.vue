@@ -79,7 +79,8 @@ export default {
       fetchReviews: 'reviews/fetch',
     }),
     editHandler(review){
-      this.currentWork = {...review}
+      console.log('editHandler review = ',review);
+      this.currentReview = {...review}
       this.emptyCardIsShown = true;
     },
     closeHandler(){
