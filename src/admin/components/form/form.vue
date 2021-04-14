@@ -64,10 +64,19 @@
           </div>
           <div class="form-btns">
             <div class="btn">
-              <app-button title="Отмена" typeAttrs="button" @click="$emit('close', $event)" plain></app-button>
+              <app-button
+                  title="Отмена"
+                  typeAttrs="button"
+                  @click="$emit('close', $event)" plain>
+
+              </app-button>
             </div>
             <div class="btn">
-              <app-button title="Сохранить" :disabled="isSubmitDisabled"></app-button>
+              <app-button
+                  title="1Сохранить"
+                  :disabled="isSubmitDisabled"
+              >
+              </app-button>
             </div>
 <!--            <div class="btn">222-->
 <!--              <app-button title="Сохранить" typeAttr="submit" disabled></app-button>-->
@@ -139,6 +148,7 @@ export default {
   methods: {
     ...mapActions({
       addNewWork: "works/add",
+      updateNewWork: "works/update",
     }),
 
     setWork(){
@@ -162,11 +172,12 @@ export default {
       e.preventDefault();
       this.hovered = true;
     },
+
     async handleSubmit() {
       console.log('!!! submit form this.newWork = ',this.newWork);
       if ((await this.$validate()) === false) return;
       if(this.newWork.id){
-                          //обновить см skill
+          await this.updateNewWork(this.newWork)               //обновить см skill
       } else{
         await this.addNewWork(this.newWork);
       }
@@ -200,9 +211,9 @@ export default {
   created() {
       this.setWork()
   },
-  beforeDestroy() {
-    console.log('beforeDestroy');
-  },
+  // beforeDestroy() {
+  //   console.log('beforeDestroy');
+  // },
   watch: {
     currentWork(){
       this.setWork()

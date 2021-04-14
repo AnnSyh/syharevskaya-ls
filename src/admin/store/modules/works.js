@@ -15,9 +15,14 @@ export default {
                 return  work.id !== workId
             })
         },
-        UPDATE_WORKS: (state, workToEdit) =>{
-            console.log(' UPDATE_WORKS: works = ',workToEdit)
-        },
+
+        UPDATE_WORKS: (state, works) => {
+            console.log(' UPDATE_WORKS: worksToEdit = ',works)
+            state.data = works
+            // state.data = state.data.filter(work => {
+            //     return  work.id == works.id
+            // })
+        }
     },
     actions: {
         async add ({commit},newWork) {
@@ -60,12 +65,12 @@ export default {
             }
         },
 
-        async update({ commit }, workToEdit) {
-            console.log('works.js: update');
+        async update({ commit },  workToEdit) {
+            // console.log('works.js: update');
             try {
-                console.log('actions: update id = ', workToEdit.id);
-                console.log('actions: update title = ', workToEdit.title);
+                console.log('works.js: actions: update = ', workToEdit);
                 const { data } = await this.$axios.post(`/works/${workToEdit.id}`,workToEdit)
+                const workToEditId = workToEdit.id
                 commit("UPDATE_WORKS", data);
 
             } catch (error) {

@@ -26,12 +26,10 @@
                 :key="work.id"
                 :emptyCardIsShown="emptyCardIsShown"
             >
-<!--          {{work.id}}-->
               <work-card
                   :work="work"
                   @edit="editHandler"
               />
-<!--              @editWork="editwork"-->
             </li>
           </ul>
         </div>

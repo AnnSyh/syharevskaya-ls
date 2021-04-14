@@ -7,7 +7,7 @@ export default {
         SET_CATEGORIES: (state, categories) => (state.data = categories),
         ADD_CATEGORY: (state, category) => state.data.unshift(category),
         UPDATE_CATEGORY: (state, category) =>{
-            console.log(' UPDATE_CATEGORY: category = ',category)
+            // console.log(' UPDATE_CATEGORY: category = ',category)
         },
         REMOVE_CATEGORIES: (state, categoryID) => {
             state.data = state.data.filter(category => {
