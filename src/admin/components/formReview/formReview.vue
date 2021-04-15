@@ -9,11 +9,13 @@
         <div class="form-cols">
           <div class="w-30p">
             <div class="label-block">
+              <app-input
+                  :error-message="validation.firstError('newReview.preview')"
+              ></app-input>
               <label
-                  :error-message="validation.firstError('newReview.photo')"
-                  v-bind="$attrs"
-                  :style="{backgroundImage: `url(${newReview.photo})`}"
-                  :class="[ 'uploader', {active: newReview.photo}, {
+                  :error-message="validation.firstError('newReview.preview')"
+                  :style="{backgroundImage: `url(${newReview.preview})`}"
+                  :class="[ 'uploader', {active: newReview.preview}, {
                             hovered: hovered
                           }]"
                   @dragover="handleDragOver"
@@ -37,13 +39,11 @@
                   v-model="newReview.author"
                   :error-message="validation.firstError('newReview.author')"
                   title="Имя автора"
-                  v-bind="$attrs"
               ></app-input></div>
               <div class="form-col"><app-input
                   v-model="newReview.occ"
                   :error-message="validation.firstError('newReview.occ')"
                   title="Титул автора"
-                  v-bind="$attrs"
               ></app-input></div>
             </div>
             <div class="form-row">
@@ -52,7 +52,6 @@
                   :error-message="validation.firstError('newReview.text')"
                   field-type="textarea"
                   title="Отзыв"
-                  v-bind="$attrs"
               ></app-input>
             </div>
 
@@ -68,7 +67,6 @@
                 <app-button
                     title="Сохранить"
                     :disabled="isSubmitDisabled"
-                    v-on="$listeners"
                 ></app-button>
               </div>
             </div>
@@ -90,7 +88,6 @@ import {Validator, mixin as ValidatorMixin} from 'simple-vue-validator';
 import {mapActions, mapState} from "vuex";
 
 export default {
-  inheritAttrs:false,
   components: {
     card,
     Input,
@@ -109,7 +106,7 @@ export default {
     "newReview.occ": value => {
       return Validator.value(value).required("Введите титул");
     } ,
-    "newReview.photo": value => {
+    "newReview.preview": value => {
       return Validator.value(value).required("Загрузите картинку");
     }
   },
@@ -140,14 +137,15 @@ export default {
     setReview(){
       if (this.currentReview){
         this.newReview = {...this.currentReview}
-        this.newReview.photo = 'https://webdev-api.loftschool.com/' + this.currentReview.photo
+        this.newReview.preview = 'https://webdev-api.loftschool.com/' + this.currentReview.photo
       } else {
         this.newReview = {
           id: null,
           author: "",
           occ: "",
           text: "",
-          photo: "",
+          photo: {},
+          preview: "",
         }
       }
     },
@@ -168,7 +166,7 @@ export default {
          //this.emptyCardIsShown =  закрыть окнопри успешном редактировании
         this.emptyCardIsShown = false;
       } else {
-        console.log('else this.newReview.id = ',this.newReview.id)
+        console.log('!!! else this.newReview.id = ',this.newReview)
         await this.addNewReview(this.newReview);
       }
     },
@@ -188,7 +186,7 @@ export default {
 
       reader.readAsDataURL(file);
       reader.onloadend = () => {
-        this.newReview.photo = reader.result;
+        this.newReview.preview = reader.result;
       };
       reader.onerror = () => { //произошла ошибка
         // надо уведомить пользователя при помощи tooltip

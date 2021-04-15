@@ -46,12 +46,14 @@ export default {
     },
     actions: {
         async add ({commit},newReview) {
-            console.log(newReview);
+            console.log('reviews.js: 1newReview = ',newReview);
             const formData = new FormData();
 
             Object.keys(newReview).forEach(item => {
                 formData.append(item, newReview[item]);
-            })
+            });
+
+            console.log('reviews.js: 2newReview = ',newReview);
 
             // for(let entry of formData.entries()){ //выводданных в консоль
             //     console.log(entry);

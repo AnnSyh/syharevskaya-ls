@@ -42,11 +42,14 @@ export default {
     actions: {
         async add ({commit},newWork) {
             console.log(newWork);
+            console.log('works.js: before - newWork = ',newWork);
             const formData = new FormData();
 
             Object.keys(newWork).forEach(item => {
                 formData.append(item, newWork[item]);
             })
+
+            console.log('works.js: after - newWork = ',newWork);
 
             // for(let entry of formData.entries()){ //выводданных в консоль
             //     console.log(entry);
