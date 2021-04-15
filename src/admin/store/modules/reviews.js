@@ -18,12 +18,17 @@ export default {
         },
 
         UPDATE_REVIEWS: (state, reviews) => {
-            console.log('1UPDATE_REVIEWS: reviews = ',reviews);
-            console.log('2UPDATE_REVIEWS: reviewsId = ',reviews.review.id);
+            console.log('UPDATE_REVIEWS: reviews = ',reviews);
+            console.log('UPDATE_REVIEWS: reviews.id = ',reviews.review.id);
+            console.log('UPDATE_REVIEWS: reviews.status = ',reviews.status);
              state.data = reviews
             // state.data = state.data.filter(reviews => {
             //     return  reviews.id == reviews.review.id
             // })
+            if(reviews.status == 1){
+                console.log('status = 1')
+                //закрыть форму ???
+            }
         }
 
     },
@@ -71,12 +76,11 @@ export default {
         },
 
         async update({ commit },  reviewToEdit) {
-            // console.log('1!!!reviews.js: update');
+            // console.log('reviews.js: update');
             try {
                 console.log('reviews.js: actions: update = ', reviewToEdit);
                 const { data } = await this.$axios.post(`/reviews/${reviewToEdit.id}`,reviewToEdit)
                 const reviewToEditId = reviewToEdit.id
-                // console.log('2!!!reviews.js: update',reviewToEditId);
                 commit("UPDATE_REVIEWS", data);
 
             } catch (error) {

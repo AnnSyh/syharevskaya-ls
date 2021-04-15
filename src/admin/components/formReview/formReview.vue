@@ -3,7 +3,6 @@
   <form class="form"
         @submit.prevent="handleSubmit"
   >
-    <p>emptyCardIsShown = {{emptyCardIsShown}}</p>
     <card>
       <h1 slot="title">Добавить отзыв</h1>
       <div class="form-container" slot="content">
@@ -12,6 +11,7 @@
             <div class="label-block">
               <label
                   :error-message="validation.firstError('newReview.photo')"
+                  v-bind="$attrs"
                   :style="{backgroundImage: `url(${newReview.photo})`}"
                   :class="[ 'uploader', {active: newReview.photo}, {
                             hovered: hovered
@@ -37,11 +37,13 @@
                   v-model="newReview.author"
                   :error-message="validation.firstError('newReview.author')"
                   title="Имя автора"
+                  v-bind="$attrs"
               ></app-input></div>
               <div class="form-col"><app-input
                   v-model="newReview.occ"
                   :error-message="validation.firstError('newReview.occ')"
                   title="Титул автора"
+                  v-bind="$attrs"
               ></app-input></div>
             </div>
             <div class="form-row">
@@ -50,6 +52,7 @@
                   :error-message="validation.firstError('newReview.text')"
                   field-type="textarea"
                   title="Отзыв"
+                  v-bind="$attrs"
               ></app-input>
             </div>
 
@@ -65,7 +68,7 @@
                 <app-button
                     title="Сохранить"
                     :disabled="isSubmitDisabled"
-                    @click="closeHandler"
+                    v-on="$listeners"
                 ></app-button>
               </div>
             </div>
@@ -87,6 +90,7 @@ import {Validator, mixin as ValidatorMixin} from 'simple-vue-validator';
 import {mapActions, mapState} from "vuex";
 
 export default {
+  inheritAttrs:false,
   components: {
     card,
     Input,
@@ -121,23 +125,17 @@ export default {
       type:Object,
       default:() => ({})
     },
-    emptyCardIsShown:Boolean,
   },
   computed:{
     ...mapState('reviews',{
       reviews: state => state.data
-    })
+    }),
   },
   methods: {
     ...mapActions({
       addNewReview: 'reviews/add',
       updateNewReview: 'reviews/update',
     }),
-
-    closeHandler(){
-      console.log('here');
-      this.emptyCardIsShown = false
-    },
 
     setReview(){
       if (this.currentReview){

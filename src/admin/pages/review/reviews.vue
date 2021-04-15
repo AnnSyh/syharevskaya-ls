@@ -9,8 +9,8 @@
           <!--          <div class="form" v-if="emptyCardIsShown">-->
           <form-review class="form" v-if="emptyCardIsShown"
                     :currentReview="currentReview"
-                    :emptyCardIsShown="emptyCardIsShown"
                     @close="closeHandler"
+                    @click="handleClick"
           />
           <!--          </div>-->
           <card simple v-else class="empty-work">
@@ -78,6 +78,15 @@ export default {
     ...mapActions({
       fetchReviews: 'reviews/fetch',
     }),
+    handleClick(){
+      console.log('handleClick',this.emptyCardIsShown);
+      console.log('this.reviews.status',this.reviews.status)
+      if(this.reviews.status == 1){
+        this.emptyCardIsShown = false
+      }
+
+
+    },
     editHandler(review){
       console.log('editHandler review = ',review);
       this.currentReview = {...review}

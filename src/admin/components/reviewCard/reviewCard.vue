@@ -35,7 +35,11 @@ import {mapActions, mapState} from "vuex"
 export default {
   components: { card, icon, user },
   props: {
-    review: Object,
+    // review: Object,
+    review:{
+      type:Object,
+      default:() => ({})
+    },
     emptyCardIsShown: {
       type: Boolean
     },
