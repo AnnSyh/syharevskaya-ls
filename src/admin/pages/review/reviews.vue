@@ -5,23 +5,24 @@
         <div class="header  page-header">
           <h1 class="header__title page-title">Блок "{{this.$route.meta.name}}"</h1>
         </div>
-        <div class="form-component card-component">
-          <!--          <div class="form" v-if="emptyCardIsShown">-->
-          <form-review class="form" v-if="emptyCardIsShown"
-                    :currentReview="currentReview"
-                    @close="closeHandler"
-                    @click="handleClick"
-          />
-          <!--          </div>-->
-          <card simple v-else class="empty-work">
-            <iconed-btn
-                type="iconed"
-                v-if="emptyCardIsShown == false"
-                @click="emptyCardIsShown = true"
-                title="Добавить отзыв"/>
-          </card>
+        <div class="form-component">
 
           <ul class="works-cards">
+            <li v-if="emptyCardIsShown" class="li-form">
+              <form-review class="form"
+                           :currentReview="currentReview"
+                           @close="closeHandler"
+                           @click="handleClick"
+              />
+            </li>
+            <li v-else class="empty-work">
+              <square-btn
+                  v-if="emptyCardIsShown == false"
+                  type="square"
+                  title="Добавить отзыв"
+                  @click="emptyCardIsShown = true"
+              />
+            </li>
             <li class="item" v-for="review in reviews"
                 :key="review.id"
                 :emptyCardIsShown="emptyCardIsShown"
@@ -33,7 +34,6 @@
             </li>
           </ul>
           <pre>{{reviews}}</pre>
-
         </div>
       </div>
     </div>
@@ -51,8 +51,7 @@ import { mapState, mapActions } from "vuex";
 import card from "../../components/card";
 import icon from "../../components/icon";
 import iconedBtn from "../../components/button/button";
-
-
+import squareBtn from "../../components/button/button";
 
 export default {
   components:{
@@ -60,7 +59,7 @@ export default {
     reviewCard,
     card,
     icon,
-    iconedBtn
+    iconedBtn, squareBtn,
   },
   data() {
     return {

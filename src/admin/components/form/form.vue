@@ -72,7 +72,7 @@
             </div>
             <div class="btn">
               <app-button
-                  title="1Сохранить"
+                  title="Сохранить"
                   :disabled="isSubmitDisabled"
               >
               </app-button>

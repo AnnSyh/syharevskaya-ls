@@ -5,23 +5,21 @@
         <div class="header  page-header">
           <h1 class="header__title page-title">Блок "{{this.$route.meta.name}}"</h1>
         </div>
-        <div class="form-component card-component">
-<!--          <div class="form" v-if="emptyCardIsShown">-->
-            <app-form class="form" v-if="emptyCardIsShown"
-            :currentWork="currentWork"
-            @close="closeHandler"
-            />
-<!--          </div>-->
-          <card simple v-else class="empty-work">
-            <iconed-btn
-                type="iconed"
-                v-if="emptyCardIsShown == false"
-                @click="emptyCardIsShown = true"
-                title="Добавить работу"/>
-          </card>
-
 <!--          <pre>{{works}}</pre>-->
           <ul class="works-cards">
+            <li v-if="emptyCardIsShown" class="li-form">
+              <app-form class="form"
+                        :currentWork="currentWork"
+                        @close="closeHandler"
+              />
+            </li>
+            <li v-else class="empty-work">
+              <square-btn
+                  type="square"
+                  v-if="emptyCardIsShown == false"
+                  @click="emptyCardIsShown = true"
+                  title="Добавить работу"/>
+            </li>
             <li class="item" v-for="work in works"
                 :key="work.id"
                 :emptyCardIsShown="emptyCardIsShown"
@@ -49,6 +47,7 @@ import { mapState, mapActions } from "vuex";
 import card from "../../components/card";
 import icon from "../../components/icon";
 import iconedBtn from "../../components/button/button";
+import squareBtn from "../../components/button/button";
 
 
 export default {
@@ -59,7 +58,7 @@ export default {
     workCard,
     card,
     icon,
-    iconedBtn
+    iconedBtn, squareBtn,
   },
   props: {
     tags:{
