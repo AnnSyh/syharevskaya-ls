@@ -9,6 +9,7 @@
           <!--          <div class="form" v-if="emptyCardIsShown">-->
           <form-review class="form" v-if="emptyCardIsShown"
                     :currentReview="currentReview"
+                    :emptyCardIsShown="emptyCardIsShown"
                     @close="closeHandler"
           />
           <!--          </div>-->
@@ -64,7 +65,6 @@ export default {
   data() {
     return {
       emptyCardIsShown:false,
-      // reviews:[],
       currentReview:null
     }
 
@@ -100,7 +100,7 @@ export default {
     this.fetchReviews();
   },
   created() {
-    console.log('!!! created() this.fetchReviews() = ', this.fetchReviews())
+    // console.log('!!! created() this.fetchReviews() = ', this.fetchReviews())
     this.fetchReviews();
   },
 }

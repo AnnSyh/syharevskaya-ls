@@ -1,6 +1,9 @@
 <template>
 
-  <form class="form" @submit.prevent="handleSubmit">
+  <form class="form"
+        @submit.prevent="handleSubmit"
+  >
+    <p>emptyCardIsShown = {{emptyCardIsShown}}</p>
     <card>
       <h1 slot="title">Добавить отзыв</h1>
       <div class="form-container" slot="content">
@@ -20,7 +23,7 @@
                 <div class="uploader-title">Перетащите или загрузите картинку</div>
                 <div class="uploader-link">
 
-                  <app-button
+                  <app-button plain
                       typeAttr="file"
                       @change="handleChange"
                   ></app-button>
@@ -52,16 +55,17 @@
 
             <div class="form-btns">
               <div class="btn">
-                <app-button
+                <app-button plain
                     title="Отмена"
                     typeAttrs="button"
-                    @click="$emit('close', $event)" plain>
+                    @click="$emit('close', $event)"
                   ></app-button>
               </div>
               <div class="btn">
                 <app-button
                     title="Сохранить"
                     :disabled="isSubmitDisabled"
+                    @click="closeHandler"
                 ></app-button>
               </div>
             </div>
@@ -116,7 +120,8 @@ export default {
     currentReview:{
       type:Object,
       default:() => ({})
-    }
+    },
+    emptyCardIsShown:Boolean,
   },
   computed:{
     ...mapState('reviews',{
@@ -126,9 +131,13 @@ export default {
   methods: {
     ...mapActions({
       addNewReview: 'reviews/add',
-      // addNewReview: 'works/add',
       updateNewReview: 'reviews/update',
     }),
+
+    closeHandler(){
+      console.log('here');
+      this.emptyCardIsShown = false
+    },
 
     setReview(){
       if (this.currentReview){
@@ -151,16 +160,15 @@ export default {
     },
 
     async handleSubmit(value) {
-      console.log('value = ',value);
-      console.log('! submit form this.newReview = ',this.newReview);
+      console.log('! submit form handleSubmit');
       if ((await this.$validate()) === false) return;
-
-      // await this.addNewReview(this.newReview);
-      // console.log('after')
 
       if(this.newReview.id){
         console.log('this.newReview.id = ',this.newReview.id)
         await this.updateNewReview(this.newReview);
+        console.log('after updateNewReview')
+         //this.emptyCardIsShown =  закрыть окнопри успешном редактировании
+        this.emptyCardIsShown = false;
       } else {
         console.log('else this.newReview.id = ',this.newReview.id)
         await this.addNewReview(this.newReview);
@@ -200,6 +208,7 @@ export default {
   // },
   watch: {
     currentReview(){
+
       this.setReview()
     }
   }

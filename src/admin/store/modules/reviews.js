@@ -16,15 +16,16 @@ export default {
                 return  review.id !== reviewId
             })
         },
-/*
+
         UPDATE_REVIEWS: (state, reviews) => {
-            console.log(' UPDATE_WORKS: worksToEdit = ',works)
-            state.data = works
-            // state.data = state.data.filter(work => {
-            //     return  work.id == works.id
+            console.log('1UPDATE_REVIEWS: reviews = ',reviews);
+            console.log('2UPDATE_REVIEWS: reviewsId = ',reviews.review.id);
+             state.data = reviews
+            // state.data = state.data.filter(reviews => {
+            //     return  reviews.id == reviews.review.id
             // })
         }
-        */
+
     },
     actions: {
         async add ({commit},newReview) {
@@ -46,7 +47,7 @@ export default {
             }
         },
 
-        async fetch({commit}) {
+        async fetch({commit},payload) {
             // console.log('review.js: fetch',)
             try {
                 const { data } = await this.$axios.get("/reviews/453");
@@ -69,16 +70,17 @@ export default {
             }
         },
 
-        async update({ commit },  workToEdit) {
-            // console.log('works.js: update');
+        async update({ commit },  reviewToEdit) {
+            // console.log('1!!!reviews.js: update');
             try {
-                console.log('works.js: actions: update = ', workToEdit);
-                const { data } = await this.$axios.post(`/works/${workToEdit.id}`,workToEdit)
-                const workToEditId = workToEdit.id
-                commit("UPDATE_WORKS", data);
+                console.log('reviews.js: actions: update = ', reviewToEdit);
+                const { data } = await this.$axios.post(`/reviews/${reviewToEdit.id}`,reviewToEdit)
+                const reviewToEditId = reviewToEdit.id
+                // console.log('2!!!reviews.js: update',reviewToEditId);
+                commit("UPDATE_REVIEWS", data);
 
             } catch (error) {
-                throw new Error("works.js update произошла ошибка");
+                throw new Error("reviews.js update произошла ошибка");
             }
         },
 
