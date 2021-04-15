@@ -16,12 +16,27 @@ export default {
             })
         },
 
-        UPDATE_WORKS: (state, works) => {
-            console.log(' UPDATE_WORKS: worksToEdit = ',works)
-            state.data = works
-            // state.data = state.data.filter(work => {
-            //     return  work.id == works.id
-            // })
+        UPDATE_WORKS: (state, payload) => {
+            console.log(' UPDATE_WORKS: worksToEdit = ', payload);
+            console.log('state.data = ',state.data);
+            console.log('payload = ',payload.work);
+            // state.data = payload
+            //begin
+            state.data.map( data => {
+
+                if(data.id === payload.work.id){
+                    console.log('if', data.id, payload.work.id);
+
+                    data.title = payload.work.title;
+                    data.techs = payload.work.techs;
+                    data.photo = payload.work.photo;
+                    data.link = payload.work.link;
+                    data.description = payload.work.description;
+                }
+                return data
+            })
+            //end
+
         }
     },
     actions: {
@@ -65,13 +80,14 @@ export default {
             }
         },
 
-        async update({ commit },  workToEdit) {
+        async update({ commit },  payload) {
             // console.log('works.js: update');
             try {
-                console.log('works.js: actions: update = ', workToEdit);
-                const { data } = await this.$axios.post(`/works/${workToEdit.id}`,workToEdit)
-                const workToEditId = workToEdit.id
-                commit("UPDATE_WORKS", data);
+                console.log('works.js: actions: update = ', payload);
+                const result = await this.$axios.post(`/works/${payload.id}`,payload)
+                console.log('works.js: before commit result.data = ',result.data)
+                commit("UPDATE_WORKS", result.data);
+                console.log('works.js: after commit  status = ',result.data.status);
 
             } catch (error) {
                 throw new Error("works.js update произошла ошибка");
