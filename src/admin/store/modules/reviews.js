@@ -28,6 +28,7 @@ export default {
                         console.log('author before:         data.author = ',data.author);
                         console.log('photo before:           data.photo = ',data.photo);
                         console.log('photo before: payload.review.photo = ', payload.review.photo);
+                        console.log('photo before: payload.review.preview = ', payload.review.preview);
 
                         data.author = payload.review.author;
                         data.occ = payload.review.occ;
@@ -46,7 +47,7 @@ export default {
     },
     actions: {
         async add ({commit},newReview) {
-            console.log('reviews.js: 1newReview = ',newReview);
+            // console.log('reviews.js: 1newReview = ',newReview);
             const formData = new FormData();
 
             Object.keys(newReview).forEach(item => {

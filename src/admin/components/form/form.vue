@@ -178,7 +178,7 @@ export default {
       if(this.newWork.id){
           await this.updateNewWork(this.newWork)               //обновить см skill
       } else{
-        await this.addNewWork(this.newWork);
+        await this.addNewWork(this.newWork);                   //создать
       }
     },
     handleChange(event) {

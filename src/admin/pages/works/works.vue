@@ -32,7 +32,6 @@
           </ul>
         </div>
       </div>
-    </div>
 
   </section>
 </template>
@@ -69,7 +68,7 @@ export default {
   data() {
     return {
       emptyCardIsShown:false,
-      // categories:[],
+      categories:[],
       currentWork:null
     }
 
@@ -84,6 +83,7 @@ export default {
       fetchWorks: "works/fetch",
     }),
     editHandler(work){
+      console.log('editHandler')
         this.currentWork = {...work}
         this.emptyCardIsShown = true;
     },
