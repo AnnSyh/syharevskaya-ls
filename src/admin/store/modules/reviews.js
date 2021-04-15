@@ -21,11 +21,10 @@ export default {
             console.log('UPDATE_REVIEWS: reviews = ',reviews);
             console.log('UPDATE_REVIEWS: reviews.id = ',reviews.review.id);
             console.log('UPDATE_REVIEWS: reviews.status = ',reviews.status);
-             state.data = reviews
-            // state.data = state.data.filter(reviews => {
-            //     return  reviews.id == reviews.review.id
-            // })
-            if(reviews.status == 1){
+             // state.data = reviews
+            state.data = state.data.filter(review => review.id === reviews.review.id)
+
+            if(review.status == 1){
                 console.log('status = 1')
                 //закрыть форму ???
             }

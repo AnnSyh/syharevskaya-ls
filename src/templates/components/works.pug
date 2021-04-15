@@ -10,9 +10,10 @@ script(type="text/x-template")#works-container
         info(:currentWork="currentWork")
 
 script(type="text/x-template")#preview-display
-    .works-slider__pics(:data-slide="currentIndex + 1")
+    .works-slider__pics(:data-slide="currentIndex.index + 1")
         .works-slider__pics-content
             //pre {{currentWork}}
+            //pre {{currentIndex.index}}
             img(:src="currentWork.photo").works-slider__thumb
             btns(
                 @slide="$emit('slide',$event)"

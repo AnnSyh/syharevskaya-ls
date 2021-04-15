@@ -45,7 +45,7 @@ export default {
   },
   computed: {
     ...mapState('works',{
-      categories: state => state.data
+      works: state => state.data
     }),
     cover() {
       return `https://webdev-api.loftschool.com/${this.work.photo}`
