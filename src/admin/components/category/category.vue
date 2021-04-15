@@ -14,6 +14,9 @@
 <!--      <p>this.category = {{this.category}}</p>-->
 <!--      <p>skills = {{skills}}</p>-->
       <ul class="skills" v-if="empty === false">
+        <li v-if="!skills.length">
+          У вас пока нет skills
+        </li>
         <li class="item"  v-for="skill in skills" :key="skill.id">
           <skill
               :skill="skill"

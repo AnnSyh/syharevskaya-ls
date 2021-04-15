@@ -79,7 +79,7 @@ export default {
     }),
     handleClick(){
       console.log('handleClick',this.emptyCardIsShown);
-      console.log('this.reviews.status',this.reviews.status)
+      // console.log('this.reviews.status',this.reviews.status)
       if(this.reviews.status == 1){
         this.emptyCardIsShown = false
       }
@@ -87,7 +87,7 @@ export default {
 
     },
     editHandler(review){
-      console.log('editHandler review = ',review);
+      // console.log('editHandler review = ',review);
       this.currentReview = {...review}
       this.emptyCardIsShown = true;
     },

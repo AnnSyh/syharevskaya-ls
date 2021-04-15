@@ -21,6 +21,9 @@
               empty
           />
         </li>
+        <li v-if="!categories.length">
+          У вас пока нет categories
+        </li>
         <li
             class="item"
             v-for="category in categories"
