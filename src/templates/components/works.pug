@@ -1,5 +1,5 @@
 script(type="text/x-template")#works-container
-    .works-slider
+    .works-slider(v-if="works.length")
         //pre {{works}}
         display(
             :currentWork="currentWork"
@@ -12,7 +12,7 @@ script(type="text/x-template")#works-container
 script(type="text/x-template")#preview-display
     .works-slider__pics(:data-slide="currentIndex.index + 1")
         .works-slider__pics-content
-            //pre {{currentWork}}
+            //pre {{currentWork.photo}}
             //pre {{currentIndex.index}}
             img(:src="currentWork.photo").works-slider__thumb
             btns(
@@ -45,6 +45,10 @@ script(type="text/x-template")#preview-btns
             ).works-slider__btn.works-slider__btn_prev
 
 script(type="text/x-template")#preview-info
+    //pre {{currentWork.title}}
+    //pre {{currentWork.techs}}
+    //pre {{currentWork.description}}
+    //pre {{currentWork.link}}
     .works-slider__data
         tags(
             :tags="tagsArray"

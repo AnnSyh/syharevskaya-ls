@@ -15,9 +15,9 @@ const info = {
     computed:{
         tagsArray(){
             console.log('22222 tagsArray this.currentWork = ', this.currentWork);
-            // console.log('this.works.techs = ',this.works.skills)
+            // console.log('this.works.techs = ',this.currentWork.techs)
 
-            // return this.currentWork.skills.split(",");
+            // return this.currentWork.techs.split(",");
         }
     }
 }
@@ -71,7 +71,7 @@ new Vue({
         this.fetch();
         // статическая подгрузка данных
         // const data = require("../data/works.json");
-            // this.works = this.requireImagesToArray(data);
+        //     this.works = this.requireImagesToArray(data);
     },
     computed: {
         currentWork(){
@@ -91,8 +91,7 @@ new Vue({
         },
         requireImagesToArray(data) {
             return data.map((item) => {
-                const requiredImage = require(`../images/content/${item.photo}`)
-                    .default;
+                const requiredImage = require(`../images/content/${item.photo}`).default;
                 item.photo = requiredImage;
                 return item;
             });
@@ -116,10 +115,12 @@ new Vue({
         async fetch(){
             const { data } = await axios.get('https://webdev-api.loftschool.com/works/453');
 
-            this.works = data.map(work =>{
+          this.works = data.map(work =>{
                 work.photo = `https://webdev-api.loftschool.com/${work.photo}`;
                 return work;
             });
+
+
         }
 
     },
