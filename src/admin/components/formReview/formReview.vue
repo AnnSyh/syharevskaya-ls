@@ -130,6 +130,7 @@ export default {
   },
   methods: {
     ...mapActions({
+      showTooltip: "tooltips/show",
       addNewReview: 'reviews/add',
       updateNewReview: 'reviews/update',
     }),
@@ -166,11 +167,20 @@ export default {
         let test = await this.updateNewReview(this.newReview);
 
         if(test == 1){  //закрыть окно при успешном редактировании
+          this.showTooltip({
+            text: 'Успешное редактирование отзыва',
+            type: "success"
+          });
           this.$emit('close');
         }
       } else {
         // console.log('!!! else this.newReview.id = ',this.newReview)
         await this.addNewReview(this.newReview);
+        this.showTooltip({
+          text: 'Успешное создание нового отзыва',
+          type: "success"
+        });
+        this.$emit('close');
       }
     },
     handleChange(event) {

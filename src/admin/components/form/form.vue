@@ -109,7 +109,9 @@ export default {
   mixins: [ValidatorMixin],
   validators: {
     "newWork.title": value => {
-      return Validator.value(value).required("Введите название");
+      return Validator.value(value)
+          .maxLength(30)
+          .required("Введите название");
     },
     "newWork.link": value => {
       return Validator.value(value)
@@ -146,6 +148,7 @@ export default {
   },
   methods: {
     ...mapActions({
+      showTooltip: "tooltips/show",
       addNewWork: "works/add",
       updateNewWork: "works/update",
     }),
@@ -177,14 +180,24 @@ export default {
       if ((await this.$validate()) === false) return;
 
       if(this.newWork.id){
-          await this.updateNewWork(this.newWork)               //обновить
+        await this.updateNewWork(this.newWork)               //обновить
 
         let test = await this.updateNewWork(this.newWork);
         if(test == 1){  //закрыть окно при успешном редактировании
+          this.showTooltip({
+            text: 'Успешное редактирование работы',
+            type: "success"
+          });
           this.$emit('close');
         }
-      } else{
+      } else {
         await this.addNewWork(this.newWork);                   //создать
+        // console.log('Успешное создание новой работы');
+        this.showTooltip({
+          text: 'Успешное создание новой работы',
+          type: "success"
+        });
+        this.$emit('close');
       }
     },
     handleChange(event) {
@@ -207,9 +220,17 @@ export default {
       };
         reader.onerror = () => { //произошла ошибка
           // надо уведомить пользователя при помощи tooltip
+          this.showTooltip({
+            text: 'произошла ошибка',
+            type: "error"
+          });
         };
         reader.onabort = () => { //не успели дож-ся пока ф-л будет обработан и начали загружать нов ф-л
           // надо уведомить пользователя при помощи tooltip
+          this.showTooltip({
+            text: 'произошла ошибка',
+            type: "error"
+          });
         }
     },
   },

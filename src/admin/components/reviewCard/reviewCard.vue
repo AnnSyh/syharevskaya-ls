@@ -55,6 +55,7 @@ export default {
 
   methods: {
     ...mapActions({
+      showTooltip: "tooltips/show",
       removeReviewAction: "reviews/remove",
       createReviewAction: "reviews/create",
       updateReviewAction: "reviews/update",
@@ -62,6 +63,11 @@ export default {
     removeReview(){
       if (this.review){
         this.removeReviewAction(this.review.id);
+        // console.log('Успешное удаление отзыва');
+        this.showTooltip({
+          text: 'Успешное удаление отзыва',
+          type: "error"
+        });
       } else {
         this.$emit('remove');
       }

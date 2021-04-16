@@ -54,6 +54,7 @@ export default {
 
   methods: {
     ...mapActions({
+      showTooltip: "tooltips/show",
       removeWorkAction: "works/remove",
       createWorkAction: "works/create",
       updateWorkAction: "works/update",
@@ -61,6 +62,11 @@ export default {
     removeWork(){
       if (this.work){
         this.removeWorkAction(this.work.id);
+        // console.log('Успешное удаление работы');
+        this.showTooltip({
+          text: 'Успешное удаление работы',
+          type: "error"
+        });
       } else {
         this.$emit('remove');
       }
