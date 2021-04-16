@@ -114,7 +114,7 @@ new Vue({
         },
 
         async fetch(){
-            const { data } = await axios.get('https://webdev-api.loftschool.com/works/174');
+            const { data } = await axios.get('https://webdev-api.loftschool.com/works/453');
 
             this.works = data.map(work =>{
                 work.photo = `https://webdev-api.loftschool.com/${work.photo}`;
