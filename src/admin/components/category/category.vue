@@ -86,6 +86,7 @@ export default {
   },
   methods:{
     ...mapActions({
+      showTooltip: "tooltips/show",
       removeCategoryAction: "categories/remove",
       createCategoryAction: "categories/create",
       updateCategoryAction: "categories/update",
@@ -99,8 +100,18 @@ export default {
           id: this.category.id,
           title: value
         });
+        // console.log('Правка категории');
+        this.showTooltip({
+          text: 'Успешное изменение категории',
+          type: "success"
+        });
       } else {
       await this.createCategoryAction(value);
+      // console.log('Создание категории');
+        this.showTooltip({
+          text: 'Успешное создание категории',
+          type: "success"
+        });
       }
     this.$emit('remove');
     },
@@ -108,6 +119,11 @@ export default {
     removeCategory(){
         if (this.category){
           this.removeCategoryAction(this.category.id);
+          console.log('Удаление категории');
+          this.showTooltip({
+            text: 'Успешное удаление категории',
+            type: "error"
+          });
         } else {
           this.$emit('remove');
         }

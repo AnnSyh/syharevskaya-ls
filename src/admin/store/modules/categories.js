@@ -57,7 +57,7 @@ export default {
                 console.log('rootState.auth.user.id = ',rootState.auth.user.id);
                 const user_id = rootState.auth.user.id//получаю user id
 
-                // const { data } = await this.$axios.get("/categories/453");
+                // const { data } = await this.$axios.get("/categories/174");
                 const { data } = await this.$axios.get(`/categories/${user_id}`);
 
                 commit("SET_CATEGORIES", data)

@@ -2,7 +2,7 @@
   <section class="works-page-component container wrapper--white">
     <div class="page-content">
 <!--    <div class="container" v-if="categories.length">-->
-    <div class="container">
+    <div class="container" v-if="categories.length">
       <div class="header">
         <span class="header__title">Блок "{{this.$route.meta.name}}"</span>
 
@@ -42,9 +42,9 @@
         </li>
       </ul>
     </div>
-<!--    <div class="container" v-else>-->
-<!--      loading....-->
-<!--    </div>-->
+    <div class="container" v-else>
+      loading....
+    </div>
     </div>
   </section>
 </template>
@@ -78,6 +78,7 @@ export default {
   },
   methods:{
     ...mapActions({
+      showTooltip: "tooltips/show",
       createCategoryAction:"categories/create",
       fetchCategoriesAction: "categories/fetch",
       addSkillAction:"skills/add",
@@ -85,17 +86,25 @@ export default {
       editSkillAction:"skills/edit"
     }),
    async createSkill(skill,categoryId){
+      console.log('!!! createSkill')
       const newSkill = {
         ...skill,
         category:categoryId
       }
       await this.addSkillAction(newSkill);
-
+      this.showTooltip({
+         text: "Успешное создание скилла!",
+         type: "success"
+       })
       skill.title="",
       skill.percent=""
     },
     removeSkill(skill){
       this.removeSkillAction(skill);
+      this.showTooltip({
+        text: "Успешное удаление скилла!",
+        type: "error"
+      })
     },
     async editSkill(skill){
       await this.editSkillAction(skill);
@@ -106,7 +115,11 @@ export default {
       try {
         await this.createCategoryAction(categoryTitle)
         this.emptyCardIsShown = false;
-      } catch (error){
+      } catch (error) {
+        this.showTooltip({
+          text: error.response.data.error,
+          type: "error"
+        })
         console.log(error.message)
       }
     },
