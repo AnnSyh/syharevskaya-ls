@@ -44,19 +44,17 @@ script(type="text/x-template")#preview-btns
             @click="$emit('slide','prev')"
             ).works-slider__btn.works-slider__btn_prev
 
+
+
 script(type="text/x-template")#preview-info
-    //pre {{currentWork.title}}
-    //pre {{currentWork.techs}}
-    //pre {{currentWork.description}}
-    //pre {{currentWork.link}}
     .works-slider__data
-        //tags(
-        //    :tags="tagsArray"
-        //    )
-        //.works-slider__tag {{tagsArray}}
-        ul.works-slider__tags
-            li.works-slider__tag-item(v-for="tag in tagsArray")
-                .tag {{tag}}
+        tags(
+            :tags="tagsArray"
+            )
+
+        //ul.works-slider__tags
+        //    li.works-slider__tag-item(v-for="tag in tagsArray")
+        //        .tag {{tag}}
 
         .works-slider__title {{currentWork.title}}
         .works-slider__desc
@@ -64,7 +62,7 @@ script(type="text/x-template")#preview-info
         .works-slider__link
             a(:href="currentWork.link").iconed-link Посмотреть сайт
 
-//script(type="text/x-template")#preview-tag
-//    ul.works-slider__tags 1111
-//        li.works-slider__tag-item(v-for="tag in tagsArray")
-//            .tag {{tag}}
+script(type="text/x-template")#preview-tag
+    ul.works-slider__tags
+        li.works-slider__tag-item(v-for="tag in tags")
+            .tag {{tag}}

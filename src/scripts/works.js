@@ -2,18 +2,19 @@ import Vue from "vue"
 import axios from "axios";
 import works from "../admin/pages/works";
 
+const tags = {
+    props:["tags"],
+    template:"#preview-tag",
+}
 
 const info = {
     props:["currentWork"],
     template:"#preview-info",
-    // components:{
-    //     tags:tags
-    // },
+    components:{
+        tags:tags
+    },
     computed:{
         tagsArray(){
-            // console.log('22222 tagsArray this.currentWork = ', this.currentWork);
-            // console.log('this.works.techs = ',this.currentWork.techs)
-            // console.log('**** = ',this.currentWork.techs.split(","))
             return this.currentWork.techs.split(",");
         }
     }
