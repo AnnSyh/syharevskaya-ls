@@ -45,8 +45,6 @@ export default {
                 formData.append(item, newReview[item]);
             });
 
-            console.log('reviews.js: 2newReview = ',newReview);
-
             // for(let entry of formData.entries()){ //выводданных в консоль
             //     console.log(entry);
             // }
@@ -70,32 +68,29 @@ export default {
         },
 
         async remove({ commit }, reviewId){
-            console.log('remove: reviewId = ',reviewId)
+            // console.log('remove: reviewId = ',reviewId)
             try {
                 await this.$axios.delete(`/reviews/${reviewId}`);
                 commit("REMOVE_REVIEWS", workId)
 
             } catch (error){
-                console.log('Ошибка remove review')
-                // throw new Error("Ошибка remove review")
+                // console.log('Ошибка remove review')
+                throw new Error("Ошибка remove review")
             }
         },
 
         async update({ commit },  payload) {
-            // console.log('reviews.js: update');
             const formData = new FormData();
             Object.keys(payload).forEach(item => {
                 formData.append(item, payload[item]);
             })
             try {
-                // console.log('reviews.js: actions: update = ', payload);
                 const { data } = await this.$axios.post(`/reviews/${payload.id}`,formData)
-                // console.log('before commit result.data = ',result.data)
                 commit("UPDATE_REVIEWS", data);
                 // console.log('after commit  status = ',result.data.status);
                 if(data.status === 1){
                     console.log('data.status === 1');
-
+                    return  data.status
                 }
 
             } catch (error) {

@@ -162,9 +162,14 @@ export default {
       if(this.newReview.id){
         console.log('this.newReview.id = ',this.newReview.id)
         await this.updateNewReview(this.newReview);
-        console.log('after updateNewReview')
-         //this.emptyCardIsShown =  закрыть окнопри успешном редактировании
-        this.emptyCardIsShown = false;
+
+        let test = await this.updateNewReview(this.newReview);
+
+        if(test == 1){  console.log('test = ',test); //закрыть окно при успешном редактировании
+          this.$emit('close');
+        }
+
+
       } else {
         console.log('!!! else this.newReview.id = ',this.newReview)
         await this.addNewReview(this.newReview);

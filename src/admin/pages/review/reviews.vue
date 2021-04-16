@@ -33,7 +33,7 @@
               />
             </li>
           </ul>
-          <pre>{{reviews}}</pre>
+<!--          <pre>{{reviews}}</pre>-->
         </div>
       </div>
     </div>
