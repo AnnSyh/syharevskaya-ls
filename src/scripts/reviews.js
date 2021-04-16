@@ -61,7 +61,7 @@ new Vue({
         },
 
         async fetch(){
-            const {data} = await axios.get('https://webdev-api.loftschool.com/reviews/453');
+            const {data} = await axios.get("https://webdev-api.loftschool.com/reviews/453");
 
             this.reviews = data.map(review =>{
                 review.photo = `https://webdev-api.loftschool.com/${review.photo}`;

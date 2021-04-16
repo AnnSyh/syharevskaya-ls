@@ -1,5 +1,6 @@
 <template>
-  <section class="about">
+  <section class="works-page-component container wrapper--white">
+    <div class="page-content">
 <!--    <div class="container" v-if="categories.length">-->
     <div class="container">
       <div class="header">
@@ -44,6 +45,7 @@
 <!--    <div class="container" v-else>-->
 <!--      loading....-->
 <!--    </div>-->
+    </div>
   </section>
 </template>
 

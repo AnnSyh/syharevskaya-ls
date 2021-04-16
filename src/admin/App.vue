@@ -3,8 +3,8 @@
 
     <div :class="{'wrapper--dark':this.$route.path === '/login'}">
 
-    <router-view name="header"/>
-    <router-view name="navigation"/>
+      <router-view name="header"/>
+      <router-view name="navigation"/>
 
     <div>
       <router-view/>
