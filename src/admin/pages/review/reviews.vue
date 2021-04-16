@@ -1,5 +1,5 @@
 <template>
-  <section class="works-page-component container">
+  <section class="works-page-component container wrapper--white">
     <div class="page-content">
       <div class="container">
         <div class="header  page-header">
