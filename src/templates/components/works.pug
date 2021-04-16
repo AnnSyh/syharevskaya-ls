@@ -50,16 +50,21 @@ script(type="text/x-template")#preview-info
     //pre {{currentWork.description}}
     //pre {{currentWork.link}}
     .works-slider__data
-        tags(
-            :tags="tagsArray"
-            )
+        //tags(
+        //    :tags="tagsArray"
+        //    )
+        //.works-slider__tag {{tagsArray}}
+        ul.works-slider__tags
+            li.works-slider__tag-item(v-for="tag in tagsArray")
+                .tag {{tag}}
+
         .works-slider__title {{currentWork.title}}
         .works-slider__desc
             p {{currentWork.description}}
         .works-slider__link
             a(:href="currentWork.link").iconed-link Посмотреть сайт
 
-script(type="text/x-template")#preview-tag
-    ul.works-slider__tags 1111
-        li.works-slider__tag-item(v-for="tag in tags")
-            .tag {{tag}}
+//script(type="text/x-template")#preview-tag
+//    ul.works-slider__tags 1111
+//        li.works-slider__tag-item(v-for="tag in tagsArray")
+//            .tag {{tag}}
