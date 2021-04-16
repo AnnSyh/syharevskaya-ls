@@ -10,7 +10,6 @@ export default {
         SET_REVIEWS(state, review) {
             state.data = review
         },
-
         REMOVE_REVIEWS: (state, reviewId) => {
             state.data = state.data.filter(review => {
                 return  review.id !== reviewId
@@ -24,20 +23,12 @@ export default {
                     if(data.id === payload.review.id){
                         // console.log('!!! if');
                         // console.log('приравниваем data', data);
-                        console.log('то что пришло  payload.review', payload.review);
-                        console.log('author before:         data.author = ',data.author);
-                        console.log('photo before:           data.photo = ',data.photo);
-                        console.log('photo before: payload.review.photo = ', payload.review.photo);
-                        console.log('photo before: payload.review.preview = ', payload.review.preview);
 
                         data.author = payload.review.author;
                         data.occ = payload.review.occ;
                         data.photo = payload.review.photo;
                         data.text = payload.review.text;
 
-                        console.log('author before:        data.author = ',data.author);
-                        console.log('photo after:           data.photo = ',data.photo);
-                        console.log('photo after: payload.review.photo = ', payload.review.photo);
                     }
                     return data
                 })
@@ -92,14 +83,18 @@ export default {
 
         async update({ commit },  payload) {
             // console.log('reviews.js: update');
+            const formData = new FormData();
+            Object.keys(payload).forEach(item => {
+                formData.append(item, payload[item]);
+            })
             try {
-                console.log('reviews.js: actions: update = ', payload);
-                const result = await this.$axios.post(`/reviews/${payload.id}`,payload)
-                console.log('before commit result.data = ',result.data)
-                commit("UPDATE_REVIEWS", result.data);
-                console.log('after commit  status = ',result.data.status);
-                if(result.data.status === 1){
-                    console.log('result.data.status === 1');
+                // console.log('reviews.js: actions: update = ', payload);
+                const { data } = await this.$axios.post(`/reviews/${payload.id}`,formData)
+                // console.log('before commit result.data = ',result.data)
+                commit("UPDATE_REVIEWS", data);
+                // console.log('after commit  status = ',result.data.status);
+                if(data.status === 1){
+                    console.log('data.status === 1');
 
                 }
 
