@@ -87,12 +87,9 @@ export default {
             try {
                 const { data } = await this.$axios.post(`/reviews/${payload.id}`,formData)
                 commit("UPDATE_REVIEWS", data);
-                // console.log('after commit  status = ',result.data.status);
                 if(data.status === 1){
-                    console.log('data.status === 1');
                     return  data.status
                 }
-
             } catch (error) {
                 throw new Error("reviews.js update произошла ошибка");
             }

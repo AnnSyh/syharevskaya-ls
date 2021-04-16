@@ -91,12 +91,11 @@ export default {
       }
     },
     editHandler(work){
-      console.log('editHandler')
         this.currentWork = {...work}
         this.emptyCardIsShown = true;
     },
     closeHandler(){
-      console.log('here');
+      // console.log('here');
       this.emptyCardIsShown = false
     }
 

@@ -166,11 +166,10 @@ export default {
         let test = await this.updateNewReview(this.newReview);
 
         if(test == 1){  //закрыть окно при успешном редактировании
-          console.log('test = ',test);
           this.$emit('close');
         }
       } else {
-        console.log('!!! else this.newReview.id = ',this.newReview)
+        // console.log('!!! else this.newReview.id = ',this.newReview)
         await this.addNewReview(this.newReview);
       }
     },
