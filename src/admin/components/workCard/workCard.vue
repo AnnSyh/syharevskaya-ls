@@ -65,6 +65,11 @@ export default {
         this.$emit('remove');
       }
     },
+    // watch:{
+    //   img(){
+    //     this.img = this.img
+    //   }
+    // }
 
   },
 };

@@ -27,11 +27,18 @@ export default {
                 if(data.id === payload.work.id){
                     console.log('if', data.id, payload.work.id);
 
+                    console.log('before data.photo = ', data.photo);
+                    console.log('before payload.preview = ', payload.preview);
+
                     data.title = payload.work.title;
                     data.techs = payload.work.techs;
                     data.photo = payload.work.photo;
                     data.link = payload.work.link;
                     data.description = payload.work.description;
+
+
+                    console.log('after data.photo = ', data.photo);
+                    console.log('before payload.preview = ', payload.preview);
                 }
                 return data
             })
@@ -85,12 +92,21 @@ export default {
 
         async update({ commit },  payload) {
             // console.log('works.js: update');
+            const formData = new FormData();
+
+            Object.keys(payload).forEach(item => {
+                formData.append(item, payload[item]);
+            })
+
+
             try {
-                console.log('works.js: actions: update = ', payload);
-                const result = await this.$axios.post(`/works/${payload.id}`,payload)
-                console.log('works.js: before commit result.data = ',result.data)
-                commit("UPDATE_WORKS", result.data);
-                console.log('works.js: after commit  status = ',result.data.status);
+                console.log('works.js: actions: update = ', formData);
+                const { data } = await this.$axios.post(`/works/${payload.id}`,formData)
+                console.log('works.js: before commit result.data = ',data)
+                // commit("UPDATE_WORKS", result.data);
+                commit("UPDATE_WORKS", data);
+
+                console.log('works.js: after commit  status = ',data.status);
 
             } catch (error) {
                 throw new Error("works.js update произошла ошибка");
