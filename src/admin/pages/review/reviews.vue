@@ -83,8 +83,6 @@ export default {
       if(this.reviews.status == 1){
         this.emptyCardIsShown = false
       }
-
-
     },
     editHandler(review){
       // console.log('editHandler review = ',review);

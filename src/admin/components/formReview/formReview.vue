@@ -156,20 +156,19 @@ export default {
     },
 
     async handleSubmit(value) {
-      console.log('! submit form handleSubmit');
+      // console.log('! submit form handleSubmit');
       if ((await this.$validate()) === false) return;
 
       if(this.newReview.id){
-        console.log('this.newReview.id = ',this.newReview.id)
+        // console.log('this.newReview.id = ',this.newReview.id)
         await this.updateNewReview(this.newReview);
 
         let test = await this.updateNewReview(this.newReview);
 
-        if(test == 1){  console.log('test = ',test); //закрыть окно при успешном редактировании
+        if(test == 1){  //закрыть окно при успешном редактировании
+          console.log('test = ',test);
           this.$emit('close');
         }
-
-
       } else {
         console.log('!!! else this.newReview.id = ',this.newReview)
         await this.addNewReview(this.newReview);

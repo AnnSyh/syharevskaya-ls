@@ -11,6 +11,7 @@
               <app-form class="form"
                         :currentWork="currentWork"
                         @close="closeHandler"
+                        @click="handleClick"
               />
             </li>
             <li v-else class="empty-work">
@@ -82,6 +83,13 @@ export default {
     ...mapActions({
       fetchWorks: "works/fetch",
     }),
+    handleClick(){
+      console.log('handleClick',this.emptyCardIsShown);
+      // console.log('this.reviews.status',this.reviews.status)
+      if(this.works.status == 1){
+        this.emptyCardIsShown = false
+      }
+    },
     editHandler(work){
       console.log('editHandler')
         this.currentWork = {...work}

@@ -93,6 +93,10 @@ export default {
                 // console.log('works.js: before commit result.data = ',data)
                 commit("UPDATE_WORKS", data);
                 // console.log('works.js: after commit  status = ',data.status);
+                if(data.status === 1){
+                    console.log('woks: data.status === 1');
+                    return  data.status
+                }
             } catch (error) {
                 throw new Error("works.js update произошла ошибка");
             }

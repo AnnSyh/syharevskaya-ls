@@ -175,8 +175,17 @@ export default {
     async handleSubmit() {
       console.log('!!! submit form this.newWork = ',this.newWork);
       if ((await this.$validate()) === false) return;
-      if(this.newWork.id){
-          await this.updateNewWork(this.newWork)               //обновить см skill
+
+      if(this.newWork.id){ console.log('!!! if')
+          await this.updateNewWork(this.newWork)               //обновить
+
+        let test = await this.updateNewWork(this.newWork);
+        console.log('test = ',test)
+
+        if(test == 1){  //закрыть окно при успешном редактировании
+          console.log('test = ',test);
+          this.$emit('close');
+        }
       } else{
         await this.addNewWork(this.newWork);                   //создать
       }
