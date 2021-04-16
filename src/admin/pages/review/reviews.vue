@@ -5,43 +5,47 @@
         <div class="header  page-header">
           <h1 class="header__title page-title">Блок "{{this.$route.meta.name}}"</h1>
         </div>
-<!--          <pre>{{works}}</pre>-->
+        <div class="form-component">
+
           <ul class="works-cards">
             <li v-if="emptyCardIsShown" class="li-form">
-              <app-form class="form"
-                        :currentWork="currentWork"
-                        @close="closeHandler"
-                        @click="handleClick"
+              <form-review class="form"
+                           :currentReview="currentReview"
+                           @close="closeHandler"
+                           @click="handleClick"
               />
             </li>
             <li v-else class="empty-work">
               <square-btn
-                  type="square"
                   v-if="emptyCardIsShown == false"
+                  type="square"
+                  title="Добавить отзыв"
                   @click="emptyCardIsShown = true"
-                  title="Добавить работу"/>
+              />
             </li>
-            <li class="item" v-for="work in works"
-                :key="work.id"
+            <li class="item" v-for="review in reviews"
+                :key="review.id"
                 :emptyCardIsShown="emptyCardIsShown"
             >
-              <work-card
-                  :work="work"
+              <review-card
+                  :review="review"
                   @edit="editHandler"
               />
             </li>
           </ul>
+<!--          <pre>{{reviews}}</pre>-->
         </div>
       </div>
+    </div>
 
   </section>
 </template>
 
 <script>
-import tagsAdder      from "../../components/tagsAdder/tagsAdder";
-import tag            from "../../components/tag/tag";
-import appForm        from "../../components/form";
-import workCard       from "../../components/workCard";
+
+
+import formReview from "../../components/formReview/formReview";
+import reviewCard       from "../../components/reviewCard";
 import { mapState, mapActions } from "vuex";
 
 import card from "../../components/card";
@@ -49,50 +53,41 @@ import icon from "../../components/icon";
 import iconedBtn from "../../components/button/button";
 import squareBtn from "../../components/button/button";
 
-
 export default {
-  components: {
-    tagsAdder,
-    tag,
-    appForm,
-    workCard,
+  components:{
+    formReview,
+    reviewCard,
     card,
     icon,
     iconedBtn, squareBtn,
   },
-  props: {
-    tags:{
-      type: String,
-      default: ""
-    }
-  },
   data() {
     return {
       emptyCardIsShown:false,
-      categories:[],
-      currentWork:null
+      currentReview:null
     }
 
   },
   computed: {
-    ...mapState("works", {
-      works: (state) => state.data,
+    ...mapState("reviews", {
+      reviews: (state) => state.data,
     }),
   },
   methods: {
     ...mapActions({
-      fetchWorks: "works/fetch",
+      fetchReviews: 'reviews/fetch',
     }),
     handleClick(){
       console.log('handleClick',this.emptyCardIsShown);
       // console.log('this.reviews.status',this.reviews.status)
-      if(this.works.status == 1){
+      if(this.reviews.status == 1){
         this.emptyCardIsShown = false
       }
     },
-    editHandler(work){
-        this.currentWork = {...work}
-        this.emptyCardIsShown = true;
+    editHandler(review){
+      // console.log('editHandler review = ',review);
+      this.currentReview = {...review}
+      this.emptyCardIsShown = true;
     },
     closeHandler(){
       // console.log('here');
@@ -103,25 +98,21 @@ export default {
   watch: {
     emptyCardIsShown(){
       if(!this.emptyCardIsShown){
-        this.currentWork = null
+        this.currentReview = null
       }
     }
   },
-
   mounted() {
-    this.fetchWorks();
+    this.fetchReviews();
   },
   created() {
-    console.log('this.fetchWorks() = ', this.fetchWorks())
-    this.fetchWorks();
-  },
-  model:{
-    prop:"tags",
-    event:"change"
+    // console.log('!!! created() this.fetchReviews() = ', this.fetchReviews())
+    this.fetchReviews();
   },
 }
 </script>
-<style lang="postcss" src="./works.pcss" scoped>
+<!--<style lang="postcss" src="../../components/card/card.pcss" scoped>-->
+<!--</style>-->
+<style lang="postcss" src="./review.pcss" scoped>
 </style>
-
 

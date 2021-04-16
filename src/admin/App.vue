@@ -6,7 +6,7 @@
     <router-view name="header"/>
     <router-view name="navigation"/>
 
-    <div >
+    <div>
       <router-view/>
     </div>
 

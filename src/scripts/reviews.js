@@ -2,7 +2,7 @@ import Vue from "vue"
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import "swiper/swiper-bundle.css"
 import axios from "axios";
-import reviews from "../admin/pages/reviews";
+import reviews from "../admin/pages/review/reviews";
 
 
 new Vue({

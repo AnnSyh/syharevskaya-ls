@@ -1,6 +1,6 @@
 <template>
   <div class="card-component card_plain" v-if="simple">
-    <slot name="default"></slot>
+    <slot name="default">simple</slot>
   </div>
   <div :class="['card-component', { slim: slim }]" v-else>
     <div class="header">

@@ -14,8 +14,14 @@
         </div>
         <a :href="work.link" class="link">{{work.link}}</a>
         <div class="btns">
-          <icon symbol="pencil" title="Править"></icon>
-          <icon symbol="cross" title="Удалить"></icon>
+<!--          <p>emptyCardIsShown = {{emptyCardIsShown}}</p>-->
+<!--          @keydown.enter="editWork"-->
+          <icon symbol="pencil" title="Править"
+                @click="$emit('edit', work)"
+          ></icon>
+          <icon symbol="cross" title="Удалить"
+                @click="removeWork"
+          ></icon>
         </div>
       </div>
     </div>
@@ -26,17 +32,45 @@
 import card from "../card";
 import icon from "../icon";
 import tagsList from "../tagsList";
+import {mapActions, mapState} from "vuex"
 
 
 export default {
   components: { card, icon, tagsList },
   props: {
     work: Object,
+    emptyCardIsShown: {
+      type: Boolean
+    },
   },
   computed: {
+    ...mapState('works',{
+      works: state => state.data
+    }),
     cover() {
       return `https://webdev-api.loftschool.com/${this.work.photo}`
-    }
+    },
+  },
+
+  methods: {
+    ...mapActions({
+      removeWorkAction: "works/remove",
+      createWorkAction: "works/create",
+      updateWorkAction: "works/update",
+    }),
+    removeWork(){
+      if (this.work){
+        this.removeWorkAction(this.work.id);
+      } else {
+        this.$emit('remove');
+      }
+    },
+    // watch:{
+    //   img(){
+    //     this.img = this.img
+    //   }
+    // }
+
   },
 };
 </script>

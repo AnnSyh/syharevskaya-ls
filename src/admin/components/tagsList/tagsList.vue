@@ -1,6 +1,7 @@
 <template>
   <ul class="tags-list-component">
-    <li class="item" v-for="tag in tagsArray" :key="tag">
+<!--    <pre>{{tagsArray}}</pre>-->
+    <li class="item" v-for="tag in tagsArray" :key="tag.id">
       <tag :title="tag"/>
     </li>
   </ul>

@@ -1,17 +1,3 @@
-.pic {
-    position: relative;
-    height: 190px;
-
-    img {
-        margin: auto;
-    }
-
-    .tag {
-        position: absolute;
-        bottom: 0;
-        right: 16px;
-    }
-}
 
 .data {
     padding: 34px 26px 44px;
@@ -27,8 +13,7 @@
         color: rgba($text-color, 0.5);
         line-height: 30px;
         margin-bottom:  26px;
-        //height: 150px;
-        height: calc(100% - 45px);
+        height: 150px;
         overflow: hidden;
     }
     .link {
@@ -47,3 +32,36 @@
         justify-content: space-between;
     }
 }
+
+.user-component {
+    color: $text-color;
+}
+.card-component {
+    min-height: 200px;
+}
+.card-component.card_plain{
+    padding: 1rem !important;
+}
+
+.card-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0 0 10px 0;
+}
+
+.review-wrapper {
+    height: 100%;
+}
+.data {
+    padding: 0px;
+    height: calc(100% - 61px);
+
+    .text {
+        font-size: 1rem;
+        overflow: hidden;
+        height: calc(100% - 45px);
+    }
+}
+.icon-component:before {
+    margin-right: 5px;
+}
+

@@ -57,6 +57,7 @@ new Vue({
             works: [],
             // currentIndex: 0,
             currentIndex: {
+                "index":0,
                 "id": 1,
                 "title": "Пока у вас еще нет загруженных работ",
                 "techs": "",
@@ -85,8 +86,8 @@ new Vue({
     methods: {
         makeInfiniteLoopForNdx(index){
             const  worksNumber = this.works.length - 1;
-            if (index < 0) this.currentIndex = worksNumber;
-            if (index > worksNumber) this.currentIndex = 0;
+            if (index < 0) this.currentIndex.index = worksNumber;
+            if (index > worksNumber) this.currentIndex.index = 0;
         },
         requireImagesToArray(data) {
             return data.map((item) => {
@@ -102,12 +103,12 @@ new Vue({
                 case "next":
                     this.works.push(this.works[0]);
                     this.works.shift();
-                    this.currentIndex++
+                    this.currentIndex.index++
                     break;
                 case "prev":
                     this.works.unshift(lastItem);
                     this.works.pop();
-                    this.currentIndex--
+                    this.currentIndex.index--
                     break;
             }
         },

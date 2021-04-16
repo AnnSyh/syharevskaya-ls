@@ -47,6 +47,11 @@ export default {
       currentTags: this.tags
     }
   },
+  watch:{
+    tags(){
+      this.currentTags = this.tags
+    }
+  },
   computed:{
     tagsArray(){
       return this.currentTags.trim().split(",");
