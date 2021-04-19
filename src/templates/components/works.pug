@@ -24,14 +24,21 @@ script(type="text/x-template")#preview-display
                 )
 
 script(type="text/x-template")#preview-thumbs
-    ul.works-slider__thumbs
-        //pre {{works}}
-        li.works-slider__thumb-item(
-            v-for="slide in works" :key="slide.id"
-            :class="{active: currentWork.id === slide.id}"
-            )
-            button.works-slider__thumb-link
-                img(:src="slide.photo").works-slider__thumb
+    .works-slider__thumbs
+        transition-group(
+            tag="ul"
+            :css="false"
+
+            @enter="enterCb"
+            @after-enter="afterCb"
+
+
+        ).list
+            li.works-slider__thumb-item(
+                v-for="slide in spliceSlides" :key="slide.id"
+                )
+                button.works-slider__thumb-link
+                    img(:src="slide.photo").works-slider__thumb
 
 script(type="text/x-template")#preview-btns
     .works-slider__buttons
@@ -42,6 +49,7 @@ script(type="text/x-template")#preview-btns
         button(
             type="button"
             @click="$emit('slide','prev')"
+            :disabled="disabled"
             ).works-slider__btn.works-slider__btn_prev
 
 

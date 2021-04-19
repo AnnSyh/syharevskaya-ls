@@ -54,11 +54,7 @@ export default {
 
 
             try {
-                console.log('rootState.auth.user.id = ',rootState.auth.user.id);
-                const user_id = rootState.auth.user.id//получаю user id
-
-                // const { data } = await this.$axios.get("/categories/174");
-                const { data } = await this.$axios.get(`/categories/${user_id}`);
+                const { data } = await this.$axios.get(`/categories/453`);
 
                 commit("SET_CATEGORIES", data)
             } catch (error) {

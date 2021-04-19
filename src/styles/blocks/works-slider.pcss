@@ -1,3 +1,12 @@
+//.outsided { border: 1px solid red;
+//  position: absolute;
+//  bottom: 100%;
+//}
+.outsided{
+  position: absolute;
+  top: -100px;
+}
+
 .works-slider {
   display: flex;
   justify-content: space-between;
@@ -71,10 +80,16 @@
 }
 
 .works-slider__thumbs {
+  overflow: hidden;
   position: absolute;
+
   right: 0;
+  top:0;
+  height: 100%;
+
   bottom: 0;
-  width: 178px;
+  width: 184px;
+  padding: 3px;
 
 
   @include phones {
@@ -82,14 +97,22 @@
   }
 }
 
+.fade {
+  transition: 1s;
+  opacity: 0;
+}
+
 .works-slider__thumb-item {
   height: 100px;
-  transition: .2s;
 
   &.active,
   &:hover {
     outline: 3px solid #f29400;
   }
+}
+
+.transition {
+  transition: 1s;
 }
 
 .works-slider__thumb {

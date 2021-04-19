@@ -71,22 +71,22 @@ export default {
       // console.log('!!!submit', this.user.name, this.user.password)
 
       if ((await this.$validate()) === false) return;
-
       this.isSubmitDisabled = true;
 
        try {
          const response = await this.$axios.post("/login", this.user);
+         // console.log('login1: response = ',response);
 
          const token = response.data.token;
-         this.$axios.defaults.headers["Authorization"] = `Bearer ${token}`;
          localStorage.setItem("token", token);//сохрнаили token в localStorage
-          this.getUser();
+         this.$axios.defaults.headers["Authorization"] = `Bearer ${token}`;
+          await this.getUser();
 
           const userResponse = await this.$axios.get("/user");
-          this.login(userResponse.data.user);
+          await this.login(userResponse.data.user);
 
-         console.log('response = ',response);
-         this.$router.replace("/");
+         console.log('login2: response = ',response);
+         await this.$router.replace('/');
 
        }  catch(error) {
           this.showTooltip({

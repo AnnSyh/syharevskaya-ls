@@ -72,7 +72,7 @@ router.beforeEach(async (to,from,next) => {
             store.dispatch("user/login", await response.data.user)
             next();
         } catch (error) {
-            router.replace("/login");
+            await router.replace("/login");
             localStorage.removeItem("token");
         }
     } else {

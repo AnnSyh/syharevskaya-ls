@@ -22,10 +22,49 @@ const info = {
 
 const btns = {
     template:"#preview-btns",
+    data(){
+        return {
+            disabled: false
+        }
+    },
 }
 const thumbs = {
     props:["works","currentWork"],
     template:"#preview-thumbs",
+    computed:{
+        spliceSlides(){
+            // console.log("!!!slicedSlides!!")
+           return [...this.works].splice(0,3);
+        }
+    },
+    methods:{
+        beforeCb(el,done){
+            this.disabled=true;
+        },
+        enterCb(el,done){
+            const list = el.closest("ul");
+
+            el.classList.add("outsided");
+            list.classList.add("transition");
+            list.style.transform = "translateY(100px)";
+
+            list.addEventListener("transitionend", e => done());
+        },
+        afterCb(el){
+            const list = el.closest("ul");
+
+            list.classList.remove("transition");
+            list.style.transform = "translateY(0px)";
+            el.classList.remove("outsided");
+            this.disabled=false;
+        },
+        leaveCb(el, done){
+            el.classList.add("fade");
+            el.addEventListener("transitionend", e => done());
+        }
+    },
+
+
 }
 
 const display = {
@@ -37,10 +76,12 @@ const display = {
     },
     computed:{
         reversedWorks(){
+            // console.log("!!!reversedWorks!!")
             const works = [...this.works];
             return works.slice(0,3).reverse();
         }
-    }
+    },
+
 };
 
 new Vue({
@@ -54,6 +95,7 @@ new Vue({
         return {
             works: [],
             tags: [],
+            disabled:false,
             // currentIndex: 0,
             currentIndex: {
                 "index":0,
@@ -73,6 +115,9 @@ new Vue({
         //     this.works = this.requireImagesToArray(data);
     },
     computed: {
+        slicedSliders(){
+            return[...this.works].splice(0,3);
+        },
         currentWork(){
             return this.works[0];
         }
@@ -95,6 +140,7 @@ new Vue({
                 return item;
             });
         },
+
         slide(direction){
             const lastItem = this.works[this.works.length - 1]
             switch (direction){
