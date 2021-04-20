@@ -59,23 +59,29 @@ const guard = axios.create({
 
 router.beforeEach(async (to,from,next) => {
     const isPublicRoute = to.matched.some(route => route.meta.public);
-    const isUserLoggedIn = store.getters["user/userIsLoggedIn"];
+    const isUserLoggedIn = store.getters["auth/userIsLoggedIn"];
 
-    next();
+    console.log('isPublicRoute = ',isPublicRoute);
+    console.log('isUserLoggedIn = ',isUserLoggedIn);
 
     if (isPublicRoute === false && isUserLoggedIn === false) {
+        console.log('!!!!- if')
         const token = localStorage.getItem("token");
         guard.defaults.headers["Authorization"] = `Bearer ${token}`;
 
         try {
             const response = await guard.get("/user");
-            store.dispatch("user/login", await response.data.user)
+            store.dispatch("user/login", await response.data.user);
+            console.log('response.data.user = ',response.data.user)
+
             next();
         } catch (error) {
+            console.log('catch');
             await router.replace("/login");
             localStorage.removeItem("token");
         }
     } else {
+        console.log('next');
         next();
     }
 });

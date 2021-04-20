@@ -3,7 +3,7 @@
 
     <div :class="{'wrapper--dark':this.$route.path === '/login'}">
 
-      <router-view name="header"/>
+      <router-view name="header" @logout="logout"/>
       <router-view name="navigation"/>
 
     <div>
@@ -59,8 +59,13 @@ export default {
   },
   methods: {
     ...mapActions({
-      hideTooltip: "tooltips/hide"
-    })
+      hideTooltip: "tooltips/hide",
+      logoutAction: 'auth/logout',
+    }),
+    async logout() {
+      await this.logoutAction();
+      this.$router.replace('/login');
+    }
   },
   computed: {
     ...mapState("tooltips", {

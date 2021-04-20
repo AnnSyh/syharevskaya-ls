@@ -17,7 +17,7 @@
 <!--          <p>emptyCardIsShown = {{emptyCardIsShown}}</p>-->
 <!--          @keydown.enter="editWork"-->
           <icon symbol="pencil" title="Править"
-                @click="$emit('edit', work)"
+                @click="$emit('edit', currentWork)"
           ></icon>
           <icon symbol="cross" title="Удалить"
                 @click="removeWork"
@@ -42,6 +42,18 @@ export default {
     emptyCardIsShown: {
       type: Boolean
     },
+  },
+  data() {
+    return {
+      currentWork: {
+        id: this.work.id,
+        title: this.work.title,
+        description: this.work.description,
+        link: this.work.link,
+        techs: this.work.techs,
+        preview: `https://webdev-api.loftschool.com/${this.work.photo}`
+      }
+    }
   },
   computed: {
     ...mapState('works',{

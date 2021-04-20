@@ -65,7 +65,6 @@ export default {
     ...mapActions({
       showTooltip: "tooltips/show",
       getUser: "auth/login",
-      login:"user/login"
     }),
     async handleSubmit() {
       // console.log('!!!submit', this.user.name, this.user.password)
@@ -82,11 +81,11 @@ export default {
          this.$axios.defaults.headers["Authorization"] = `Bearer ${token}`;
           await this.getUser();
 
-          const userResponse = await this.$axios.get("/user");
-          await this.login(userResponse.data.user);
+          // const userResponse = await this.$axios.get("/user");
+          // await this.login(userResponse.data.user);
 
-         console.log('login2: response = ',response);
-         await this.$router.replace('/');
+         // console.log('login2: response = ',response);
+         this.$router.replace('/');
 
        }  catch(error) {
           this.showTooltip({

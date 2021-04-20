@@ -1,6 +1,8 @@
 <template>
     <headline v-if="this.$route.path !== '/login'"
-              title="Панель администрирования">
+              title="Панель администрирования"
+              @logout="$emit('logout')"
+    >
       <user
           title="Анна Сухаревская"
           src="https://cdn1.ozone.ru/s3/multimedia-4/wc1200/6017928400.jpg"

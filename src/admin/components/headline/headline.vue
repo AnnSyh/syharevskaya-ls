@@ -21,9 +21,12 @@ import { mapActions } from "vuex";
       default: "Панель администрирования"
     },
     methods:{
-      ...mapActions({
-        logout: "user/logout"
-      }),
+      logout() {
+        this.$emit('logout');
+      }
+      // ...mapActions({
+      //   logout: "user/logout"
+      // }),
     }
   }
 </script>

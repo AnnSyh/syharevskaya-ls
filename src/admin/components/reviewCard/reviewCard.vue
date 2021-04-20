@@ -14,7 +14,7 @@
         </div>
         <div class="btns">
           <icon symbol="pencil" title="Править"
-                @click="$emit('edit', review)"
+                @click="$emit('edit', currentReview)"
           ></icon>
           <icon symbol="cross" title="Удалить"
                 @click="removeReview"
@@ -43,6 +43,17 @@ export default {
     emptyCardIsShown: {
       type: Boolean
     },
+  },
+  data() {
+    return {
+      currentReview: {
+        id: this.review.id,
+        author: this.review.author,
+        occ: this.review.occ,
+        text: this.review.text,
+        preview: `https://webdev-api.loftschool.com/${this.review.photo}`
+      }
+    }
   },
   computed: {
     ...mapState('reviews',{
