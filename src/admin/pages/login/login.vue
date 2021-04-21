@@ -64,7 +64,7 @@ export default {
   methods: {
     ...mapActions({
       showTooltip: "tooltips/show",
-      getUser: "auth/login",
+      getUser: "user/login",
     }),
     async handleSubmit() {
       // console.log('!!!submit', this.user.name, this.user.password)

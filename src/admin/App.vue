@@ -40,7 +40,7 @@ export default {
   methods: {
     ...mapActions({
       hideTooltip: "tooltips/hide",
-      logoutAction: 'auth/logout',
+      logoutAction: 'user/logout',
     }),
     async logout() {
       await this.logoutAction();

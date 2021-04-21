@@ -3,92 +3,75 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-import siteHeader from "../components/siteHeader";
-import navigation from "../components/navigation/navigation";
-
-import About    from '../pages/about/about'
-import Login    from '../pages/login/login'
-import Works    from '../pages/works/works'
-import Reviews  from '../pages/review/reviews'
-
 import store    from "../store";
 import axios    from "axios";
 import config from "../../../env.paths.json" // для  baseURL: config.BASE_URL
 
+axios.defaults.baseURL = config.BASE_URL;
+
 const routes = [
-    { path: '/',
+    {   path: '/',
         components: {
-            default: About,
-            header: siteHeader,
-            navigation: navigation
+            default: () => import("../pages/about/about"),
+            header: () => import("../components/siteHeader"),
+            navigation: () => import("../components/navigation/navigation")
         },
         meta:{name:"Обо мне!"}
      },
     { path: '/login',
         components: {
-            default: Login,
-            meta:{
-                public:true
-            }
+            default: () => import("../pages/login/login"),
+            meta: {public: true}
         },
     },
     { path: '/reviews',
         components: {
-            default: Reviews,
-            header: siteHeader,
-            navigation: navigation
+            default: () => import("../pages/review/reviews"),
+            header: () => import("../components/siteHeader"),
+            navigation: () => import("../components/navigation/navigation")
         },
         meta:{name:"Отзывы!"}
     },
     { path: '/works',
         components: {
-            default: Works,
-            header: siteHeader,
-            navigation: navigation
+            default: () => import("../pages/works/works"),
+            header: () => import("../components/siteHeader"),
+            navigation: () => import("../components/navigation/navigation")
         },
         meta:{name:"Работы!"}
     },
 
-]
+];
+// const router = new VueRouter({ routes });
+// export default router;
 
-export const router = new VueRouter({ routes })
-
-const guard = axios.create({ baseURL: config.BASE_URL});
+const guard = axios.defaults.baseURL;
 console.log('guard = ',guard);
 
-router.beforeEach(async (to,from,next) => {
-    const isPublicRoute = to.matched.some(route => route.meta.public);
-    const isUserLoggedIn = store.getters["auth/userIsLoggedIn"];
+export const router = new VueRouter({ routes });
 
+router.beforeEach(async (to,from,next) => {
+    console.log('to',to);
+    const isPublicRoute = to.matched.some(route => route.meta.public);
+    const isUserLoggedIn = store.getters["user/userIsLoggedIn"];
     console.log('isPublicRoute = ',isPublicRoute);
     console.log('isUserLoggedIn = ',isUserLoggedIn);
 
-    // const response = await guard.get("/user");
-    // console.log('guard = ',response);
-
-    // const response = await guard.get("/auth");
-    // console.log('response.data.user = ',response.data.auth);
-
-    // if (isPublicRoute === false && isUserLoggedIn === false) {
-    if (false) {
-        console.log('!!!!- if')
+    if (isPublicRoute === false && isUserLoggedIn === false) {
         const token = localStorage.getItem("token");
 
         guard.defaults.headers["Authorization"] = `Bearer ${token}`;
 
         try {
-            const response = await guard.get("/auth");
-            store.dispatch("auth/login", await response.data.auth);
-            console.log('response.data.auth = ',response.data.auth)
-
+            const response = await guard.get("/user");
+            store.dispatch("user/login", await response.data.user)
             next();
         } catch (error) {
-            console.log('catch');
-            await router.replace("/login");
+            router.replace("/login");
             localStorage.removeItem("token");
         }
     } else {
-        console.log('next');
         next();
     }
+
 });
