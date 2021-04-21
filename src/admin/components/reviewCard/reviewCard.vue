@@ -14,7 +14,7 @@
         </div>
         <div class="btns">
           <icon symbol="pencil" title="Править"
-                @click="$emit('edit', currentReview)"
+                @click="edit()"
           ></icon>
           <icon symbol="cross" title="Удалить"
                 @click="removeReview"
@@ -47,18 +47,15 @@ export default {
   data() {
     return {
       currentReview: {
-        id: this.review.id,
-        author: this.review.author,
-        occ: this.review.occ,
-        text: this.review.text,
-        preview: `https://webdev-api.loftschool.com/${this.review.photo}`
+        id: '',
+        author: '',
+        occ: '',
+        text: '',
+        preview: ''
       }
     }
   },
   computed: {
-    ...mapState('reviews',{
-      categories: state => state.data
-    }),
     cover() {
       return `https://webdev-api.loftschool.com/${this.review.photo}`
     },
@@ -71,6 +68,19 @@ export default {
       createReviewAction: "reviews/create",
       updateReviewAction: "reviews/update",
     }),
+    edit() {
+      this.setReview();
+      this.$emit('edit', this.currentReview);
+    },
+    setReview() {
+      this.currentReview = {
+        id: this.review.id,
+        author: this.review.author,
+        occ: this.review.occ,
+        text: this.review.text,
+        preview: `https://webdev-api.loftschool.com/${this.review.photo}`
+      }
+    },
     removeReview(){
       if (this.review){
         this.removeReviewAction(this.review.id);
@@ -84,6 +94,9 @@ export default {
       }
     },
 
+  },
+  created() {
+    this.setReview();
   },
 };
 </script>

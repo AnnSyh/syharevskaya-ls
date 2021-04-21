@@ -9,8 +9,15 @@ export default {
             category.skills=[];
             state.data.unshift(category);
         },
-        UPDATE_CATEGORY: (state, category) =>{
+        UPDATE_CATEGORY: (state, editedCat) =>{
             // console.log(' UPDATE_CATEGORY: category = ',category)
+            state.data = state.data.map(category => {
+                if(category.id === editedCat.id) {
+                    category = editedCat;
+                }
+
+                return category;
+            })
         },
         REMOVE_CATEGORIES: (state, categoryID) => {
             state.data = state.data.filter(category => {
