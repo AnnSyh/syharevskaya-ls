@@ -114,7 +114,7 @@ export default {
     removeCategory(){
         if (this.category){
           this.removeCategoryAction(this.category.id);
-          console.log('Удаление категории');
+          // console.log('Удаление категории');
           this.showTooltip({
             text: 'Успешное удаление категории',
             type: "error"

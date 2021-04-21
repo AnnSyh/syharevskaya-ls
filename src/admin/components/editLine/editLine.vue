@@ -78,7 +78,7 @@ export default {
   },
   methods: {
     onApprove() {
-      if (this.name.trim() === "") {  //нужна валидация  если поле пустое то ошибка
+      if (this.name.trim() === "") {  //валидация  если поле пустое
         // console.log("Пустое поле ")
         return this.$validate() === false;
       }

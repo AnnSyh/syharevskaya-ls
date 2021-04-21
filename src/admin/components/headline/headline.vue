@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
 
   export default {
     props:{
@@ -24,9 +23,6 @@ import { mapActions } from "vuex";
       logout() {
         this.$emit('logout');
       }
-      // ...mapActions({
-      //   logout: "user/logout"
-      // }),
     }
   }
 </script>
