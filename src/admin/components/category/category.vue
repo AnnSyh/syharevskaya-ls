@@ -1,6 +1,5 @@
 <template>
   <card>
-<!--    <p>this.title = {{this.title}}</p>-->
     <editLine
         slot="title"
         v-model="categoryTitle"
@@ -9,10 +8,6 @@
         @approve="approveHandler"
     />
     <template slot="content">
-<!--      <p>this.title = {{this.title}}</p>-->
-<!--      <p>this.category.id = {{this.category.id}}</p>-->
-<!--      <p>this.category = {{this.category}}</p>-->
-<!--      <p>skills = {{skills}}</p>-->
       <ul class="skills" v-if="empty === false">
         <li v-if="!skills.length">
           У вас пока нет skills
@@ -93,7 +88,7 @@ export default {
     }),
 
   async  approveHandler(value){
-      console.log(this.category);
+      // console.log(this.category);
       if(this.category &&  this.category.id){
         // console.log('update');
         this.updateCategoryAction({
