@@ -53,9 +53,8 @@ const routes = [
 
 export const router = new VueRouter({ routes })
 
-const guard = axios.create({
-    baseURL: config.BASE_URL
-});
+const guard = axios.create({ baseURL: config.BASE_URL});
+console.log('guard = ',guard);
 
 router.beforeEach(async (to,from,next) => {
     const isPublicRoute = to.matched.some(route => route.meta.public);
@@ -64,15 +63,23 @@ router.beforeEach(async (to,from,next) => {
     console.log('isPublicRoute = ',isPublicRoute);
     console.log('isUserLoggedIn = ',isUserLoggedIn);
 
-    if (isPublicRoute === false && isUserLoggedIn === false) {
+    // const response = await guard.get("/user");
+    // console.log('guard = ',response);
+
+    // const response = await guard.get("/auth");
+    // console.log('response.data.user = ',response.data.auth);
+
+    // if (isPublicRoute === false && isUserLoggedIn === false) {
+    if (false) {
         console.log('!!!!- if')
         const token = localStorage.getItem("token");
+
         guard.defaults.headers["Authorization"] = `Bearer ${token}`;
 
         try {
-            const response = await guard.get("/user");
-            store.dispatch("user/login", await response.data.user);
-            console.log('response.data.user = ',response.data.user)
+            const response = await guard.get("/auth");
+            store.dispatch("auth/login", await response.data.auth);
+            console.log('response.data.auth = ',response.data.auth)
 
             next();
         } catch (error) {
