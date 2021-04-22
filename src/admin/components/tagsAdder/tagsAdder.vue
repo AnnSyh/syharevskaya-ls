@@ -58,18 +58,13 @@ export default {
     },
   },
   methods:{
-    removeTag(tag){  console.log('removeTag')
-
+    removeTag(tag){
       const tags = [...this.tagsArray];
       const tagNdx = tags.indexOf(tag);
-
-      console.log('tags = ',tags);
-      console.log('tagNdx = ',tagNdx);
 
       if (tagNdx < 0) return;
 
       tags.splice(tagNdx,1);
-      console.log('tags.slice = ',tags);
       this.currentTags = tags.join(", ");
 
       this.$emit("change", this.currentTags)

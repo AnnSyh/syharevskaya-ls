@@ -78,19 +78,15 @@ export default {
       fetchReviews: 'reviews/fetch',
     }),
     handleClick(){
-      console.log('handleClick',this.emptyCardIsShown);
-      // console.log('this.reviews.status',this.reviews.status)
       if(this.reviews.status == 1){
         this.emptyCardIsShown = false
       }
     },
     editHandler(review){
-      // console.log('editHandler review = ',review);
       this.currentReview = {...review}
       this.emptyCardIsShown = true;
     },
     closeHandler(){
-      // console.log('here');
       this.emptyCardIsShown = false
     }
 

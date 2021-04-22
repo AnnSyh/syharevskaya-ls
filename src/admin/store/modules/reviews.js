@@ -71,7 +71,7 @@ export default {
             // console.log('remove: reviewId = ',reviewId)
             try {
                 await this.$axios.delete(`/reviews/${reviewId}`);
-                commit("REMOVE_REVIEWS", workId)
+                commit("REMOVE_REVIEWS", reviewId)
 
             } catch (error){
                 // console.log('Ошибка remove review')
