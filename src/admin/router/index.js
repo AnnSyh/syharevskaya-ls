@@ -21,8 +21,8 @@ const routes = [
     { path: '/login',
         components: {
             default: () => import("../pages/login/login"),
-            meta: {public: true}
         },
+        meta: {public: true}
     },
     { path: '/reviews',
         components: {
@@ -45,17 +45,15 @@ const routes = [
 // const router = new VueRouter({ routes });
 // export default router;
 
-const guard = axios.defaults.baseURL;
-console.log('guard = ',guard);
 
 export const router = new VueRouter({ routes });
 
-router.beforeEach(async (to,from,next) => {
-    console.log('to',to);
+router.beforeEach(async (to, from, next) => {
     const isPublicRoute = to.matched.some(route => route.meta.public);
     const isUserLoggedIn = store.getters["user/userIsLoggedIn"];
-    console.log('isPublicRoute = ',isPublicRoute);
-    console.log('isUserLoggedIn = ',isUserLoggedIn);
+
+    next();
+    return;
 
     if (isPublicRoute === false && isUserLoggedIn === false) {
         const token = localStorage.getItem("token");
@@ -73,5 +71,5 @@ router.beforeEach(async (to,from,next) => {
     } else {
         next();
     }
-
 });
+
