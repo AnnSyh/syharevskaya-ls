@@ -42,12 +42,12 @@ const routes = [
     },
 
 ];
-// const router = new VueRouter({ routes });
-// export default router;
+const router = new VueRouter({ routes });
+export default router;
 
 
-export const router = new VueRouter({ routes });
-
+// export const router = new VueRouter({ routes });
+/*
 router.beforeEach(async (to, from, next) => {
     const isPublicRoute = to.matched.some(route => route.meta.public);
     const isUserLoggedIn = store.getters["user/userIsLoggedIn"];
@@ -72,4 +72,5 @@ router.beforeEach(async (to, from, next) => {
         next();
     }
 });
+*/
 
