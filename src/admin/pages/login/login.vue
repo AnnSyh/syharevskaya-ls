@@ -72,14 +72,17 @@ export default {
       if ((await this.$validate()) === false) return;
       this.isSubmitDisabled = true;
 
+      console.log(this.user);
+
        try {
          const response = await this.$axios.post("/login", this.user);
-         // console.log('login1: response = ',response);
+         console.log('response = ',response);
 
          const token = response.data.token;
          localStorage.setItem("token", token);//сохрнаили token в localStorage
          this.$axios.defaults.headers["Authorization"] = `Bearer ${token}`;
           await this.getUser();
+          console.log(this.getUser())
 
           // const userResponse = await this.$axios.get("/user");
           // await this.login(userResponse.data.user);
@@ -88,10 +91,11 @@ export default {
          this.$router.replace('/');
 
        }  catch(error) {
-          this.showTooltip({
-            text: error.response.data.error,
-            type: "error"
-          })
+         console.log('catch(error)');
+          // this.showTooltip({
+          //   text: error.response.data.error,
+          //   type: "error"
+          // })
          // console.log("response.data.error",error.response.data.error)
          // console.dir(error.response.data.error)
        } finally {
