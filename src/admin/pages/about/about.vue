@@ -86,7 +86,7 @@ export default {
       editSkillAction:"skills/edit"
     }),
    async createSkill(skill,categoryId){
-      console.log('!!! createSkill')
+      // console.log('!!! createSkill')
       const newSkill = {
         ...skill,
         category:categoryId
@@ -111,7 +111,6 @@ export default {
       skill.editmode = false;
     },
    async createCategory(categoryTitle){
-      console.log('about.vue createCategory')
       try {
         await this.createCategoryAction(categoryTitle)
         this.emptyCardIsShown = false;

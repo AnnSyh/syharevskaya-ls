@@ -84,7 +84,7 @@ export default {
       fetchWorks: "works/fetch",
     }),
     handleClick(){
-      console.log('handleClick',this.emptyCardIsShown);
+      // console.log('handleClick',this.emptyCardIsShown);
       // console.log('this.reviews.status',this.reviews.status)
       if(this.works.status == 1){
         this.emptyCardIsShown = false
@@ -112,7 +112,6 @@ export default {
     this.fetchWorks();
   },
   created() {
-    console.log('this.fetchWorks() = ', this.fetchWorks())
     this.fetchWorks();
   },
   model:{

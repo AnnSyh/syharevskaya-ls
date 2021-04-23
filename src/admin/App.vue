@@ -3,7 +3,7 @@
 
     <div :class="{'wrapper--dark':this.$route.path === '/login'}">
 
-      <router-view name="header"/>
+      <router-view name="header" @logout="logout"/>
       <router-view name="navigation"/>
 
     <div>
@@ -27,40 +27,25 @@
 
 <script>
 import notification from "./components/notification";
-
-import icon       from "./components/icon/icon";
 import navigation from "./components/navigation/navigation";
-import card       from "./components/card/card";
-import iconedBtn  from "./components/button/button";
-import test       from "./components/test/test";
-import headline   from "./components/headline/headline";
 import siteHeader   from "./components/siteHeader/siteHeader";
-import def        from "./components/deff/deff";
-import user       from "./components/user/user";
-import category   from "./components/category/category";
 import { mapState, mapActions } from "vuex";
-import works      from "./pages/works/works";
-
 
 export default {
   components: {
-    test,
-    user,
-    headline,
-    siteHeader,
-    def,
-    iconedBtn,
-    card,
     navigation,
-    icon,
-    category,
+    siteHeader,
     notification,
-    works
   },
   methods: {
     ...mapActions({
-      hideTooltip: "tooltips/hide"
-    })
+      hideTooltip: "tooltips/hide",
+      logoutAction: 'user/logout',
+    }),
+    async logout() {
+      await this.logoutAction();
+      this.$router.replace('/login');
+    }
   },
   computed: {
     ...mapState("tooltips", {

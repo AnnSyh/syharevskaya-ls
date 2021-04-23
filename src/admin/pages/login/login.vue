@@ -50,8 +50,8 @@ export default {
   },
   data: () => ({
     user: {
-      name: "annsyh030420218",
-      password: "1111"
+      name: "",
+      password: ""
     },
     isSubmitDisabled: false
   }),
@@ -64,37 +64,27 @@ export default {
   methods: {
     ...mapActions({
       showTooltip: "tooltips/show",
-      getUser: "auth/login",
-      login:"user/login"
+      getUser: "user/login",
     }),
     async handleSubmit() {
-      // console.log('!!!submit', this.user.name, this.user.password)
-
       if ((await this.$validate()) === false) return;
       this.isSubmitDisabled = true;
+      // console.log(this.user);
 
        try {
          const response = await this.$axios.post("/login", this.user);
-         // console.log('login1: response = ',response);
-
          const token = response.data.token;
+
          localStorage.setItem("token", token);//сохрнаили token в localStorage
          this.$axios.defaults.headers["Authorization"] = `Bearer ${token}`;
-          await this.getUser();
-
-          const userResponse = await this.$axios.get("/user");
-          await this.login(userResponse.data.user);
-
-         console.log('login2: response = ',response);
-         await this.$router.replace('/');
+         await this.getUser();
+         this.$router.replace('/');
 
        }  catch(error) {
           this.showTooltip({
             text: error.response.data.error,
             type: "error"
           })
-         // console.log("response.data.error",error.response.data.error)
-         // console.dir(error.response.data.error)
        } finally {
          this.isSubmitDisabled = false;
        }

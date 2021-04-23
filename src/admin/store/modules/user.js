@@ -1,27 +1,26 @@
 export default {
     namespaced: true,
     state: {
-        user: {},
+        user: {}
     },
     mutations: {
         SET_USER: (state, user) => (state.user = user),
-        CLEAR_USER: state => (state.user = {}),
-    },
-    getters:{
-        userIsLoggedIn: state => {
-            const userObj = state.user;
-            const userObjIsEmpty = Object.keys(userObj).length === 0 && userObj.constructor === Object
-
-            return userObjIsEmpty === false;
-        }
+        CLEAR_USER: state => (state.user = {})
     },
     actions: {
-        logout({commit}){
+        logout({ commit }) {
+            commit('CLEAR_USER');
             localStorage.removeItem("token");
-            location.reload();//перезагрузка стр без token-а
+            this.$axios.defaults.headers['Authorization'] = '';
         },
-        login({commit},user){
-            commit("SET_USER",user);
+        async login({ commit }) {
+            const user = await this.$axios.get('/user');
+            commit('SET_USER', user.data.user);
         }
     },
+    getters: {
+        userIsLoggedIn: ({ user }) => {
+            return (Object.keys(user).length === 0 && user.constructor === Object) === false;
+        }
+    }
 };

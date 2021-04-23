@@ -138,7 +138,7 @@ export default {
     setReview(){
       if (this.currentReview){
         this.newReview = {...this.currentReview}
-        this.newReview.preview = 'https://webdev-api.loftschool.com/' + this.currentReview.photo
+        // this.newReview.preview = 'https://webdev-api.loftschool.com/' + this.currentReview.photo
       } else {
         this.newReview = {
           id: null,

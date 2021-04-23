@@ -17,7 +17,7 @@
 <!--          <p>emptyCardIsShown = {{emptyCardIsShown}}</p>-->
 <!--          @keydown.enter="editWork"-->
           <icon symbol="pencil" title="Править"
-                @click="$emit('edit', work)"
+                @click="edit()"
           ></icon>
           <icon symbol="cross" title="Удалить"
                 @click="removeWork"
@@ -43,6 +43,18 @@ export default {
       type: Boolean
     },
   },
+  data() {
+    return {
+      currentWork: {
+        id: '',
+        title: '',
+        description:  '',
+        link:  '',
+        techs:  '',
+        preview:  ''
+      }
+    }
+  },
   computed: {
     ...mapState('works',{
       works: state => state.data
@@ -59,6 +71,20 @@ export default {
       createWorkAction: "works/create",
       updateWorkAction: "works/update",
     }),
+    edit() {
+      this.setCurrentWork();
+      this.$emit('edit', this.currentWork);
+    },
+    setCurrentWork() {
+      this.currentWork = {
+        id: this.work.id,
+        title: this.work.title,
+        description: this.work.description,
+        link: this.work.link,
+        techs: this.work.techs,
+        preview: `https://webdev-api.loftschool.com/${this.work.photo}`
+      }
+    },
     removeWork(){
       if (this.work){
         this.removeWorkAction(this.work.id);
@@ -77,6 +103,9 @@ export default {
     //   }
     // }
 
+  },
+  created() {
+    this.setCurrentWork();
   },
 };
 </script>

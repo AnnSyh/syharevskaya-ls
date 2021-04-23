@@ -25,15 +25,16 @@ script(type="text/x-template")#preview-display
 
 script(type="text/x-template")#preview-thumbs
     .works-slider__thumbs
-        transition-group(
-            tag="ul"
-            :css="false"
-
-            @enter="enterCb"
-            @after-enter="afterCb"
-
-
-        ).list
+        //transition-group(
+        //    tag="ul"
+        //    :css="false"
+        //
+        //    @enter="enterCb"
+        //    @after-enter="afterCb"
+        //
+        //
+        //)
+        ul.list
             li.works-slider__thumb-item(
                 v-for="slide in spliceSlides" :key="slide.id"
                 )

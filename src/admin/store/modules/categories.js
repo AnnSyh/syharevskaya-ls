@@ -5,9 +5,19 @@ export default {
     },
     mutations:{
         SET_CATEGORIES: (state, categories) => (state.data = categories),
-        ADD_CATEGORY: (state, category) => state.data.unshift(category),
-        UPDATE_CATEGORY: (state, category) =>{
+        ADD_CATEGORY(state, category) {
+            category.skills=[];
+            state.data.unshift(category);
+        },
+        UPDATE_CATEGORY: (state, editedCat) =>{
             // console.log(' UPDATE_CATEGORY: category = ',category)
+            state.data = state.data.map(category => {
+                if(category.id === editedCat.id) {
+                    category = editedCat;
+                }
+
+                return category;
+            })
         },
         REMOVE_CATEGORIES: (state, categoryID) => {
             state.data = state.data.filter(category => {
@@ -51,11 +61,8 @@ export default {
     },
     actions: {
         async fetch({ commit,rootState },payload) {
-
-
             try {
                 const { data } = await this.$axios.get(`/categories/453`);
-
                 commit("SET_CATEGORIES", data)
             } catch (error) {
                 console.log(error);
@@ -65,7 +72,6 @@ export default {
             try {
                 const { data } = await this.$axios.post(`/categories`, { title })
                 commit("ADD_CATEGORY", data);
-
             } catch (error) {
                 throw new Error("create произошла ошибка");
             }

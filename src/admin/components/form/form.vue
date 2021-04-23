@@ -156,7 +156,7 @@ export default {
     setWork(){
       if (this.currentWork){
         this.newWork = {...this.currentWork}
-        this.newWork.preview = 'https://webdev-api.loftschool.com/' + this.currentWork.photo
+        // this.newWork.preview = 'https://webdev-api.loftschool.com/' + this.currentWork.photo
       } else {
         this.newWork = {
           id: null,
