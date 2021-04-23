@@ -20,13 +20,6 @@ const skillsItem = {
     mounted() {
         this.drawPercentegeCircle();
     }
-    // :stroke-dashoffset="getPercent" //skills.pug
-    // computed:{
-    //     getPercent(){
-    //         const r=3.14*2*40
-    //         return r-r/100*this.skill.percent
-    //     }
-    // }
 
 }
 

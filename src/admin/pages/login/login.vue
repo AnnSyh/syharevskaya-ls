@@ -50,8 +50,8 @@ export default {
   },
   data: () => ({
     user: {
-      name: "",
-      password: ""
+      name: "annsyh030420218",
+      password: "1111"
     },
     isSubmitDisabled: false
   }),
