@@ -107,8 +107,25 @@ export default {
       })
     },
     async editSkill(skill){
-      await this.editSkillAction(skill);
-      skill.editmode = false;
+      console.log('editSkill',skill);
+      try {
+        await this.editSkillAction(skill);
+        skill.editmode = false;
+
+        this.showTooltip({
+          text: "Навык успешно изменен",
+          type: "success"
+        })
+
+      }  catch (error){
+        console.log(error.message)
+        this.showTooltip({
+          text: 'Ошибка заполните поля',
+          type: "error"
+        })
+        console.log(error.message)
+      }
+
     },
    async createCategory(categoryTitle){
       try {

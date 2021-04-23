@@ -78,8 +78,8 @@ export default {
   },
   methods: {
     onApprove() {
+      // console.log('onApprove');
       if (this.name.trim() === "") {  //валидация  если поле пустое
-        // console.log("Пустое поле ")
         return this.$validate() === false;
       }
       this.editmode = false;
