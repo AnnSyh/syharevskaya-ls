@@ -45,6 +45,10 @@ const routes = [
 
 const guard = axios.create({    baseURL: config.BASE_URL});
 export const router = new VueRouter({ routes });
+
+// const router = new VueRouter({ routes });
+// export default router;
+
 /* */
 router.beforeEach(async (to, from, next) => {
     const isPublicRoute = to.matched.some(route => route.meta.public);
@@ -52,21 +56,45 @@ router.beforeEach(async (to, from, next) => {
     // console.log('isPublicRoute = ' ,isPublicRoute);
     // console.log('isUserLoggedIn = ' ,isUserLoggedIn);
 
-    if (isPublicRoute === false && isUserLoggedIn === false) {
-        const token = localStorage.getItem("token");
+    // if (isPublicRoute === false && isUserLoggedIn === false) {
+    //     const token = localStorage.getItem("token");
+    //
+    //     guard.defaults.headers["Authorization"] = `Bearer ${token}`;
+    //
+    //     try {
+    //         const response = await guard.get("/user");
+    //         commit("user/SET_USER", response.data.user);
+    //         next();
+    //     } catch (error) {
+    //         router.replace("/login");
+    //         localStorage.removeItem("token");
+    //     }
+    // } else if (isPublicRoute && isUserLoggedIn) {
+    //     next({ path: from.path });
+    // } else {
+    //     next();
+    // }
+    if (!isUserLoggedIn) {
+        const token = localStorage.getItem('token');
 
-        guard.defaults.headers["Authorization"] = `Bearer ${token}`;
-
-        try {
-            const response = await guard.get("/user");
-            commit("user/SET_USER", response.data.user);
+        if (!token && isPublicRoute) {
             next();
-        } catch (error) {
-            router.replace("/login");
-            localStorage.removeItem("token");
+        } else if (token) {
+            guard.defaults.headers['Authorization'] = `Bearer ${ token }`;
+            try {
+                const response = await guard.get('/user');
+                store.commit("user/SET_USER", response.data.user);
+
+                (from.path === "/login") ? next() : next({ path: from.path });
+            } catch (e) {
+                localStorage.removeItem('token');
+                next('/login');
+            }
+        } else {
+            next('/login');
         }
     } else if (isPublicRoute && isUserLoggedIn) {
-        next({ path: from.path });
+        next(   { path: from.path });
     } else {
         next();
     }

@@ -61,11 +61,8 @@ export default {
     },
     actions: {
         async fetch({ commit,rootState },payload) {
-
-
             try {
                 const { data } = await this.$axios.get(`/categories/453`);
-
                 commit("SET_CATEGORIES", data)
             } catch (error) {
                 console.log(error);
@@ -75,7 +72,6 @@ export default {
             try {
                 const { data } = await this.$axios.post(`/categories`, { title })
                 commit("ADD_CATEGORY", data);
-
             } catch (error) {
                 throw new Error("create произошла ошибка");
             }

@@ -7,7 +7,6 @@ import store from "./store";
 import $axios from "./requests";
 
 Vue.use(SimpleVueValidation,{mode:'manual'});
-
 Vue.prototype.$axios = $axios;
 store.$axios = $axios;
 

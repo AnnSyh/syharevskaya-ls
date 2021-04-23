@@ -67,20 +67,17 @@ export default {
       getUser: "user/login",
     }),
     async handleSubmit() {
-
       if ((await this.$validate()) === false) return;
       this.isSubmitDisabled = true;
       // console.log(this.user);
 
        try {
          const response = await this.$axios.post("/login", this.user);
-         // console.log('response = ',response);
-
          const token = response.data.token;
+
          localStorage.setItem("token", token);//сохрнаили token в localStorage
          this.$axios.defaults.headers["Authorization"] = `Bearer ${token}`;
-          await this.getUser();
-          // console.log(this.getUser())
+         await this.getUser();
          this.$router.replace('/');
 
        }  catch(error) {
