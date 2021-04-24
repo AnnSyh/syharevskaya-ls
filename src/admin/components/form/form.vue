@@ -55,7 +55,6 @@
                 />
               </div>
               <div class="form-row">
-<!--                <p>newWork.techs = {{newWork.techs}}</p>-->
                 <tags-adder
                     v-model="newWork.techs"
                     :error-message="validation.firstError('newWork.techs')"

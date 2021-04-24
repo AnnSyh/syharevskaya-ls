@@ -46,7 +46,6 @@ export default {
     prop:"tags",
     event:"change"
   },
-
   data(){
     return{
       currentTags: this.tags
@@ -76,7 +75,6 @@ export default {
     }
   }
 }
-
 </script>
 
 
