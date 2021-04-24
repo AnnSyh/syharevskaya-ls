@@ -32,7 +32,7 @@
       <div class="btns">
         <icon symbol="tick" class="btn" @click="$emit('approve', currentSkill)"/>
 <!--        <icon symbol="tick" class="btn" @click="approveHandler"/>-->
-        <icon symbol="cross" class="btn"@click="currentSkill.editmode = false"/>
+        <icon symbol="cross" class="btn" @click="currentSkill.editmode = false"/>
       </div>
 
     </div>
@@ -78,13 +78,13 @@ export default {
     icon,
     appInput: input
   },
-  methods:{
-    async approveHandler(){
-      console.log("approveHandler");
-      if ((await this.$validate()) === false) return; //валидация  если поле пустое
-      $emit('approve', currentSkill);
-    }
-  }
+  // methods:{
+  //   async approveHandler(){
+  //     console.log("approveHandler");
+  //     if ((await this.$validate()) === false) return; //валидация  если поле пустое
+  //     // $emit('approve', currentSkill);
+  //   }
+  // }
 }
 </script>
 

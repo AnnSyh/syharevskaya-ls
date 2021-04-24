@@ -1,15 +1,28 @@
 export default {
     namespaced: true,
-    state:{},
+    state:{
+        skills: []
+    },
     mutations :{},
     actions: {
+        // async add(store, skill) {
+        //     try {
+        //         const response = await this.$axios.post('/skills', skill);
+        //         store.commit('categories/ADD_SKILL', response.data, {root: true});
+        //     } catch (error) {
+        //         throw new Error('1Не удалось создать скилл');
+        //     }
+        // },
         async add({ commit }, skill){
+            console.log('skills: !!! add');
             try {
+                console.log('skills: !!! try');
                 const { data } = await this.$axios.post('/skills', skill);
+                console.log('',)
                 commit("categories/ADD_SKILL", data, { root: true })
-
             } catch (error){
-                throw new Error("Ошибка add Skill")
+                console.log('skills: error');
+                throw new Error("1Ошибка add Skill")
             }
         },
        async remove({ commit }, skillToRemove){

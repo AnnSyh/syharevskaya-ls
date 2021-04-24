@@ -21,7 +21,7 @@
         </li>
       </ul>
       <div class="bottom-line">
-        <skillAddLine
+        <skill-add-line
             @approve="$emit('create-skill', $event)"
             :blocked="empty"/>
       </div>

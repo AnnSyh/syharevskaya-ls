@@ -6,7 +6,7 @@ export default {
     mutations:{
         SET_CATEGORIES: (state, categories) => (state.data = categories),
         ADD_CATEGORY(state, category) {
-            // category.skills=[];
+            category.skills=[];
             state.data.unshift(category);
         },
         UPDATE_CATEGORY: (state, editedCat) =>{
