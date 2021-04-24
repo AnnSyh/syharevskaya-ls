@@ -8,6 +8,7 @@
             <div class="form-col">
               <div class="label-block">
                 <app-input
+                    v-model="newWork.preview"
                     :error-message="validation.firstError('newWork.preview')"
                 ></app-input>
                 <label
@@ -54,7 +55,7 @@
                 />
               </div>
               <div class="form-row">
-<!--                <p>newWork.techs = {{newWork.techs}}</p>-->
+                <p>newWork.techs = {{newWork.techs}}</p>
                 <tags-adder
                     v-model="newWork.techs"
                     :error-message="validation.firstError('newWork.techs')"
@@ -77,9 +78,6 @@
               >
               </app-button>
             </div>
-<!--            <div class="btn">222-->
-<!--              <app-button title="Сохранить" typeAttr="submit" disabled></app-button>-->
-<!--            </div>-->
           </div>
         </div>
       </card>
@@ -104,7 +102,14 @@ export default {
     appButton,
     appInput,
     tagsAdder,
-    Validator
+    // Validator
+  },
+  props: {
+    emptyCardIsShown: true,
+    currentWork: {
+      type: Object | null,
+      default: null
+    }
   },
   mixins: [ValidatorMixin],
   validators: {
@@ -122,7 +127,9 @@ export default {
       return Validator.value(value).required("Введите описание");
     },
     "newWork.techs": value => {
-      return Validator.value(value).required("Введите tag");
+      console.log('validators: newWork.techs',value);
+      // return Validator.value(value).required("Введите tag");
+      return Validator.value(value).required("Загрузите картинку");
     } ,
     "newWork.preview": value => {
       return Validator.value(value).required("Загрузите картинку");
@@ -176,7 +183,7 @@ export default {
     },
 
     async handleSubmit() {
-      // console.log('!!! submit form this.newWork = ',this.newWork);
+      console.log('!!! submit form this.newWork = ',this.newWork);
       if ((await this.$validate()) === false) return;
 
       if(this.newWork.id){

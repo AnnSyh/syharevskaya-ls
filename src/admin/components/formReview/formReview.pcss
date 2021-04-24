@@ -80,19 +80,24 @@
     }
 }
 
-.label-block .input {
-    height: 0;
-    border: none;
+.label-block.input-hidden {
+    position: relative;
 }
+.label-block.input-hidden > .input {
+    top: 20%;
+    position: absolute;
+    left: 3.5rem;
+}
+
 .uploader-link,
 .uploader-btn {
     top: 72px;
     position: relative;
 }
 
-.label-block .input {
-    display: none;
-}
+//.label-block .input {
+//    display: none;
+//}
 
 
 .label-block {
