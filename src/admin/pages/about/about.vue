@@ -86,7 +86,6 @@ export default {
       editSkillAction:"skills/edit"
     }),
    async createSkill(skill,categoryId){
-      console.log('!!! createSkill')
       const newSkill = {
         ...skill,
         category:categoryId
