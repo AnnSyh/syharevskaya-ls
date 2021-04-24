@@ -86,7 +86,6 @@ export default {
       editSkillAction:"skills/edit"
     }),
    async createSkill(skill,categoryId){
-      // console.log('!!! createSkill')
       const newSkill = {
         ...skill,
         category:categoryId
@@ -99,6 +98,7 @@ export default {
       skill.title="",
       skill.percent=""
     },
+
     removeSkill(skill){
       this.removeSkillAction(skill);
       this.showTooltip({
@@ -106,8 +106,8 @@ export default {
         type: "error"
       })
     },
+
     async editSkill(skill){
-      console.log('editSkill',skill);
       try {
         await this.editSkillAction(skill);
         skill.editmode = false;
@@ -118,7 +118,6 @@ export default {
         })
 
       }  catch (error){
-        console.log(error.message)
         this.showTooltip({
           text: 'Ошибка заполните поля',
           type: "error"
@@ -127,6 +126,7 @@ export default {
       }
 
     },
+
    async createCategory(categoryTitle){
       try {
         await this.createCategoryAction(categoryTitle)
