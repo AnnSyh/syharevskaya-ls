@@ -8,8 +8,9 @@
       <div class="form-container" slot="content">
         <div class="form-cols">
           <div class="w-30p">
-            <div class="label-block">
+            <div class="label-block input-hidden">
               <app-input
+                  v-model="newReview.preview"
                   :error-message="validation.firstError('newReview.preview')"
               ></app-input>
               <label
@@ -203,9 +204,17 @@ export default {
       };
       reader.onerror = () => { //произошла ошибка
         // надо уведомить пользователя при помощи tooltip
+        this.showTooltip({
+          text: 'произошла ошибка',
+          type: "error"
+        });
       };
       reader.onabort = () => { //не успели дож-ся пока ф-л будет обработан и начали загружать нов ф-л
         // надо уведомить пользователя при помощи tooltip
+        this.showTooltip({
+          text: 'произошла ошибка',
+          type: "error"
+        });
       }
     },
   },
