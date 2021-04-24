@@ -4,6 +4,7 @@
       title="Добавление тега"
       v-model="currentTags"
       @input="$emit('change', currentTags)"
+      :error-message="errorMessage"
     />
     <ul class="tags">
       <li
@@ -35,13 +36,16 @@ export default {
     tags:{
       type: String,
       default: ""
-    }
+    },
+    errorMessage: {
+      type: String,
+      default: ""
+    },
   },
   model:{
     prop:"tags",
     event:"change"
   },
-
   data(){
     return{
       currentTags: this.tags
@@ -71,7 +75,6 @@ export default {
     }
   }
 }
-
 </script>
 
 

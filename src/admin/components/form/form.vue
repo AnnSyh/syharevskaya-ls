@@ -55,7 +55,6 @@
                 />
               </div>
               <div class="form-row">
-                <p>newWork.techs = {{newWork.techs}}</p>
                 <tags-adder
                     v-model="newWork.techs"
                     :error-message="validation.firstError('newWork.techs')"
@@ -128,7 +127,6 @@ export default {
     },
     "newWork.techs": value => {
       console.log('validators: newWork.techs',value);
-      // return Validator.value(value).required("Введите tag");
       return Validator.value(value).required("Загрузите картинку");
     } ,
     "newWork.preview": value => {
@@ -183,7 +181,7 @@ export default {
     },
 
     async handleSubmit() {
-      console.log('!!! submit form this.newWork = ',this.newWork);
+      // console.log('!!! submit form this.newWork = ',this.newWork);
       if ((await this.$validate()) === false) return;
 
       if(this.newWork.id){
