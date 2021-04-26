@@ -1,7 +1,6 @@
 <template>
   <section class="works-page-component container wrapper--white">
     <div class="page-content">
-<!--    <div class="container" v-if="categories.length">-->
     <div class="container" v-if="categories.length">
       <div class="header">
         <span class="header__title">Блок "{{this.$route.meta.name}}"</span>
@@ -149,9 +148,5 @@ export default {
 }
 </script>
 
-<style>
-.about .container {
-  max-width: 67.75rem;
-}
-</style>
+
 

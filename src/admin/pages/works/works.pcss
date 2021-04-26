@@ -1,39 +1,3 @@
-.card-component {
-    background: #fff;
-    box-shadow: 0.25625rem 0.18125rem 1.25rem 0 rgb(0 0 0 / 40%);
-    //box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-    //padding: 0 20px 30px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    min-height: 400px;
-
-    &.card_plain {
-        padding: 0;
-        overflow: hidden;
-    }
-
-    .header {
-        padding: 28px 2% 23px 2%;
-        border-bottom: 1px solid rgba(#1f232d, 0.15);
-        font-size: 18px;
-        font-weight: 600;
-        margin-bottom: 30px;
-        height: auto;
-    }
-
-    .content {
-        padding: 0;
-        display: flex;
-        //flex: 1;
-        justify-content: space-between;
-
-        .col {
-            width: calc(50% - 0.9375rem);
-            margin-bottom: 1.875rem;
-        }
-    }
-}
 
 .works-cards {
     display: flex;
@@ -42,20 +6,31 @@
     margin-top: -28px;
 
     .item {
-        //overflow: hidden;
         width: 30.3%;
-        //margin-right: 28px;
         margin-top: 28px;
+        @media(max-width:768px){
+            width: 49%;
+        }
+        @media(max-width:480px){
+            width: 100%;
+        }
     }
+
 }
 .empty-work {
     width: calc(33.3% - 28px);
     display: flex;
     align-items: center;
     justify-content: center;
-    //margin-right: 28px;
     margin-top: 28px;
+    @media(max-width:768px){
+        width: 49%;
+    }
+    @media(max-width:480px){
+        width: 100%;
+    }
 }
 .li-form {
     width: 100%;
 }
+
