@@ -21,7 +21,9 @@
                   @click="emptyCardIsShown = true"
                   title="Добавить работу"/>
             </li>
-            <li class="item" v-for="work in works"
+            <li
+                class="item"
+                v-for="work in works"
                 :key="work.id"
                 :emptyCardIsShown="emptyCardIsShown"
             >

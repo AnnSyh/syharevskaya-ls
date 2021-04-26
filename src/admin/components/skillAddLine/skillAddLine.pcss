@@ -3,6 +3,9 @@
   width: 90%;
   align-items: center;
   justify-content: space-between;
+  @media(max-width:480px){
+    flex-direction: column;
+  }
 
   & .title {
     width: 85%;
@@ -12,6 +15,7 @@
   & .percent {
     display: flex;
   }
+
 }
 
 .skillAddLine-component {
@@ -19,6 +23,17 @@
   align-items: center;
   justify-content: space-between;
   position: relative;
+  @media(max-width:480px){
+    width: 100%;
+
+    .input,
+    .percent {
+      width: 100%;
+    }
+    .inputs .title {
+      width: 97%;
+    }
+  }
 
   &.blocked{
     filter:grayscale(50%);

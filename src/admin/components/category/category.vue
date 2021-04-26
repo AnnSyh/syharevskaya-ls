@@ -132,6 +132,5 @@ export default {
 </script>
 
 
-<style lang="postcss" src="./category.pcss" scoped>
-</style>
+<style lang="postcss" src="./category.pcss" scoped></style>
 

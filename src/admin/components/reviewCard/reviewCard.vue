@@ -1,18 +1,18 @@
 <template>
   <card simple>
-    <div class="review-wrapper">
-      <div class="card-header">
+<!--    <div class="review-wrapper">-->
+      <div class="header">
         <user
             :title="review.author"
             :subtitle="review.occ"
             :src="cover"
         ></user>
       </div>
-      <div class="data">
-        <div class="text">
+      <div class="content">
+        <div class="text text-review">
           <p>{{review.text}}</p>
         </div>
-        <div class="btns">
+        <div class="bottom-line">
           <icon symbol="pencil" title="Править"
                 @click="edit()"
           ></icon>
@@ -21,7 +21,7 @@
           ></icon>
         </div>
       </div>
-    </div>
+<!--    </div>-->
   </card>
 </template>
 

@@ -1,19 +1,18 @@
 <template>
   <card simple>
-    <div class="works-wrapper">
-      <div class="pic">
+      <div class="header">
         <img class="image" :src="cover"/>
         <div class="tag">
           <tags-list :tags="work.techs"/>
         </div>
       </div>
-      <div class="data">
-        <div class="title">{{work.title}}</div>
-        <div class="text">
+      <div class="content">
+        <div class="title work-title">{{work.title}}</div>
+        <div class="text work-text">
           <p>{{work.description}}</p>
         </div>
-        <a :href="work.link" class="link">{{work.link}}</a>
-        <div class="btns">
+        <a :href="work.link" class="link work-link">{{work.link}}</a>
+        <div class="bottom-line">
 <!--          <p>emptyCardIsShown = {{emptyCardIsShown}}</p>-->
 <!--          @keydown.enter="editWork"-->
           <icon symbol="pencil" title="Править"
@@ -24,7 +23,6 @@
           ></icon>
         </div>
       </div>
-    </div>
   </card>
 </template>
 
