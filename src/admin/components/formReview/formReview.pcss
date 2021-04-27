@@ -1,10 +1,24 @@
 .form-cols {
     display: flex;
+
+
+    .w-30p {width:30%;}
+    .w-70p {width:70%;}
+
+    @media(max-width:768px){
+        flex-direction: column;
+        .w-30p {width: 100%;}
+        .w-70p {width: 100%;}
+
+    }
 }
 
 .form-col {
     width: 50%;
     margin-right: 30px;
+    @media(max-width:768px){
+        width: 100%;
+    }
 
     &:last-child {
         margin-right: 0;
@@ -12,8 +26,10 @@
 }
 
 .uploader {
-    height: 200px;
-    width: 100px;
+    //height: 200px;
+    //width: 100px;
+    //min-height: 200px;
+    //max-width: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -50,9 +66,6 @@
     margin-bottom: 30px;
 }
 
-.w-30p {width:30%;}
-.w-70p {width:70%;}
-
 .form-btns {
     display: flex;
     justify-content: flex-end;
@@ -80,34 +93,26 @@
     }
 }
 
-.label-block.input-hidden {
-    position: relative;
-}
-.label-block.input-hidden > .input {
-    top: 20%;
-    position: absolute;
-    left: 8.5rem;
-    width: 30px;
-}
-
-.uploader-link,
-.uploader-btn {
-    top: 72px;
-    position: relative;
-}
-
-//.label-block .input {
-//    display: none;
-//}
-
-
 .label-block {
     width: 100%;
     align-items: center;
     justify-content: center;
     display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
 }
 .uploader {
     height: 12.5rem;
     width: 12.5rem;
+    margin: 1rem 0;
 }
+
+.input-hidden {
+   position: relative;
+    top: -3.875rem;
+
+    input {
+        border-color: #fff;
+    }
+}
+
