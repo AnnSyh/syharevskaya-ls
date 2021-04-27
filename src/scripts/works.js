@@ -61,6 +61,7 @@ const thumbs = {
         leaveCb(el, done){
             el.classList.add("fade");
             el.addEventListener("transitionend", e => done());
+            console.log("!!!slicedSlides!!")
         }
     },
 

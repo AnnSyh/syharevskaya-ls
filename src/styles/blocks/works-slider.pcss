@@ -93,7 +93,20 @@
 
 
   @include phones {
-    display: none;
+    /* display: none; */
+    top: auto;
+    bottom: -340px;
+    left: 0;
+    width: 100%;
+
+    ul {
+      display: flex;
+      width: 100%;
+
+      li {
+        width: 33%;
+      }
+    }
   }
 }
 
@@ -166,12 +179,18 @@
         margin-top: 3px;
       }
     }
+    @include phones {
+      transform: rotate( -90deg );
+    }
   }
   &_next {
     &:active {
       &:before {
         margin-top: -3px;
       }
+    }
+    @include phones {
+      transform: rotate( -90deg );
     }
   }
 }
@@ -259,4 +278,9 @@
 
 .fade-leave-to {
   opacity: 0;
+}
+
+
+.list li:last-child {
+  outline: 3px solid #f29400;
 }

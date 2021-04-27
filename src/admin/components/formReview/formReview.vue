@@ -8,11 +8,8 @@
       <div class="form-container" slot="content">
         <div class="form-cols">
           <div class="w-30p">
-            <div class="label-block input-hidden">
-              <app-input
-                  v-model="newReview.preview"
-                  :error-message="validation.firstError('newReview.preview')"
-              ></app-input>
+            <div class="label-block">
+
               <label
                   :error-message="validation.firstError('newReview.preview')"
                   :style="{backgroundImage: `url(${newReview.preview})`}"
@@ -23,15 +20,23 @@
                   @dragleave="hovered = false"
                   @drop="handleChange"
               >
+                <app-input
+                    class="input-hidden"
+                    v-model="newReview.preview"
+                    :error-message="validation.firstError('newReview.preview')"
+                ></app-input>
+
                 <div class="uploader-title">Перетащите или загрузите картинку</div>
                 <div class="uploader-link">
 
-                  <app-button plain
-                      typeAttr="file"
-                      @change="handleChange"
-                  ></app-button>
+
                 </div>
               </label>
+              <app-button plain
+                          typeAttr="file"
+                          @change="handleChange"
+              ></app-button>
+
             </div>
           </div>
           <div class="w-70p">

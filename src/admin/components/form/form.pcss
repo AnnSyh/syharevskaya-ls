@@ -1,10 +1,16 @@
 .form-cols {
     display: flex;
+    @media(max-width:480px){
+        flex-direction: column;
+    }
 }
 
-.form-col {
+.form-col { border: 1px solid red;
     width: 50%;
     margin-right: 30px;
+    @media(max-width:480px){
+        width: 100%;
+    }
 
     &:last-child {
         margin-right: 0;
