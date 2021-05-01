@@ -31,3 +31,21 @@ $ npm run имя_скрипта
 ```sh
 $ yarn имя_скрипта
 ```
+
+##### Используемые технологии:
+```sh
+Yarn
+Pug
+Webpak
+Flexbox
+Git
+localStorage
+
+Vue
+  Storybook
+  Router
+  Axios
+  Store
+  Simple-vue-validator
+
+```
