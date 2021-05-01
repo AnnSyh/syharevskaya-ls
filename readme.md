@@ -49,3 +49,9 @@ Vue
   Simple-vue-validator
 
 ```
+
+##### Лендинг:
+https://annsyh.github.io/syharevskaya-ls/
+
+##### Админка:
+https://annsyh.github.io/syharevskaya-ls/admin/
